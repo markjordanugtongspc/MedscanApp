@@ -451,24 +451,28 @@ footer {
 }
 
 .slide-indicators {
-  flex: 0.1;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  opacity: 0.3;
-}
-
-.indicator.active {
-  opacity: 1;
-}
+    flex: 0.1;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Default indicator styling */
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    opacity: 0.3;
+  }
+  
+  /* Active indicator with larger size */
+  .indicator.active {
+    width: 14px; /* Increased size */
+    height: 14px; /* Increased size */
+    opacity: 1;
+  }  
 
 .next-btn,
 .get-started-btn {

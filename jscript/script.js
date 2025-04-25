@@ -91,38 +91,72 @@ document.addEventListener('DOMContentLoaded', () => {
         onboarding.style.display = 'flex';
         setTimeout(() => {
             onboarding.style.opacity = '1';
+            // Make sure the first slide is active
+            const firstSlide = document.querySelector('.onboarding-slide');
+            if (firstSlide) {
+                firstSlide.classList.add('active');
+            }
         }, 50);
     }
 
-    // Onboarding slides functionality
-    function setupOnboarding() {
-        const slides = document.querySelectorAll('.onboarding-slide');
-        const nextButtons = document.querySelectorAll('.next-btn');
-        const getStartedButton = document.querySelector('.get-started-btn');
-        
-        nextButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const currentSlide = document.querySelector('.onboarding-slide.active');
-                const currentIndex = Array.from(slides).indexOf(currentSlide);
-                const nextIndex = currentIndex + 1;
-                
-                if (nextIndex < slides.length) {
-                    currentSlide.classList.remove('active');
-                    slides[nextIndex].classList.add('active');
-                }
-            });
-        });
-        
-        if (getStartedButton) {
-            getStartedButton.addEventListener('click', () => {
-                onboarding.style.opacity = '0';
-                setTimeout(() => {
-                    onboarding.style.display = 'none';
-                    showAppContent();
-                }, 500);
-            });
+// Onboarding slides functionality
+function setupOnboarding() {
+    const slides = document.querySelectorAll('.onboarding-slide');
+    const nextButtons = document.querySelectorAll('.next-btn');
+    const skipButtons = document.querySelectorAll('.skip-btn');
+    const getStartedButton = document.querySelector('.get-started-btn');
+    const svgTrigger = document.querySelector('#svg-trigger'); // Added SVG trigger reference
+
+    // Set the first slide as active initially
+    if (slides.length > 0) {
+        slides[0].classList.add('active');
+    }
+
+    // Function to handle moving to the next slide
+    function moveToNextSlide() {
+        const currentSlide = document.querySelector('.onboarding-slide.active');
+        if (currentSlide) {
+            const currentIndex = Array.from(slides).indexOf(currentSlide);
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < slides.length) {
+                currentSlide.classList.remove('active');
+                slides[nextIndex].classList.add('active');
+            } else {
+                // If we're at the last slide, show app content
+                hideOnboarding();
+            }
         }
     }
+
+    // Function to hide onboarding and show app content
+    function hideOnboarding() {
+        const onboarding = document.querySelector('#onboarding');
+        if (onboarding) {
+            onboarding.style.opacity = '0';
+            setTimeout(() => {
+                onboarding.style.display = 'none';
+                showAppContent();
+            }, 500);
+        }
+    }
+
+    // Attach event listeners to buttons that move to the next slide
+    nextButtons.forEach(button => button.addEventListener('click', moveToNextSlide));
+
+    // Attach event listeners to Skip buttons to hide onboarding
+    skipButtons.forEach(button => button.addEventListener('click', hideOnboarding));
+
+    // Ensure "Get Started" button behaves correctly
+    if (getStartedButton) {
+        getStartedButton.addEventListener('click', hideOnboarding);
+    }
+
+    // Ensure the SVG button also triggers "Get Started"
+    if (svgTrigger) {
+        svgTrigger.addEventListener('click', hideOnboarding);
+    }
+}
 
     // Show main app content
     function showAppContent() {

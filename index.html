@@ -1,168 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>MedScan App</title>
-		<link rel="stylesheet" href="css/style.css" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
-		/>
-	</head>
-	<body>
-		<div class="app-wrapper">
-			<div id="loader" class="loader-container">
-				<div class="medical-loader">
-					<div class="heart">
-						<div class="heart-piece-0"></div>
-						<div class="heart-piece-1"></div>
-						<div class="heart-piece-2"></div>
-						<div class="heart-piece-3"></div>
-						<div class="heart-piece-4"></div>
-						<div class="heart-piece-5"></div>
-						<div class="heart-piece-6"></div>
-						<div class="heart-piece-7"></div>
-						<div class="heart-piece-8"></div>
-						<div class="heart-depth"></div>
-						<div class="crack"></div>
-						<div class="bandage"></div>
-						<div class="heart-glow"></div>
-					</div>
-					<div class="pulse-ring"></div>
-				</div>
-				<h3 class="loading-text">Medscan App</h3>
-				<h3 class="loading-text loading-dots">
-					Loading
-					<span class="dots"></span>
-				</h3>
-			</div>
-
-			<div id="onboarding" class="onboarding-container" style="display: none">
-				<div class="status-bar">
-					<span class="time">12:51</span>
-					<div class="status-icons">
-						<i class="fas fa-signal"></i>
-						<i class="fas fa-wifi"></i>
-						<i class="fas fa-battery-full"></i>
-					</div>
-				</div>
-
-				<div class="onboarding-slides">
-					<div class="onboarding-slide active" id="slide-1">
-						<div class="onboarding-image">
-							<img
-								src="https://s3-alpha-sig.figma.com/img/8684/dd51/9f4aef3b368af492470d9a84fa7d14b6?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KzCsjKxECOqgEQ7jjV00qdYiXXrjXdPWMthLaW8bYr~PFv54Zd0oxvoeU6ecoqJ4KTlqKHbFAo3PWa0GIVaWs~dve4yGI1RTC3DcZ~TBLBi~p~4rk1XdMo~sZR8BS7yp4Z3EN6AR4nD0u58N46kEEQJofLEoiKbQcY7IfP2PxU6yCAxV6iOBKn1rxOyKxOUDO7rL2o-sW~htvBgq3cyEiaeYvNADcI9Ycbq8MNMXHOlrn9n2KjvPFxJglMBPmZsVBngMIlJxvBwJrrPRGEqboGRSz8myxPAV1WUNNd3YVtdhglI8ed96ey2gdJLXuWf54aWam6ywdTxW~hs2Z2tfUw__"
-								alt="Doctor with phone"
-							/>
-						</div>
-						<div class="onboarding-text">
-							<h2>
-								MedScan app helps users manage health data, view results, track
-								progress, and get personalized recommendations for informed
-								well-being decisions.
-							</h2>
-						</div>
-						<div class="slide-indicators">
-							<span class="indicator active"></span>
-							<span class="indicator"></span>
-							<span class="indicator"></span>
-						</div>
-						<button class="next-btn">Next</button>
-					</div>
-
-					<div class="onboarding-slide" id="slide-2">
-						<div class="onboarding-image">
-							<img
-								src="https://s3-alpha-sig.figma.com/img/46c8/a3bb/0bcc1802390e35873ccb34bda80d4e24?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qaD-BWi27KHvsm4rIXm9F4~IEIG8i5peqYnIWPPTff9XFuwsi8hK708zb6uyjs-1P1enhJDtJw-f9wgDJ2Xn39hLeX75sL5Plry-QNyRv4J3zl2uf6JEvxx9HISJpZJ4jszg8s8tx7mjL6p9uC592mWXW7bbBIAPzim6AG4xjL1LnbpA5-ljREl6HvTmUtnmJltkZLpR9YEx-IQU2etYIycPG6IOitKcNFVEiXSjkDdwybg3PSeByoolrs9EGBHzqEbSIQLw525tjNEhKhuXXOdsh7LfaTY38RaSOZIp2DVB-xN30UxiMcfxZ4RYX7jatQVgrp1asTs-tkxvEcRfHg__"
-								alt="Scan medications"
-							/>
-						</div>
-						<div class="onboarding-text">
-							<h2>
-								Scan your medications to identify them and get detailed
-								information about dosage, side effects, and interactions.
-							</h2>
-						</div>
-						<div class="slide-indicators">
-							<span class="indicator"></span>
-							<span class="indicator active"></span>
-							<span class="indicator"></span>
-						</div>
-						<button class="next-btn">Next</button>
-					</div>
-
-					<div class="onboarding-slide" id="slide-3">
-						<div class="onboarding-image">
-							<img
-								src="https://s3-alpha-sig.figma.com/img/3068/0557/71719d6f9e4672a72ee992e90c82a4c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IGe~89ng1A5m5gm5n-n7gg278tFAhTKQntFg~rytZeySRho45isgqwIjnEdZXdjLkQlW1ZZ5Mv8kpGG2oWZlM4G1fyGy8ZDdTL2i85bIP3-4og-66Wlc4YMMZun-mMQKi4a15DuqTXnw8G1sXCsCRJ9Ro1uGAWKUZuidKwAQY6NQAwmCIFVLUxXvLDUvP4FVf3KjjMwTizhVlrswGaZI9iPbexy84ECHfFrVfDRo75GND6ed5hWTR8GMk7U5ynbm-7HGyJpqkTk2sS6mobcm4B36i7Al4s-qqgsbwV8qPjWadcfXiwB1xffQi1FlEiv3c97F6aRndOvmS3QTOhj4Rw__"
-								alt="Health monitoring"
-							/>
-						</div>
-						<div class="onboarding-text">
-							<h2>
-								Track your medication history and receive reminders to ensure
-								you never miss a dose.
-							</h2>
-						</div>
-						<div class="slide-indicators">
-							<span class="indicator"></span>
-							<span class="indicator"></span>
-							<span class="indicator active"></span>
-						</div>
-						<button class="get-started-btn">Get Started</button>
-					</div>
-				</div>
-			</div>
-
-			<div id="app-content" class="container" style="display: none">
-				<header>
-					<h1>MedScan</h1>
-					<nav>
-						<ul>
-							<li><a href="#home">Home</a></li>
-							<li><a href="#scan">Scan</a></li>
-							<li><a href="#history">History</a></li>
-							<li><a href="#profile">Profile</a></li>
-						</ul>
-					</nav>
-				</header>
-
-				<main>
-					<section id="home" class="active-section">
-						<h2>Welcome to MedScan</h2>
-						<p>Your personal medication identification assistant</p>
-						<button class="primary-btn">Get Started</button>
-					</section>
-				</main>
-
-				<footer>
-					<nav class="bottom-nav">
-						<a href="#home" class="nav-item active">
-							<i class="fas fa-home"></i>
-							<span>Home</span>
-						</a>
-						<a href="#scan" class="nav-item">
-							<i class="fas fa-camera"></i>
-							<span>Scan</span>
-						</a>
-						<a href="#history" class="nav-item">
-							<i class="fas fa-history"></i>
-							<span>History</span>
-						</a>
-						<a href="#profile" class="nav-item">
-							<i class="fas fa-user"></i>
-							<span>Profile</span>
-						</a>
-					</nav>
-				</footer>
-			</div>
-		</div>
-
-		<script src="jscript/script.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MedScan App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      /* Ensure the text-medscan and bg-dot colors are properly set */
+      .text-medscan { color: #199b91; }
+      .bg-dot { background-color: #199b91; }
+    </style>
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <div id="loader" class="loader-container">
+        <div id="animation-container" class="relative flex flex-col items-center justify-center w-full h-full">
+          <!-- Logo and MedScan text container -->
+          <div id="logo-text-container" class="relative flex items-center justify-start w-full max-w-[400px] px-4">
+            <img
+              src="https://pixvid.org/images/2025/04/24/1.png"
+              alt="Logo"
+              class="w-[150px] h-[150px] md:w-[200px] md:h-[200px] animate-logo-bounce"
+            />
+            <div
+              id="medscan"
+              class="absolute left-[120px] md:left-[180px] text-medscan text-[28px] md:text-[32px] font-bold whitespace-nowrap opacity-0 translate-y-0 animate-[fade-in_500ms_forwards_3500ms,slide-right_800ms_ease-out_forwards_4000ms]"
+            ></div>
+          </div>
+          
+          <!-- 4 Bouncing Dots (hidden initially) -->
+          <div
+            id="dots-container"
+            class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-6 md:space-x-8"
+          >
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-dot shadow-lg font-bold"></div>
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-dot shadow-lg font-bold"></div>
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-dot shadow-lg font-bold"></div>
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-dot shadow-lg font-bold"></div>
+          </div>
+        </div>
+      </div>
+      <div id="onboarding" class="onboarding-container" style="display:none">
+        <div class="status-bar">
+          <span class="time">12:51</span>
+          <div class="status-icons">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+          </div>
+        </div>
+        <div class="onboarding-slides">
+          <div class="onboarding-slide active" id="slide-1">
+            <div class="onboarding-image">
+              <img src="https://s3-alpha-sig.figma.com/img/8684/dd51/9f4aef3b368af492470d9a84fa7d14b6?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KzCsjKxECOqgEQ7jjV00qdYiXXrjXdPWMthLaW8bYr~PFv54Zd0oxvoeU6ecoqJ4KTlqKHbFAo3PWa0GIVaWs~dve4yGI1RTC3DcZ~TBLBi~p~4rk1XdMo~sZR8BS7yp4Z3EN6AR4nD0u58N46kEEQJofLEoiKbQcY7IfP2PxU6yCAxV6iOBKn1rxOyKxOUDO7rL2o-sW~htvBgq3cyEiaeYvNADcI9Ycbq8MNMXHOlrn9n2KjvPFxJglMBPmZsVBngMIlJxvBwJrrPRGEqboGRSz8myxPAV1WUNNd3YVtdhglI8ed96ey2gdJLXuWf54aWam6ywdTxW~hs2Z2tfUw__" alt="Doctor with phone">
+            </div>
+            <div class="onboarding-text">
+              <h2>MedScan app helps users manage health data, view results, track progress, and get personalized recommendations for informed well-being decisions.</h2>
+            </div>
+            <div class="slide-indicators">
+              <span class="indicator active"></span>
+              <span class="indicator"></span>
+              <span class="indicator"></span>
+            </div>
+            <button class="next-btn">Next</button>
+          </div>
+          <div class="onboarding-slide" id="slide-2">
+            <div class="onboarding-image">
+              <img src="https://s3-alpha-sig.figma.com/img/46c8/a3bb/0bcc1802390e35873ccb34bda80d4e24?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qaD-BWi27KHvsm4rIXm9F4~IEIG8i5peqYnIWPPTff9XFuwsi8hK708zb6uyjs-1P1enhJDtJw-f9wgDJ2Xn39hLeX75sL5Plry-QNyRv4J3zl2uf6JEvxx9HISJpZJ4jszg8s8tx7mjL6p9uC592mWXW7bbBIAPzim6AG4xjL1LnbpA5-ljREl6HvTmUtnmJltkZLpR9YEx-IQU2etYIycPG6IOitKcNFVEiXSjkDdwybg3PSeByoolrs9EGBHzqEbSIQLw525tjNEhKhuXXOdsh7LfaTY38RaSOZIp2DVB-xN30UxiMcfxZ4RYX7jatQVgrp1asTs-tkxvEcRfHg__" alt="Scan medications">
+            </div>
+            <div class="onboarding-text">
+              <h2>Scan your medications to identify them and get detailed information about dosage, side effects, and interactions.</h2>
+            </div>
+            <div class="slide-indicators">
+              <span class="indicator"></span>
+              <span class="indicator active"></span>
+              <span class="indicator"></span>
+            </div>
+            <button class="next-btn">Next</button>
+          </div>
+          <div class="onboarding-slide" id="slide-3">
+            <div class="onboarding-image">
+              <img src="https://s3-alpha-sig.figma.com/img/3068/0557/71719d6f9e4672a72ee992e90c82a4c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IGe~89ng1A5m5gm5n-n7gg278tFAhTKQntFg~rytZeySRho45isgqwIjnEdZXdjLkQlW1ZZ5Mv8kpGG2oWZlM4G1fyGy8ZDdTL2i85bIP3-4og-66Wlc4YMMZun-mMQKi4a15DuqTXnw8G1sXCsCRJ9Ro1uGAWKUZuidKwAQY6NQAwmCIFVLUxXvLDUvP4FVf3KjjMwTizhVlrswGaZI9iPbexy84ECHfFrVfDRo75GND6ed5hWTR8GMk7U5ynbm-7HGyJpqkTk2sS6mobcm4B36i7Al4s-qqgsbwV8qPjWadcfXiwB1xffQi1FlEiv3c97F6aRndOvmS3QTOhj4Rw__" alt="Health monitoring">
+            </div>
+            <div class="onboarding-text">
+              <h2>Track your medication history and receive reminders to ensure you never miss a dose.</h2>
+            </div>
+            <div class="slide-indicators">
+              <span class="indicator"></span>
+              <span class="indicator"></span>
+              <span class="indicator active"></span>
+            </div>
+            <button class="get-started-btn">Get Started</button>
+          </div>
+        </div>
+      </div>
+      <div id="app-content" class="container" style="display:none">
+        <header>
+          <h1>MedScan</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#scan">Scan</a>
+              </li>
+              <li>
+                <a href="#history">History</a>
+              </li>
+              <li>
+                <a href="#profile">Profile</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <section id="home" class="active-section">
+            <h2>Welcome to MedScan</h2>
+            <p>Your personal medication identification assistant</p>
+            <button class="primary-btn">Get Started</button>
+          </section>
+        </main>
+        <footer>
+          <nav class="bottom-nav">
+            <a href="#home" class="nav-item active">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+            <a href="#scan" class="nav-item">
+              <i class="fas fa-camera"></i>
+              <span>Scan</span>
+            </a>
+            <a href="#history" class="nav-item">
+              <i class="fas fa-history"></i>
+              <span>History</span>
+            </a>
+            <a href="#profile" class="nav-item">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </nav>
+        </footer>
+      </div>
+    </div>
+    <script src="jscript/script.js"></script>
+  </body>
 </html>

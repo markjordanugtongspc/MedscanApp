@@ -29,6 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Step 1: Logo bounces in (animation is handled by CSS)
         console.log("Animation sequence started");
         
+        // Add background animation after 800ms
+        setTimeout(() => {
+            // After 1500ms more, show the colored background
+            setTimeout(() => {
+                loader.classList.add('animate-bg');
+                
+                // After 800ms, remove the colored background
+                setTimeout(() => {
+                    loader.classList.remove('animate-bg');
+                }, 800);
+            }, 1500);
+        }, 800);
+        
         // Step 2: Start typing MedScan text after logo animation completes
         setTimeout(() => {
             console.log("Starting MedScan text typing");

@@ -10,6 +10,8 @@
 
     <!-- Custom Font Imports -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+    <!-- Added Flowbite CSS for Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
@@ -35,6 +37,7 @@
           </div>
         </div>
       </div>
+      <!-- End of Loader section -->
 
       <!-- Improved Onboarding Section -->
       <div id="onboarding" class="onboarding-container" style="display: none">
@@ -65,6 +68,7 @@
               </button>
             </div>
           </div>
+          <!-- End of Slide 1 -->
 
           <!-- Slide 2 -->
           <div class="onboarding-slide invisible absolute inset-0 flex h-full flex-col p-5 opacity-0 transition-all duration-500" id="slide-2">
@@ -92,6 +96,7 @@
               </button>
             </div>
           </div>
+          <!-- End of Slide 2 -->
 
           <!-- Slide 3 -->
           <div class="onboarding-slide invisible absolute inset-0 flex h-full flex-col p-5 opacity-0 transition-all duration-500" id="slide-3">
@@ -122,12 +127,13 @@
           </div>
         </div>
       </div>
+      <!-- End of Slide 3 -->
 
       <!-- Welcome Page -->
-      <div id="welcome-page" class="relative container" style="display: none; opacity: 0;">
+      <div id="welcome-page" class="relative container" style="display: none; opacity: 1;">
         <div class="flex h-full flex-col items-center justify-center space-y-6 px-6 py-10">
           <!-- Logo (Adjustable with Tailwind top-[value]) -->
-          <div class="relative bottom-[250px] h-[500px] w-[500px] flex-shrink-0">
+          <div class="flex-shrink99 absolute bottom-[465px] -left-[25px] h-[500px] w-[500px]">
             <img src="https://pixvid.org/images/2025/04/24/1.png" alt="MedScan Logo" class="h-full w-full object-contain" />
           </div>
 
@@ -138,21 +144,23 @@
           <h1 class="font-poppins absolute top-[335px] left-1/2 -translate-x-1/2 text-center text-[32px] font-bold whitespace-nowrap text-[#263238]">Welcome to MedScan</h1>
 
           <!-- Description Text -->
-          <p class="absolute top-[435px] left-1/2 w-[326px] -translate-x-1/2 text-center font-['Open_Sans'] text-[16px] leading-normal text-[#28303B] opacity-75">Stay informed about your medications with ease. Let's take a step toward safer and smarter healthcare, together.</p>
+          <p class="absolute top-[420px] left-1/2 w-[326px] -translate-x-1/2 text-center font-['Open_Sans'] text-[16px] leading-normal text-[#28303B] opacity-75">Stay informed about your medications with ease. Let's take a step toward safer and smarter healthcare, together.</p>
 
           <!-- Buttons -->
           <!-- Parent container must be `relative` -->
           <div class="relative flex w-full flex-col space-y-4 px-4">
             <!-- Adjustable Login Button -->
-            <button class="absolute bottom-[75px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 rounded-full bg-[#199B91] text-lg font-bold text-white transition-all hover:bg-[#0d8b81]">LOG IN</button>
+            <button class="absolute top-[76px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 cursor-pointer rounded-full bg-[#199B91] text-lg font-bold text-white transition-all hover:bg-[#0d8b81] active:scale-95">LOG IN</button>
 
             <!-- Adjustable Signup Button -->
-            <button class="absolute -top-[65px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 rounded-full border-2 border-[#199B91] bg-white text-lg font-bold text-[#199B91] transition-all hover:bg-[#f0f9f8]">SIGN UP</button>
+            <button class="absolute top-[150px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 cursor-pointer rounded-full border-2 border-[#199B91] bg-white text-lg font-bold text-[#199B91] transition-all hover:bg-[#E0F7FA] active:scale-95">SIGN UP</button>
           </div>
         </div>
       </div>
+      <!-- End of Welcome Page -->
 
       <div id="app-content" class="container" style="display: none">
+
         <header>
           <h1>MedScan</h1>
           <nav>
@@ -172,6 +180,7 @@
             </ul>
           </nav>
         </header>
+
         <main>
           <section id="home" class="active-section">
             <h2>Welcome to MedScan</h2>
@@ -179,6 +188,7 @@
             <button class="primary-btn">Get Started</button>
           </section>
         </main>
+
         <footer>
           <nav class="bottom-nav">
             <a href="#home" class="nav-item active">
@@ -199,8 +209,10 @@
             </a>
           </nav>
         </footer>
+        
       </div>
     </div>
     <script src="jscript/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   </body>
 </html>

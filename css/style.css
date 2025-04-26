@@ -1,7 +1,3 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 :root {
   --primary-color: #243e36;
   --secondary-color: #7ca982;
@@ -13,16 +9,21 @@
   --animation-timing: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Global Font Setup */
-* {
+
+/* Disable Temporarily - For Enhancement
+ * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif; /* Default font for all text */
-}
+  font-family: "Open Sans", sans-serif;
+} 
+*/
+
+
 
 /* Title and Subtitle Font */
-h1, h2 {
+h1,
+h2 {
   font-family: "Poppins", bold;
 }
 
@@ -40,14 +41,14 @@ body {
 }
 
 .app-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
 /* Loader Styles */
 .loader-container {
@@ -76,31 +77,31 @@ body {
 
 /* Animation class for loader background */
 .loader-container.animate-bg {
-  background-color: #199B91;
+  background-color: #199b91;
 }
 
 /* Animation Container */
 #animation-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Logo and Text Container */
 #logo-text-container {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      opacity 0.8s ease-out,
-      visibility 0.8s ease-out;
-      z-index: 10;
-      margin: 0 auto;
-  }
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.8s ease-out,
+    visibility 0.8s ease-out;
+  z-index: 10;
+  margin: 0 auto;
+}
 
 #logo-text-container img {
   transition: transform 0.8s ease-out;
@@ -135,31 +136,29 @@ body {
 
 /* Bouncing Dots */
 #dots-container {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    gap: 2rem; /* Adjust spacing between dots */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  gap: 2rem; /* Adjust spacing between dots */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
 }
 
 /* Individual dots */
 #dots-container div {
-    width: 1.5rem; /* Increase dot size */
-    height: 1.5rem; /* Increase dot size */
-    border-radius: 9999px; /* Keeps dots perfectly round */
-    background-color: var(--color-dot); /* Uses the assigned theme color */
-    box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    will-change: transform;
-    opacity: 0.9;
+  width: 1.5rem; /* Increase dot size */
+  height: 1.5rem; /* Increase dot size */
+  border-radius: 9999px; /* Keeps dots perfectly round */
+  background-color: var(--color-dot); /* Uses the assigned theme color */
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  opacity: 0.9;
 }
-
-  
 
 /* Ensure dots are properly hidden initially */
 #dots-container.hidden {
@@ -385,14 +384,14 @@ footer {
 
 /* Skip button positioning */
 .skip-btn {
-    position: absolute;
-    top: 858px;
-    left: 62px;
-    z-index: 10;
-    background: none; /* Removes any button background */
-    border: none; /* No border */
-    padding: 0; /* No extra spacing */
-  }  
+  position: absolute;
+  top: 858px;
+  left: 62px;
+  z-index: 10;
+  background: none; /* Removes any button background */
+  border: none; /* No border */
+  padding: 0; /* No extra spacing */
+}
 
 .skip-btn:hover {
   transform: scale(1.05);
@@ -457,28 +456,28 @@ footer {
 }
 
 .slide-indicators {
-    flex: 0.1;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* Default indicator styling */
-  .indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    opacity: 0.3;
-  }
-  
-  /* Active indicator with larger size */
-  .indicator.active {
-    width: 14px; /* Increased size */
-    height: 14px; /* Increased size */
-    opacity: 1;
-  }  
+  flex: 0.1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Default indicator styling */
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  opacity: 0.3;
+}
+
+/* Active indicator with larger size */
+.indicator.active {
+  width: 14px; /* Increased size */
+  height: 14px; /* Increased size */
+  opacity: 1;
+}
 
 .next-btn,
 .get-started-btn {
@@ -637,7 +636,6 @@ footer {
     transform: translateY(0);
   }
 }
-
 
 /* Hidden elements */
 #onboarding,

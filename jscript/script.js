@@ -265,3 +265,65 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     setupWelcomePageButtons();
 });
+// ===== NEW FUNCTIONALITY CAN GO HERE =====
+
+// Function to show login page and hide welcome page
+function showLoginPage() {
+    const welcomePage = document.getElementById('welcome-page');
+    const loginPage = document.getElementById('login-page');
+    const appContent = document.getElementById('app-content');
+    
+    // Hide welcome page with fade-out animation
+    if (welcomePage) {
+        welcomePage.style.opacity = '0';
+        setTimeout(() => {
+            welcomePage.style.display = 'none';
+            
+            // Show login page with fade-in animation
+            if (loginPage) {
+                loginPage.style.display = 'flex';
+                setTimeout(() => {
+                    loginPage.style.opacity = '1';
+                }, 50);
+            }
+            
+            // Ensure app content remains hidden
+            if (appContent) {
+                appContent.style.display = 'none';
+                appContent.style.opacity = '0';
+            }
+        }, 500);
+    }
+}
+
+// Function to initialize login button
+function setupLoginButton() {
+    const loginBtn = document.querySelector('#welcome-page button:first-of-type');
+    if (loginBtn) {
+        // Remove any existing event listeners to prevent conflicts
+        loginBtn.replaceWith(loginBtn.cloneNode(true));
+        // Add new event listener
+        document.querySelector('#welcome-page button:first-of-type')
+            .addEventListener('click', showLoginPage);
+    }
+}
+
+// Initialize login functionality when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Hide login page initially if it exists
+    const loginPage = document.getElementById('login-page');
+    if (loginPage) {
+        loginPage.style.display = 'none';
+        loginPage.style.opacity = '0';
+    }
+    
+    // Set up login button
+    setupLoginButton();
+    
+    // Make sure app content is hidden initially
+    const appContent = document.getElementById('app-content');
+    if (appContent) {
+        appContent.style.display = 'none';
+        appContent.style.opacity = '0';
+    }
+});

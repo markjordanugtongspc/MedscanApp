@@ -112,15 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     }
 
-    // Show welcome page
-    function showWelcomePage() {
-        const welcomePage = document.getElementById('welcome-page');
-        welcomePage.style.display = 'flex';
-        setTimeout(() => {
-            welcomePage.style.opacity = '1';
-        }, 50);
-    }
-
     // Onboarding slides functionality
     function setupOnboarding() {
         const slides = document.querySelectorAll('.onboarding-slide');
@@ -174,12 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     welcomePage.style.opacity = "1"; // Smooth fade-in effect
                 }, 50);
-
-                // Ensure MedScan text is visible
-                if (logoTextContainer) {
-                    logoTextContainer.style.display = "block";
-                    logoTextContainer.style.opacity = "1";
-                }
+                
+                // We don't need to show the logo text container here
+                // as it should remain hidden after the initial animation
             }
         }
 
@@ -205,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add event listeners for welcome page buttons
-    document.addEventListener('DOMContentLoaded', () => {
+    function setupWelcomePageButtons() {
         const loginBtn = document.querySelector('#welcome-page button:first-of-type');
         const signupBtn = document.querySelector('#welcome-page button:last-of-type');
 
@@ -230,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 500);
             });
         }
-    });
+    }
 
     // Navigation functionality
     function setupNavigation() {
@@ -275,4 +263,5 @@ document.addEventListener('DOMContentLoaded', () => {
     startAnimationSequence();
     setupOnboarding();
     setupNavigation();
+    setupWelcomePageButtons();
 });

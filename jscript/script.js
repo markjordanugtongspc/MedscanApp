@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onboarding.style.opacity = '0';
         appContent.style.opacity = '0';
         appContent.style.transition = 'opacity 0.5s ease-in';
-        
+
         document.querySelectorAll('section').forEach(section => {
             if (!section.classList.contains('active-section')) {
                 section.style.display = 'none';
@@ -28,20 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function startAnimationSequence() {
         // Step 1: Logo bounces in (animation is handled by CSS)
         console.log("Animation sequence started");
-        
+
         // Add background animation after 800ms
         setTimeout(() => {
             // After 1500ms more, show the colored background
             setTimeout(() => {
                 loader.classList.add('animate-bg');
-                
+
                 // After 800ms, remove the colored background
                 setTimeout(() => {
                     loader.classList.remove('animate-bg');
                 }, 800);
             }, 1500);
         }, 800);
-        
+
         // Step 2: Start typing MedScan text after logo animation completes
         setTimeout(() => {
             console.log("Starting MedScan text typing");
@@ -55,26 +55,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     clearInterval(typingInterval);
                     console.log("Text typing completed");
-                    
+
                     // Step 3: After typing completes, wait a moment then fade out logo and text
                     setTimeout(() => {
                         cursor.style.display = 'none';
                         console.log("Fading out logo and text");
-                        
+
                         // Fade out logo and text
                         logoTextContainer.style.animation = 'fade-out 800ms forwards';
-                        
+
                         // Step 4: After fadeout, hide logo container and show dots
                         setTimeout(() => {
                             logoTextContainer.style.display = 'none';
                             console.log("Showing dots container");
-                            
+
                             // Show dots container
                             dotsContainer.classList.remove('hidden');
-                            
+
                             // Ensure flex display is applied
                             dotsContainer.style.display = 'flex';
-                            
+
                             // Animate each dot with staggered delays
                             dots.forEach((dot, index) => {
                                 // Apply the animation with delay
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Make sure dots are visible and properly sized
                                 dot.style.opacity = '1';
                             });
-                            
+
                             // Step 5: Transition to onboarding after showing dots for a while
                             setTimeout(() => {
                                 console.log("Transitioning to onboarding");
@@ -112,64 +112,89 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     }
 
-// Onboarding slides functionality
-function setupOnboarding() {
-    const slides = document.querySelectorAll('.onboarding-slide');
-    const nextButtons = document.querySelectorAll('.next-btn');
-    const skipButtons = document.querySelectorAll('.skip-btn');
-    const getStartedButton = document.querySelector('.get-started-btn');
-    const svgTrigger = document.querySelector('#svg-trigger'); // Added SVG trigger reference
-
-    // Set the first slide as active initially
-    if (slides.length > 0) {
-        slides[0].classList.add('active');
+    // Show welcome page
+    function showWelcomePage() {
+        const welcomePage = document.getElementById('welcome-page');
+        welcomePage.style.display = 'flex';
+        setTimeout(() => {
+            welcomePage.style.opacity = '1';
+        }, 50);
     }
 
-    // Function to handle moving to the next slide
-    function moveToNextSlide() {
-        const currentSlide = document.querySelector('.onboarding-slide.active');
-        if (currentSlide) {
-            const currentIndex = Array.from(slides).indexOf(currentSlide);
-            const nextIndex = currentIndex + 1;
+    // Onboarding slides functionality
+    function setupOnboarding() {
+        const slides = document.querySelectorAll('.onboarding-slide');
+        const nextButtons = document.querySelectorAll('.next-btn');
+        const skipButtons = document.querySelectorAll('.skip-btn');
+        const getStartedButton = document.querySelector('.get-started-btn');
+        const svgTrigger = document.querySelector('#svg-trigger'); // Added SVG trigger reference
+        //Added Shit
+        const welcomePage = document.getElementById("welcome-page");
+        const logoTextContainer = document.getElementById('logo-text-container'); // Ensure MedScan text is visible
+        // End of Added Shit
 
-            if (nextIndex < slides.length) {
-                currentSlide.classList.remove('active');
-                slides[nextIndex].classList.add('active');
-            } else {
-                // If we're at the last slide, show app content
-                hideOnboarding();
+        // Set the first slide as active initially
+        if (slides.length > 0) {
+            slides[0].classList.add('active');
+        }
+
+        // Function to handle moving to the next slide
+        function moveToNextSlide() {
+            const currentSlide = document.querySelector('.onboarding-slide.active');
+            if (currentSlide) {
+                const currentIndex = Array.from(slides).indexOf(currentSlide);
+                const nextIndex = currentIndex + 1;
+
+                if (nextIndex < slides.length) {
+                    currentSlide.classList.remove('active');
+                    slides[nextIndex].classList.add('active');
+                } else {
+                    // If we're at the last slide, show app content
+                    hideOnboarding();
+                }
             }
         }
-    }
 
-    // Function to hide onboarding and show app content
-    function hideOnboarding() {
-        const onboarding = document.querySelector('#onboarding');
-        if (onboarding) {
-            onboarding.style.opacity = '0';
-            setTimeout(() => {
-                onboarding.style.display = 'none';
-                showAppContent();
-            }, 500);
+        // Function to hide onboarding and show welcome page
+        function hideOnboarding() {
+            const onboarding = document.querySelector('#onboarding');
+            if (onboarding) {
+                onboarding.style.opacity = '0';
+                setTimeout(() => {
+                    onboarding.style.display = 'none';
+                    showWelcomePage(); // Show welcome page instead of app content
+                }, 500);
+            }
+        }
+
+        // Function to show the welcome page
+        function showWelcomePage() {
+            if (welcomePage) {
+                welcomePage.style.display = "flex";
+                setTimeout(() => {
+                    welcomePage.style.opacity = "1"; // Smooth fade-in effect
+                }, 50);
+
+                // Ensure MedScan text is visible
+                if (logoTextContainer) {
+                    logoTextContainer.style.display = "block";
+                    logoTextContainer.style.opacity = "1";
+                }
+            }
+        }
+
+        // Attach event listeners to buttons for onboarding navigation
+        nextButtons.forEach(button => button.addEventListener("click", moveToNextSlide));
+        skipButtons.forEach(button => button.addEventListener("click", hideOnboarding));
+
+        if (getStartedButton) {
+            getStartedButton.addEventListener("click", hideOnboarding);
+        }
+
+        if (svgTrigger) {
+            svgTrigger.addEventListener("click", hideOnboarding);
         }
     }
-
-    // Attach event listeners to buttons that move to the next slide
-    nextButtons.forEach(button => button.addEventListener('click', moveToNextSlide));
-
-    // Attach event listeners to Skip buttons to hide onboarding
-    skipButtons.forEach(button => button.addEventListener('click', hideOnboarding));
-
-    // Ensure "Get Started" button behaves correctly
-    if (getStartedButton) {
-        getStartedButton.addEventListener('click', hideOnboarding);
-    }
-
-    // Ensure the SVG button also triggers "Get Started"
-    if (svgTrigger) {
-        svgTrigger.addEventListener('click', hideOnboarding);
-    }
-}
 
     // Show main app content
     function showAppContent() {
@@ -179,25 +204,53 @@ function setupOnboarding() {
         }, 50);
     }
 
+    // Add event listeners for welcome page buttons
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginBtn = document.querySelector('#welcome-page button:first-of-type');
+        const signupBtn = document.querySelector('#welcome-page button:last-of-type');
+
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                const welcomePage = document.getElementById('welcome-page');
+                welcomePage.style.opacity = '0';
+                setTimeout(() => {
+                    welcomePage.style.display = 'none';
+                    showAppContent();
+                }, 500);
+            });
+        }
+
+        if (signupBtn) {
+            signupBtn.addEventListener('click', () => {
+                const welcomePage = document.getElementById('welcome-page');
+                welcomePage.style.opacity = '0';
+                setTimeout(() => {
+                    welcomePage.style.display = 'none';
+                    showAppContent();
+                }, 500);
+            });
+        }
+    });
+
     // Navigation functionality
     function setupNavigation() {
         const navItems = document.querySelectorAll('.nav-item');
         const sections = document.querySelectorAll('section');
-        
+
         navItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                
+
                 const targetId = item.getAttribute('href').slice(1);
-                
+
                 navItems.forEach(navItem => navItem.classList.remove('active'));
                 item.classList.add('active');
-                
+
                 sections.forEach(section => {
                     section.style.display = 'none';
                     section.classList.remove('active-section');
                 });
-                
+
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.style.display = 'flex';
@@ -205,7 +258,7 @@ function setupOnboarding() {
                 }
             });
         });
-        
+
         const primaryBtn = document.querySelector('.primary-btn');
         if (primaryBtn) {
             primaryBtn.addEventListener('click', () => {

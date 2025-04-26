@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,262 +7,200 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
-    
+
     <!-- Custom Font Imports -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-	<body>
-		<div class="app-wrapper">
-			<!-- Loader section remains unchanged -->
-			<div id="loader" class="loader-container">
-				<div
-					id="animation-container"
-					class="relative flex flex-col items-center"
-				>
-					<!-- Logo and Text Container -->
-					<div id="logo-text-container" class="relative flex items-center justify-start w-[400px]">
-						<img
-							src="https://pixvid.org/images/2025/04/24/1.png"
-							alt="Logo"
-							class="h-[200px] w-[200px] animate-[bounce-animation_3214ms_cubic-bezier(0.22,0.61,0.36,1)_forwards,slide-left_800ms_ease-out_3215ms_forwards]"
-						/>
+  <body>
+    <div class="app-wrapper">
+      <!-- Loader section remains unchanged -->
+      <div id="loader" class="loader-container">
+        <div id="animation-container" class="relative flex flex-col items-center">
+          <!-- Logo and Text Container -->
+          <div id="logo-text-container" class="relative flex w-[400px] items-center justify-start">
+            <img src="https://pixvid.org/images/2025/04/24/1.png" alt="Logo" class="h-[200px] w-[200px] animate-[bounce-animation_3214ms_cubic-bezier(0.22,0.61,0.36,1)_forwards,slide-left_800ms_ease-out_3215ms_forwards]" />
 
-						<!-- "MedScan" Text -->
-						<div 
-                id="medscan" 
-                class="absolute mt-6 left-[185px] text-medscan text-[32px] font-bold opacity-0 translate-y-0 animate-[fade-in_500ms_forwards_3500ms,slide-right_1000ms_ease-out_forwards_4000ms]"
-            ></div>
+            <!-- "MedScan" Text -->
+            <div id="medscan" class="text-medscan absolute left-[185px] mt-6 translate-y-0 animate-[fade-in_500ms_forwards_3500ms,slide-right_1000ms_ease-out_forwards_4000ms] text-[32px] font-bold opacity-0"></div>
+          </div>
+
+          <!-- Bouncing Dots -->
+          <div id="dots-container" class="absolute bottom-1 flex hidden gap-5">
+            <div class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0s] rounded-full"></div>
+            <div class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.15s] rounded-full"></div>
+            <div class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.3s] rounded-full"></div>
+            <div class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.45s] rounded-full"></div>
+          </div>
         </div>
+      </div>
 
-					<!-- Bouncing Dots -->
-					<div id="dots-container" class="bottom-1 gap-5 absolute flex hidden">
-						<div
-							class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0s] rounded-full"
-						></div>
-						<div
-							class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.15s] rounded-full"
-						></div>
-						<div
-							class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.3s] rounded-full"
-						></div>
-						<div
-							class="bg-secondary-color h-5 w-5 animate-[bounce_1s_infinite_0.45s] rounded-full"
-						></div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Improved Onboarding Section -->
-			<div id="onboarding" class="onboarding-container" style="display: none">
-
-				<div class="onboarding-slides relative h-full overflow-hidden">
-					<!-- Slide 1 -->
-					<div
-						class="onboarding-slide active inset-0 p-5 visible absolute flex h-full flex-col opacity-100 transition-all duration-500"
-						id="slide-1"
-					>
-						<div
-							class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center"
-						>
-							<img
-								src="https://s3-alpha-sig.figma.com/img/8684/dd51/9f4aef3b368af492470d9a84fa7d14b6?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KzCsjKxECOqgEQ7jjV00qdYiXXrjXdPWMthLaW8bYr~PFv54Zd0oxvoeU6ecoqJ4KTlqKHbFAo3PWa0GIVaWs~dve4yGI1RTC3DcZ~TBLBi~p~4rk1XdMo~sZR8BS7yp4Z3EN6AR4nD0u58N46kEEQJofLEoiKbQcY7IfP2PxU6yCAxV6iOBKn1rxOyKxOUDO7rL2o-sW~htvBgq3cyEiaeYvNADcI9Ycbq8MNMXHOlrn9n2KjvPFxJglMBPmZsVBngMIlJxvBwJrrPRGEqboGRSz8myxPAV1WUNNd3YVtdhglI8ed96ey2gdJLXuWf54aWam6ywdTxW~hs2Z2tfUw__"
-								alt="Doctor using MedScan app"
-								class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain"
-								loading="lazy"
-							/>
-						</div>
-
-						<div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
-							<p>
-								MedScan app helps users manage health data, view results, track
-								progress, and get personalized recommendations for informed
-								well-being decisions.
-              </p>
-						</div>
-
-						<div class="slide-indicators mb-2 gap-2.5 flex flex-[0.1] justify-center">
-              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00;"></span>
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
-            </div>                                  
-
-						<div class="px-5 pb-8 mt-auto flex items-end justify-between">
-            <button class="skip-btn text-primary-color font-montserrat font-bold text-[40px]">Skip</button>
-
-							<button
-								class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95"
-								aria-label="Next slide"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="M5 12h14M12 5l7 7-7 7" />
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<!-- Slide 2 -->
-					<div
-						class="onboarding-slide inset-0 p-5 invisible absolute flex h-full flex-col opacity-0 transition-all duration-500"
-						id="slide-2"
-					>
-						<div
-							class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center"
-						>
-							<img
-								src="https://s3-alpha-sig.figma.com/img/46c8/a3bb/0bcc1802390e35873ccb34bda80d4e24?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qaD-BWi27KHvsm4rIXm9F4~IEIG8i5peqYnIWPPTff9XFuwsi8hK708zb6uyjs-1P1enhJDtJw-f9wgDJ2Xn39hLeX75sL5Plry-QNyRv4J3zl2uf6JEvxx9HISJpZJ4jszg8s8tx7mjL6p9uC592mWXW7bbBIAPzim6AG4xjL1LnbpA5-ljREl6HvTmUtnmJltkZLpR9YEx-IQU2etYIycPG6IOitKcNFVEiXSjkDdwybg3PSeByoolrs9EGBHzqEbSIQLw525tjNEhKhuXXOdsh7LfaTY38RaSOZIp2DVB-xN30UxiMcfxZ4RYX7jatQVgrp1asTs-tkxvEcRfHg__"
-								alt="Scan medications"
-								class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain"
-								loading="lazy"
-							/>
-						</div>
-
-						<div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
-							<p>
-								Scan your medications to identify them and get detailed
-								information about dosage, side effects, and interactions.
-              </p>
-						</div>
-
-						<div class="slide-indicators mb-2 gap-2.5 flex flex-[0.1] justify-center">
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
-              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00;"></span>
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
+      <!-- Improved Onboarding Section -->
+      <div id="onboarding" class="onboarding-container" style="display: none">
+        <div class="onboarding-slides relative h-full overflow-hidden">
+          <!-- Slide 1 -->
+          <div class="onboarding-slide active visible absolute inset-0 flex h-full flex-col p-5 opacity-100 transition-all duration-500" id="slide-1">
+            <div class="onboarding-image mb-0 flex flex-1 items-center justify-center pb-0">
+              <img src="https://s3-alpha-sig.figma.com/img/8684/dd51/9f4aef3b368af492470d9a84fa7d14b6?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KzCsjKxECOqgEQ7jjV00qdYiXXrjXdPWMthLaW8bYr~PFv54Zd0oxvoeU6ecoqJ4KTlqKHbFAo3PWa0GIVaWs~dve4yGI1RTC3DcZ~TBLBi~p~4rk1XdMo~sZR8BS7yp4Z3EN6AR4nD0u58N46kEEQJofLEoiKbQcY7IfP2PxU6yCAxV6iOBKn1rxOyKxOUDO7rL2o-sW~htvBgq3cyEiaeYvNADcI9Ycbq8MNMXHOlrn9n2KjvPFxJglMBPmZsVBngMIlJxvBwJrrPRGEqboGRSz8myxPAV1WUNNd3YVtdhglI8ed96ey2gdJLXuWf54aWam6ywdTxW~hs2Z2tfUw__" alt="Doctor using MedScan app" class="max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain p-5" loading="lazy" />
             </div>
 
-						<div class="px-5 pb-8 mt-auto flex items-end justify-between">
-							<button class="skip-btn text-primary-color font-montserrat font-bold text-[40px]">Skip</button>
-
-							<button
-								class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95"
-								aria-label="Next slide"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="M5 12h14M12 5l7 7-7 7" />
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<!-- Slide 3 -->
-					<div
-						class="onboarding-slide inset-0 p-5 invisible absolute flex h-full flex-col opacity-0 transition-all duration-500"
-						id="slide-3"
-					>
-						<div
-							class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center"
-						>
-							<img
-								src="https://s3-alpha-sig.figma.com/img/3068/0557/71719d6f9e4672a72ee992e90c82a4c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IGe~89ng1A5m5gm5n-n7gg278tFAhTKQntFg~rytZeySRho45isgqwIjnEdZXdjLkQlW1ZZ5Mv8kpGG2oWZlM4G1fyGy8ZDdTL2i85bIP3-4og-66Wlc4YMMZun-mMQKi4a15DuqTXnw8G1sXCsCRJ9Ro1uGAWKUZuidKwAQY6NQAwmCIFVLUxXvLDUvP4FVf3KjjMwTizhVlrswGaZI9iPbexy84ECHfFrVfDRo75GND6ed5hWTR8GMk7U5ynbm-7HGyJpqkTk2sS6mobcm4B36i7Al4s-qqgsbwV8qPjWadcfXiwB1xffQi1FlEiv3c97F6aRndOvmS3QTOhj4Rw__"
-								alt="Health monitoring"
-								class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain"
-								loading="lazy"
-							/>
-						</div>
-
-						<div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
-							<p>
-								Track your medication history and receive reminders to ensure
-								you never miss a dose.
-              </p>
-						</div>
-
-						<div class="slide-indicators mb-2 gap-2.5 flex flex-[0.1] justify-center">
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
-              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36;"></span>
-              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00;"></span>
+            <div class="onboarding-text mb-2 flex-[0.2] px-5 text-center">
+              <p>MedScan app helps users manage health data, view results, track progress, and get personalized recommendations for informed well-being decisions.</p>
             </div>
 
-						<div class="px-5 pb-8 mt-auto flex items-end justify-between">
-          <!-- Skip Button - Pero eh Comment Ni Soon -->
-              <button class="skip-btn text-primary-color font-montserrat font-bold text-[40px]">
-                  Skip
-              </button>
-              
-              <button id="svg-trigger"
-              class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95"
-              aria-label="Trigger Get Started">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="slide-indicators mb-2 flex flex-[0.1] justify-center gap-2.5">
+              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00"></span>
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+            </div>
+
+            <div class="mt-auto flex items-end justify-between px-5 pb-8">
+              <button class="skip-btn text-primary-color font-montserrat text-[40px] font-bold">Skip</button>
+
+              <button class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+                </svg>
               </button>
+            </div>
+          </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
+          <!-- Slide 2 -->
+          <div class="onboarding-slide invisible absolute inset-0 flex h-full flex-col p-5 opacity-0 transition-all duration-500" id="slide-2">
+            <div class="onboarding-image mb-0 flex flex-1 items-center justify-center pb-0">
+              <img src="https://s3-alpha-sig.figma.com/img/46c8/a3bb/0bcc1802390e35873ccb34bda80d4e24?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qaD-BWi27KHvsm4rIXm9F4~IEIG8i5peqYnIWPPTff9XFuwsi8hK708zb6uyjs-1P1enhJDtJw-f9wgDJ2Xn39hLeX75sL5Plry-QNyRv4J3zl2uf6JEvxx9HISJpZJ4jszg8s8tx7mjL6p9uC592mWXW7bbBIAPzim6AG4xjL1LnbpA5-ljREl6HvTmUtnmJltkZLpR9YEx-IQU2etYIycPG6IOitKcNFVEiXSjkDdwybg3PSeByoolrs9EGBHzqEbSIQLw525tjNEhKhuXXOdsh7LfaTY38RaSOZIp2DVB-xN30UxiMcfxZ4RYX7jatQVgrp1asTs-tkxvEcRfHg__" alt="Scan medications" class="max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain p-5" loading="lazy" />
+            </div>
 
-			<div id="app-content" class="container" style="display: none">
-				<header>
-					<h1>MedScan</h1>
-					<nav>
-						<ul>
-							<li>
-								<a href="#home">Home</a>
-							</li>
-							<li>
-								<a href="#scan">Scan</a>
-							</li>
-							<li>
-								<a href="#history">History</a>
-							</li>
-							<li>
-								<a href="#profile">Profile</a>
-							</li>
-						</ul>
-					</nav>
-				</header>
-				<main>
-					<section id="home" class="active-section">
-						<h2>Welcome to MedScan</h2>
-						<p>Your personal medication identification assistant</p>
-						<button class="primary-btn">Get Started</button>
-					</section>
-				</main>
-				<footer>
-					<nav class="bottom-nav">
-						<a href="#home" class="nav-item active">
-							<i class="fas fa-home"></i>
-							<span>Home</span>
-						</a>
-						<a href="#scan" class="nav-item">
-							<i class="fas fa-camera"></i>
-							<span>Scan</span>
-						</a>
-						<a href="#history" class="nav-item">
-							<i class="fas fa-history"></i>
-							<span>History</span>
-						</a>
-						<a href="#profile" class="nav-item">
-							<i class="fas fa-user"></i>
-							<span>Profile</span>
-						</a>
-					</nav>
-				</footer>
-			</div>
-		</div>
-		<script src="jscript/script.js"></script>
-	</body>
+            <div class="onboarding-text mb-2 flex-[0.2] px-5 text-center">
+              <p>Scan your medications to identify them and get detailed information about dosage, side effects, and interactions.</p>
+            </div>
+
+            <div class="slide-indicators mb-2 flex flex-[0.1] justify-center gap-2.5">
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00"></span>
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+            </div>
+
+            <div class="mt-auto flex items-end justify-between px-5 pb-8">
+              <button class="skip-btn text-primary-color font-montserrat text-[40px] font-bold">Skip</button>
+
+              <button class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95" aria-label="Next slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="onboarding-slide invisible absolute inset-0 flex h-full flex-col p-5 opacity-0 transition-all duration-500" id="slide-3">
+            <div class="onboarding-image mb-0 flex flex-1 items-center justify-center pb-0">
+              <img src="https://s3-alpha-sig.figma.com/img/3068/0557/71719d6f9e4672a72ee992e90c82a4c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IGe~89ng1A5m5gm5n-n7gg278tFAhTKQntFg~rytZeySRho45isgqwIjnEdZXdjLkQlW1ZZ5Mv8kpGG2oWZlM4G1fyGy8ZDdTL2i85bIP3-4og-66Wlc4YMMZun-mMQKi4a15DuqTXnw8G1sXCsCRJ9Ro1uGAWKUZuidKwAQY6NQAwmCIFVLUxXvLDUvP4FVf3KjjMwTizhVlrswGaZI9iPbexy84ECHfFrVfDRo75GND6ed5hWTR8GMk7U5ynbm-7HGyJpqkTk2sS6mobcm4B36i7Al4s-qqgsbwV8qPjWadcfXiwB1xffQi1FlEiv3c97F6aRndOvmS3QTOhj4Rw__" alt="Health monitoring" class="max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain p-5" loading="lazy" />
+            </div>
+
+            <div class="onboarding-text mb-2 flex-[0.2] px-5 text-center">
+              <p>Track your medication history and receive reminders to ensure you never miss a dose.</p>
+            </div>
+
+            <div class="slide-indicators mb-2 flex flex-[0.1] justify-center gap-2.5">
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+              <span class="indicator h-2.5 w-2.5 rounded-full opacity-30" style="background-color: #243e36"></span>
+              <span class="indicator active h-4 w-4 rounded-full opacity-100" style="background-color: #00ff00"></span>
+            </div>
+
+            <div class="mt-auto flex items-end justify-between px-5 pb-8">
+              <!-- Skip Button - Pero eh Comment Ni Soon -->
+              <button class="skip-btn text-primary-color font-montserrat text-[40px] font-bold">Skip</button>
+
+              <button id="svg-trigger" class="next-btn focus:ring-opacity-50 flex h-[75px] w-[75px] items-center justify-center rounded-full bg-gradient-to-b from-[#199B91] to-[#093532] transition-transform duration-200 hover:scale-105 focus:ring-2 focus:ring-[#199B91] focus:outline-none active:scale-95" aria-label="Trigger Get Started">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome Page -->
+      <div id="welcome-page" class="relative container" style="display: flex; opacity: 1;">
+        <div class="flex h-full flex-col items-center justify-center space-y-6 px-6 py-10">
+          <!-- Logo (Adjustable with Tailwind top-[value]) -->
+          <div class="relative bottom-[250px] h-[500px] w-[500px] flex-shrink-0">
+            <img src="https://pixvid.org/images/2025/04/24/1.png" alt="MedScan Logo" class="h-full w-full object-contain" />
+          </div>
+
+          <!-- Divider Line (Adjustable with Tailwind top-[value]) -->
+          <div class="absolute top-[325px] h-[2px] w-[80%] bg-[#35A69E]"></div>
+
+          <!-- Welcome Text (Adjustable with Tailwind top-[value]) -->
+          <h1 class="font-poppins absolute top-[335px] left-1/2 -translate-x-1/2 text-center text-[32px] font-bold whitespace-nowrap text-[#263238]">Welcome to MedScan</h1>
+
+          <!-- Description Text -->
+          <p class="absolute top-[435px] left-1/2 w-[326px] -translate-x-1/2 text-center font-['Open_Sans'] text-[16px] leading-normal text-[#28303B] opacity-75">Stay informed about your medications with ease. Let's take a step toward safer and smarter healthcare, together.</p>
+
+          <!-- Buttons -->
+          <!-- Parent container must be `relative` -->
+          <div class="relative flex w-full flex-col space-y-4 px-4">
+            <!-- Adjustable Login Button -->
+            <button class="absolute bottom-[75px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 rounded-full bg-[#199B91] text-lg font-bold text-white transition-all hover:bg-[#0d8b81]">LOG IN</button>
+
+            <!-- Adjustable Signup Button -->
+            <button class="absolute -top-[65px] left-1/2 h-[56px] w-[389px] -translate-x-1/2 rounded-full border-2 border-[#199B91] bg-white text-lg font-bold text-[#199B91] transition-all hover:bg-[#f0f9f8]">SIGN UP</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="app-content" class="container" style="display: none">
+        <header>
+          <h1>MedScan</h1>
+          <nav>
+            <ul>
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#scan">Scan</a>
+              </li>
+              <li>
+                <a href="#history">History</a>
+              </li>
+              <li>
+                <a href="#profile">Profile</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <section id="home" class="active-section">
+            <h2>Welcome to MedScan</h2>
+            <p>Your personal medication identification assistant</p>
+            <button class="primary-btn">Get Started</button>
+          </section>
+        </main>
+        <footer>
+          <nav class="bottom-nav">
+            <a href="#home" class="nav-item active">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+            <a href="#scan" class="nav-item">
+              <i class="fas fa-camera"></i>
+              <span>Scan</span>
+            </a>
+            <a href="#history" class="nav-item">
+              <i class="fas fa-history"></i>
+              <span>History</span>
+            </a>
+            <a href="#profile" class="nav-item">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </nav>
+        </footer>
+      </div>
+    </div>
+    <script src="jscript/script.js"></script>
+  </body>
 </html>

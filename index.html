@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>MedScan App</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
@@ -22,7 +23,7 @@
         <div id="animation-container" class="relative flex flex-col items-center">
           <!-- Logo and Text Container -->
           <div id="logo-text-container" class="relative flex w-[400px] items-center justify-start">
-            <img src="https://pixvid.org/images/2025/04/24/1.png" alt="Logo" class="h-[200px] w-[200px] animate-[bounce-animation_3214ms_cubic-bezier(0.22,0.61,0.36,1)_forwards,slide-left_800ms_ease-out_3215ms_forwards]" />
+            <img src="images/logo.png" alt="Logo" class="h-[150px] w-[100px] animate-[bounce-animation_3214ms_cubic-bezier(0.22,0.61,0.36,1)_forwards,slide-left_800ms_ease-out_3215ms_forwards]" />
 
             <!-- "MedScan" Text -->
             <div id="medscan" class="text-medscan mt-6 translate-y-0 font-bold absolute left-[185px] animate-[fade-in_500ms_forwards_3500ms,slide-right_1000ms_ease-out_forwards_4000ms] text-[32px] opacity-0"></div>
@@ -45,7 +46,7 @@
           <!-- Slide 1 -->
           <div class="onboarding-slide active inset-0 p-5 visible absolute flex h-full flex-col opacity-100 transition-all duration-500" id="slide-1">
             <div class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center">
-              <img src="https://s3-alpha-sig.figma.com/img/8684/dd51/9f4aef3b368af492470d9a84fa7d14b6?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KzCsjKxECOqgEQ7jjV00qdYiXXrjXdPWMthLaW8bYr~PFv54Zd0oxvoeU6ecoqJ4KTlqKHbFAo3PWa0GIVaWs~dve4yGI1RTC3DcZ~TBLBi~p~4rk1XdMo~sZR8BS7yp4Z3EN6AR4nD0u58N46kEEQJofLEoiKbQcY7IfP2PxU6yCAxV6iOBKn1rxOyKxOUDO7rL2o-sW~htvBgq3cyEiaeYvNADcI9Ycbq8MNMXHOlrn9n2KjvPFxJglMBPmZsVBngMIlJxvBwJrrPRGEqboGRSz8myxPAV1WUNNd3YVtdhglI8ed96ey2gdJLXuWf54aWam6ywdTxW~hs2Z2tfUw__" alt="Doctor using MedScan app" class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain" loading="lazy" />
+              <img src="images/view-page.gif" alt="Doctor using MedScan app" class="max-h-[280px] max-w-[70%] object-contain" />
             </div>
 
             <div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
@@ -73,7 +74,7 @@
           <!-- Slide 2 -->
           <div class="onboarding-slide inset-0 p-5 invisible absolute flex h-full flex-col opacity-0 transition-all duration-500" id="slide-2">
             <div class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center">
-              <img src="https://s3-alpha-sig.figma.com/img/46c8/a3bb/0bcc1802390e35873ccb34bda80d4e24?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qaD-BWi27KHvsm4rIXm9F4~IEIG8i5peqYnIWPPTff9XFuwsi8hK708zb6uyjs-1P1enhJDtJw-f9wgDJ2Xn39hLeX75sL5Plry-QNyRv4J3zl2uf6JEvxx9HISJpZJ4jszg8s8tx7mjL6p9uC592mWXW7bbBIAPzim6AG4xjL1LnbpA5-ljREl6HvTmUtnmJltkZLpR9YEx-IQU2etYIycPG6IOitKcNFVEiXSjkDdwybg3PSeByoolrs9EGBHzqEbSIQLw525tjNEhKhuXXOdsh7LfaTY38RaSOZIp2DVB-xN30UxiMcfxZ4RYX7jatQVgrp1asTs-tkxvEcRfHg__" alt="Scan medications" class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain" loading="lazy" />
+              <img src="images/view-page1.gif" alt="Scan medications" class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain" loading="lazy" />
             </div>
 
             <div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
@@ -101,7 +102,7 @@
           <!-- Slide 3 -->
           <div class="onboarding-slide inset-0 p-5 invisible absolute flex h-full flex-col opacity-0 transition-all duration-500" id="slide-3">
             <div class="onboarding-image mb-0 pb-0 flex flex-1 items-center justify-center">
-              <img src="https://s3-alpha-sig.figma.com/img/3068/0557/71719d6f9e4672a72ee992e90c82a4c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IGe~89ng1A5m5gm5n-n7gg278tFAhTKQntFg~rytZeySRho45isgqwIjnEdZXdjLkQlW1ZZ5Mv8kpGG2oWZlM4G1fyGy8ZDdTL2i85bIP3-4og-66Wlc4YMMZun-mMQKi4a15DuqTXnw8G1sXCsCRJ9Ro1uGAWKUZuidKwAQY6NQAwmCIFVLUxXvLDUvP4FVf3KjjMwTizhVlrswGaZI9iPbexy84ECHfFrVfDRo75GND6ed5hWTR8GMk7U5ynbm-7HGyJpqkTk2sS6mobcm4B36i7Al4s-qqgsbwV8qPjWadcfXiwB1xffQi1FlEiv3c97F6aRndOvmS3QTOhj4Rw__" alt="Health monitoring" class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain" loading="lazy" />
+              <img src="images/view-page2.gif" alt="Health monitoring" class="p-5 max-h-[280px] max-w-[70%] rounded-full bg-[rgba(244,218,224,0.3)] object-contain" loading="lazy" />
             </div>
 
             <div class="onboarding-text mb-2 px-5 flex-[0.2] text-center">
@@ -133,8 +134,8 @@
       <div id="welcome-page" class="relative container" style="display: none; opacity: 1;">
         <div class="space-y-6 px-6 py-10 flex h-full flex-col items-center justify-center">
           <!-- Logo (Adjustable with Tailwind top-[value]) -->
-          <div class="flex-shrink99 absolute bottom-[465px] -left-[25px] h-[500px] w-[500px]">
-            <img src="https://pixvid.org/images/2025/04/24/1.png" alt="MedScan Logo" class="h-full w-full object-contain" />
+          <div class="flex-shrink99 absolute bottom-[605px] left-[91px] h-[250px] w-[250px]">
+            <img src="images/logo.png" alt="MedScan Logo" class="h-full w-full object-contain" />
           </div>
 
           <!-- Divider Line (Adjustable with Tailwind top-[value]) -->
@@ -175,9 +176,9 @@
     </svg>
   </button>
   <div class="w-full max-w-md mt-16 space-y-6"></div>
-  <!-- Logo (You can add your logo here later) -->
+  <!-- Logo -->
   <div class="w-[120px] h-[120px] mb-4 mx-auto">
-    <!-- Empty container for logo - add img tag later -->
+    <img src="images/logo.png" alt="MedScan Logo" class="h-full w-full object-contain" />
   </div>
 
   <!-- Login Content -->

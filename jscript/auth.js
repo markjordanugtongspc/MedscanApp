@@ -1,283 +1,294 @@
-// Wait for the DOM to be fully loaded before executing code
+/**
+ * Authentication JavaScript for MedScan App
+ * This file handles form validation and submission for the sign-up process
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on the signup page
+    // Get form elements
     const signupForm = document.getElementById('signup-form');
-    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('signup-email');
+    const passwordInput = document.getElementById('signup-password');
+    const confirmPasswordInput = document.getElementById('signup-confirm-password');
+    const showPasswordCheckbox = document.getElementById('show-signup-password');
     
-    // Initialize signup form if it exists
-    if (signupForm) {
-        initializeSignupForm();
+    // Email error message element (will be created dynamically)
+    let emailErrorElement = null;
+    
+    // Password error message element (will be created dynamically)
+    let passwordErrorElement = null;
+    
+    // Valid email domains
+    const validDomains = ['@gmail.com', '@yahoomail.com', '@yahoo.com'];
+    
+    /**
+     * Validates if the email has an acceptable domain
+     * @param {string} email - The email to validate
+     * @returns {boolean} - True if email domain is valid, false otherwise
+     */
+    function isValidEmailDomain(email) {
+        return validDomains.some(domain => email.toLowerCase().endsWith(domain));
     }
     
-    // Initialize login form if it exists
-    if (loginForm) {
-        initializeLoginForm();
+    /**
+     * Validates if the password meets requirements:
+     * - At least 8 characters
+     * - Contains letters
+     * - Contains numbers
+     * - Contains symbols
+     * @param {string} password - The password to validate
+     * @returns {boolean} - True if password meets all requirements, false otherwise
+     */
+    function isValidPassword(password) {
+        // Check length
+        if (password.length < 8) return false;
+        
+        // Check for letters
+        if (!/[a-zA-Z]/.test(password)) return false;
+        
+        // Check for numbers
+        if (!/[0-9]/.test(password)) return false;
+        
+        // Check for symbols
+        if (!/[^a-zA-Z0-9]/.test(password)) return false;
+        
+        return true;
     }
     
-    // Function to initialize signup form
-    function initializeSignupForm() {
-        // Get references to all form elements
-        const emailInput = document.getElementById('signup-email');
-        const passwordInput = document.getElementById('signup-password');
-        const confirmPasswordInput = document.getElementById('signup-confirm-password');
-        const showPasswordCheckbox = document.getElementById('show-signup-password');
-        
-        // Create error message elements
-        let emailErrorMsg = document.createElement('p');
-        emailErrorMsg.className = 'text-red-500 text-xs mt-1 ml-3';
-        emailInput.parentNode.parentNode.appendChild(emailErrorMsg);
-        
-        let passwordErrorMsg = document.createElement('p');
-        passwordErrorMsg.className = 'text-red-500 text-xs mt-1 ml-3';
-        passwordInput.parentNode.parentNode.appendChild(passwordErrorMsg);
-        
-        let confirmPasswordErrorMsg = document.createElement('p');
-        confirmPasswordErrorMsg.className = 'text-red-500 text-xs mt-1 ml-3';
-        confirmPasswordInput.parentNode.parentNode.appendChild(confirmPasswordErrorMsg);
-        
-        // Function to validate email domain
-        function validateEmailDomain(email) {
-            // List of allowed domains
-            const allowedDomains = ['@gmail.com', '@yahoomail.com', '@yahoo.com'];
-            
-            // Check if email ends with any of the allowed domains
-            return allowedDomains.some(domain => email.toLowerCase().endsWith(domain));
+    /**
+     * Shows an error message for the email input
+     * @param {string} message - The error message to display
+     */
+    function showEmailError(message) {
+        // Remove existing error message if it exists
+        if (emailErrorElement) {
+            emailErrorElement.remove();
         }
         
-        // Function to validate password strength
-        function validatePassword(password) {
-            // Check if password is at least 8 characters
-            if (password.length < 8) {
-                return {
-                    valid: false,
-                    message: 'Password must be at least 8 characters long'
-                };
-            }
-            
-            // Check if password contains letters
-            if (!/[a-zA-Z]/.test(password)) {
-                return {
-                    valid: false,
-                    message: 'Password must contain at least one letter'
-                };
-            }
-            
-            // Check if password contains numbers
-            if (!/[0-9]/.test(password)) {
-                return {
-                    valid: false,
-                    message: 'Password must contain at least one number'
-                };
-            }
-            
-            // Check if password contains symbols
-            if (!/[^a-zA-Z0-9]/.test(password)) {
-                return {
-                    valid: false,
-                    message: 'Password must contain at least one symbol'
-                };
-            }
-            
-            // If all checks pass, password is valid
-            return {
-                valid: true,
-                message: ''
-            };
+        // Create new error message element
+        emailErrorElement = document.createElement('div');
+        emailErrorElement.className = 'text-red-500 text-sm mt-1';
+        emailErrorElement.textContent = message;
+        
+        // Insert error message after email input container
+        emailInput.parentElement.parentElement.appendChild(emailErrorElement);
+    }
+    
+    /**
+     * Shows an error message for the password input
+     * @param {string} message - The error message to display
+     */
+    function showPasswordError(message) {
+        // Remove existing error message if it exists
+        if (passwordErrorElement) {
+            passwordErrorElement.remove();
         }
         
-        // Function to handle email input validation
-        function handleEmailValidation() {
+        // Create new error message element
+        passwordErrorElement = document.createElement('div');
+        passwordErrorElement.className = 'text-red-500 text-sm mt-1';
+        passwordErrorElement.textContent = message;
+        
+        // Insert error message after password input container
+        passwordInput.parentElement.parentElement.appendChild(passwordErrorElement);
+    }
+    
+    /**
+     * Removes the email error message if it exists
+     */
+    function removeEmailError() {
+        if (emailErrorElement) {
+            emailErrorElement.remove();
+            emailErrorElement = null;
+        }
+    }
+    
+    /**
+     * Removes the password error message if it exists
+     */
+    function removePasswordError() {
+        if (passwordErrorElement) {
+            passwordErrorElement.remove();
+            passwordErrorElement = null;
+        }
+    }
+    
+    /**
+     * Validates the email input
+     * @returns {boolean} - True if email is valid, false otherwise
+     */
+    function validateEmail() {
+        const email = emailInput.value.trim();
+        
+        // Check if email is empty
+        if (!email) {
+            showEmailError('Email is required');
+            return false;
+        }
+        
+        // Check if email format is valid
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showEmailError('Please enter a valid email address');
+            return false;
+        }
+        
+        // Check if email domain is acceptable
+        if (!isValidEmailDomain(email)) {
+            showEmailError('The Email is Not Acceptable. Please use Gmail, Yahoo Mail, or Yahoo.');
+            return false;
+        }
+        
+        // Email is valid
+        removeEmailError();
+        return true;
+    }
+    
+    /**
+     * Validates the password input
+     * @returns {boolean} - True if password is valid, false otherwise
+     */
+    function validatePassword() {
+        const password = passwordInput.value;
+        
+        // Check if password is empty
+        if (!password) {
+            showPasswordError('Password is required');
+            return false;
+        }
+        
+        // Check if password meets requirements
+        if (!isValidPassword(password)) {
+            showPasswordError('Password must be at least 8 characters and include letters, numbers, and symbols');
+            return false;
+        }
+        
+        // Password is valid
+        removePasswordError();
+        return true;
+    }
+    
+    /**
+     * Validates the confirm password input
+     * @returns {boolean} - True if confirm password matches password, false otherwise
+     */
+    function validateConfirmPassword() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        
+        // Check if confirm password is empty
+        if (!confirmPassword) {
+            showPasswordError('Please confirm your password');
+            return false;
+        }
+        
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            showPasswordError('Passwords do not match');
+            return false;
+        }
+        
+        // Confirm password is valid
+        removePasswordError();
+        return true;
+    }
+    
+    /**
+     * Saves user data to localStorage
+     * @param {string} email - The user's email
+     * @param {string} password - The user's password
+     */
+    function saveToLocalStorage(email, password) {
+        const userData = {
+            email: email,
+            password: password,
+            signupDate: new Date().toISOString()
+        };
+        
+        localStorage.setItem('medscanUserData', JSON.stringify(userData));
+    }
+    
+    // Event listener for email input to validate on blur
+    emailInput.addEventListener('blur', validateEmail);
+    
+    // Event listener for email input to remove error on focus
+    emailInput.addEventListener('focus', removeEmailError);
+    
+    // Event listener for password input to validate on blur
+    passwordInput.addEventListener('blur', validatePassword);
+    
+    // Event listener for password input to remove error on focus
+    passwordInput.addEventListener('focus', removePasswordError);
+    
+    // Event listener for confirm password input to validate on blur
+    confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+    
+    // Event listener for confirm password input to remove error on focus
+    confirmPasswordInput.addEventListener('focus', removePasswordError);
+    
+    // Event listener for show password checkbox
+    showPasswordCheckbox.addEventListener('change', function() {
+        // Toggle password visibility for both password fields
+        const type = this.checked ? 'text' : 'password';
+        passwordInput.type = type;
+        confirmPasswordInput.type = type;
+    });
+    
+    // Event listener for form submission
+    signupForm.addEventListener('submit', function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+        
+        // Validate all inputs
+        const isEmailValid = validateEmail();
+        const isPasswordValid = validatePassword();
+        const isConfirmPasswordValid = validateConfirmPassword();
+        
+        // If all inputs are valid, save data and proceed
+        if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
             const email = emailInput.value.trim();
-            
-            if (email === '') {
-                emailErrorMsg.textContent = 'Email is required';
-                return false;
-            } else if (!validateEmailDomain(email)) {
-                emailErrorMsg.textContent = 'The Email is Not Acceptable. Use only @gmail.com, @yahoomail.com, or @yahoo.com';
-                return false;
-            } else {
-                emailErrorMsg.textContent = '';
-                return true;
-            }
-        }
-        
-        // Function to handle password input validation
-        function handlePasswordValidation() {
             const password = passwordInput.value;
-            const validation = validatePassword(password);
             
-            if (!validation.valid) {
-                passwordErrorMsg.textContent = validation.message;
-                return false;
-            } else {
-                passwordErrorMsg.textContent = '';
-                return true;
-            }
+            // Save user data to localStorage
+            saveToLocalStorage(email, password);
+            
+            // Redirect to verification page
+            window.location.href = 'verification.html';
+        }
+    });
+
+    // Verification process is handled in otp.js
+    
+    /**
+     * ===== EMAIL MASKING FUNCTIONALITY =====
+     */
+    
+    /**
+     * Masks an email address for privacy
+     * Example: "user@example.com" becomes "us**@example.com"
+     *
+     * @param {string} email - The email address to mask
+     * @returns {string} - The masked email address
+     */
+    function maskEmail(email) {
+        if (!email) return '';
+        
+        const [username, domain] = email.split('@');
+        
+        // If username is very short, mask only the last character
+        if (username.length <= 2) {
+            return username.substring(0, 1) + '*' + '@' + domain;
         }
         
-        // Function to handle confirm password validation
-        function handleConfirmPasswordValidation() {
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
-            
-            if (confirmPassword === '') {
-                confirmPasswordErrorMsg.textContent = 'Please confirm your password';
-                return false;
-            } else if (password !== confirmPassword) {
-                confirmPasswordErrorMsg.textContent = 'Passwords do not match';
-                return false;
-            } else {
-                confirmPasswordErrorMsg.textContent = '';
-                return true;
-            }
-        }
+        // For longer usernames, show first 2 chars and mask the rest
+        const visiblePart = username.substring(0, 2);
+        const maskedPart = '*'.repeat(username.length - 2);
         
-        // Add event listeners for real-time validation
-        emailInput.addEventListener('blur', handleEmailValidation);
-        passwordInput.addEventListener('blur', handlePasswordValidation);
-        confirmPasswordInput.addEventListener('blur', handleConfirmPasswordValidation);
-        
-        // Toggle password visibility when checkbox is clicked
-        function handleTogglePasswordVisibility() {
-            const type = showPasswordCheckbox.checked ? 'text' : 'password';
-            passwordInput.type = type;
-            confirmPasswordInput.type = type;
-        }
-        
-        showPasswordCheckbox.addEventListener('change', handleTogglePasswordVisibility);
-        
-        // Handle form submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            // Validate all inputs
-            const isEmailValid = handleEmailValidation();
-            const isPasswordValid = handlePasswordValidation();
-            const isConfirmPasswordValid = handleConfirmPasswordValidation();
-            
-            // If all validations pass, save to localStorage
-            if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-                const userData = {
-                    email: emailInput.value.trim(),
-                    password: passwordInput.value // In a real app, never store passwords in plain text
-                };
-                
-                // Save to localStorage
-                localStorage.setItem('userData', JSON.stringify(userData));
-                
-                // Show success message
-                alert('Sign up successful!');
-                
-                // Reset form
-                signupForm.reset();
-                
-                // Redirect to login page
-                window.location.href = 'login.html';
-            }
-        }
-        
-        signupForm.addEventListener('submit', handleFormSubmit);
+        return visiblePart + maskedPart + '@' + domain;
     }
     
-    // Function to initialize login form
-    function initializeLoginForm() {
-        // Get references to login form elements
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const showPasswordCheckbox = document.getElementById('show-password');
-        
-        // Create error message elements
-        let emailErrorMsg = document.createElement('p');
-        emailErrorMsg.className = 'text-red-500 text-xs mt-1 ml-3';
-        emailInput.parentNode.parentNode.appendChild(emailErrorMsg);
-        
-        let passwordErrorMsg = document.createElement('p');
-        passwordErrorMsg.className = 'text-red-500 text-xs mt-1 ml-3';
-        passwordInput.parentNode.parentNode.appendChild(passwordErrorMsg);
-        
-        // Function to validate email domain
-        function validateEmailDomain(email) {
-            // List of allowed domains
-            const allowedDomains = ['@gmail.com', '@yahoomail.com', '@yahoo.com'];
-            
-            // Check if email ends with any of the allowed domains
-            return allowedDomains.some(domain => email.toLowerCase().endsWith(domain));
-        }
-        
-        // Function to handle email input validation
-        function handleEmailValidation() {
-            const email = emailInput.value.trim();
-            
-            if (email === '') {
-                emailErrorMsg.textContent = 'Email is required';
-                return false;
-            } else if (!validateEmailDomain(email)) {
-                emailErrorMsg.textContent = 'The Email is Not Acceptable. Use only @gmail.com, @yahoomail.com, or @yahoo.com';
-                return false;
-            } else {
-                emailErrorMsg.textContent = '';
-                return true;
-            }
-        }
-        
-        // Function to handle password validation
-        function handlePasswordValidation() {
-            const password = passwordInput.value;
-            
-            if (password === '') {
-                passwordErrorMsg.textContent = 'Password is required';
-                return false;
-            } else {
-                passwordErrorMsg.textContent = '';
-                return true;
-            }
-        }
-        
-        // Add event listeners for real-time validation
-        emailInput.addEventListener('blur', handleEmailValidation);
-        passwordInput.addEventListener('blur', handlePasswordValidation);
-        
-        // Toggle password visibility when checkbox is clicked
-        function handleTogglePasswordVisibility() {
-            passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
-        }
-        
-        showPasswordCheckbox.addEventListener('change', handleTogglePasswordVisibility);
-        
-        // Handle login form submission
-        function handleLoginSubmit(event) {
-            event.preventDefault();
-            
-            // Validate inputs
-            const isEmailValid = handleEmailValidation();
-            const isPasswordValid = handlePasswordValidation();
-            
-            if (isEmailValid && isPasswordValid) {
-                // Get stored user data
-                const storedUserData = localStorage.getItem('userData');
-                
-                if (storedUserData) {
-                    const userData = JSON.parse(storedUserData);
-                    
-                    // Check if credentials match
-                    if (userData.email === emailInput.value.trim() && 
-                        userData.password === passwordInput.value) {
-                        // Login successful
-                        alert('Login successful!');
-                        
-                        // Reset form
-                        loginForm.reset();
-                    } else {
-                        // Login failed
-                        passwordErrorMsg.textContent = 'Invalid email or password';
-                    }
-                } else {
-                    // No user data found
-                    passwordErrorMsg.textContent = 'No account found. Please sign up first.';
-                }
-            }
-        }
-        
-        loginForm.addEventListener('submit', handleLoginSubmit);
-    }
+    // Make maskEmail function available globally
+    window.maskEmail = maskEmail;
+    
+    /**
+     * ===== END EMAIL MASKING FUNCTIONALITY =====
+     */
 });

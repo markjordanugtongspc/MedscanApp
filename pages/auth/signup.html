@@ -20,7 +20,7 @@
 <body class="bg-[#f1f7ed]">
     <div class="app-wrapper">
   <!-- Sign Up Page -->
-  <div id="signup-page" class="relative container flex h-screen flex-col items-center justify-center bg-[#f1f7ed] px-6 py-10">
+  <div id="signup-page" class="relative container flex h-screen flex-col items-center justify-center bg-[#f1f7ed] px-6 py-10"> <!-- Mobile Screen View -->
     <!-- Back Button -->
     <button class="absolute top-17 left-6 w-[40px] h-[40px] flex-shrink-0 cursor-pointer" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -116,13 +116,14 @@
           <label for="show-signup-password" class="ml-2 text-sm text-gray-600 font-open-sans">Show password</label>
         </div>
 
-        <!-- Sign Up Button -->
-        <button
-          type="submit"
-          class="w-full rounded-full bg-[#199B91] px-5 py-3 text-lg font-bold text-white transition-all hover:bg-[#0d8b81] active:scale-95 font-montserrat"
-        >
-          SIGN UP
-        </button>
+<!-- Sign Up Button -->
+<button
+    type="submit"
+    class="relative bg-[#199B91] text-black text-lg font-bold font-montserrat shadow-md w-[389px] h-[56px] rounded-full transition-all active:scale-95 flex items-center justify-center hover:bg-[#0d8b81]"
+>
+    SIGN UP
+</button>
+
 
         <!-- Login Link -->
         <p class="text-center text-sm text-[#666] mt-3">

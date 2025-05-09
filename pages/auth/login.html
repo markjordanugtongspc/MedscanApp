@@ -12,8 +12,6 @@
 
   <!-- Custom Font Imports -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-  <!-- Added Flowbite CSS for Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   <!-- Added Tailwind CSS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
@@ -131,7 +129,39 @@
     </div>
   </div>
 
-  <script src="../../jscript/script.js"></script>
-  <script src="../../jscript/auth.js"></script>
+  <!-- Sliding Validation Modal -->
+  <div id="validation-modal" class="fixed inset-0 z-50 transform transition-transform duration-300 translate-y-full" style="display: none;">
+    <!-- Modal Overlay -->
+    <div id="validation-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Modal Content -->
+    <div class="absolute bottom-0 left-0 right-0 mx-auto max-w-md bg-white rounded-t-3xl p-6 shadow-xl transform transition-transform duration-300">
+      <!-- Drag handle -->
+      <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+      
+      <div class="text-center py-4">
+        <svg class="mx-auto mb-4 text-[#199B91] w-14 h-14" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        </svg>
+        <h3 id="validation-message" class="mb-5 text-lg font-semibold text-gray-700"></h3>
+        <button id="validation-ok-btn" type="button" class="w-full sm:max-w-xs mx-auto text-green bg-[#0d5c56] hover:bg-[#064641] focus:ring-4 focus:outline-none focus:ring-[#199B91]/30 font-bold rounded-full text-sm px-6 py-3 text-center border-2 border-[#199B91] shadow-lg text-white">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize login page functionality
+      if (typeof window.setupLoginPage === 'function') {
+        window.setupLoginPage();
+      } else {
+        console.error('setupLoginPage function not found');
+      }
+    });
+  </script>
+
+  <script type="module" src="../../jscript/auth_event_listeners.js"></script>
 </body>
 </html>

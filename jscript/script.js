@@ -8,20 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = dotsContainer.querySelectorAll('div');
     const loader = document.getElementById('loader');
     const onboarding = document.getElementById('onboarding');
-    const appContent = document.getElementById('app-content');
     let i = 0;
 
     // Initialize app state
     function initApp() {
         onboarding.style.opacity = '0';
-        appContent.style.opacity = '0';
-        appContent.style.transition = 'opacity 0.5s ease-in';
-
-        document.querySelectorAll('section').forEach(section => {
-            if (!section.classList.contains('active-section')) {
-                section.style.display = 'none';
-            }
-        });
+        
+        // Initialize welcome page
+        const welcomePage = document.getElementById('welcome-page');
+        if (welcomePage) {
+            welcomePage.style.opacity = '0';
+            welcomePage.style.transition = 'opacity 0.5s ease-in';
+        }
     }
 
     // Main animation sequence
@@ -184,40 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Show main app content
-    function showAppContent() {
-        appContent.style.display = 'flex';
-        setTimeout(() => {
-            appContent.style.opacity = '1';
-        }, 50);
-    }
-
     // Add event listeners for welcome page buttons
     function setupWelcomePageButtons() {
-        const loginBtn = document.querySelector('#welcome-page button:first-of-type');
-        const signupBtn = document.querySelector('#welcome-page button:last-of-type');
-
-        if (loginBtn) {
-            loginBtn.addEventListener('click', () => {
-                const welcomePage = document.getElementById('welcome-page');
-                welcomePage.style.opacity = '0';
-                setTimeout(() => {
-                    welcomePage.style.display = 'none';
-                    showAppContent();
-                }, 500);
-            });
-        }
-
-        if (signupBtn) {
-            signupBtn.addEventListener('click', () => {
-                const welcomePage = document.getElementById('welcome-page');
-                welcomePage.style.opacity = '0';
-                setTimeout(() => {
-                    welcomePage.style.display = 'none';
-                    showAppContent();
-                }, 500);
-            });
-        }
+        // Note: The actual click handlers for these buttons are implemented
+        // in the separate event listeners below, not in this function
+        console.log('Welcome page buttons initialized');
     }
 
     // Navigation functionality
@@ -262,7 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initApp();
     startAnimationSequence();
     setupOnboarding();
-    setupNavigation();
     setupWelcomePageButtons();
 });
 // ===== NEW FUNCTIONALITY CAN GO HERE =====

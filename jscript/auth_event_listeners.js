@@ -243,3 +243,320 @@ function handleBackToLogin() {
 // Expose functions to global scope
 window.handleSignupSubmit = handleSignupSubmit;
 window.handleBackToLogin = handleBackToLogin;
+
+// ===== LOGIN FUNCTIONALITY =====
+
+import { loginUser } from './auth_api.js';
+
+/**
+ * Set up login page functionality
+ */
+function setupLoginPage() {
+    setupLoginSlidingModals();
+    setupLoginPasswordToggle();
+    setupLoginForm();
+}
+
+/**
+ * Set up sliding modals for login page
+ */
+function setupLoginSlidingModals() {
+    // Get modal elements
+    const validationModal = document.getElementById('validation-modal');
+    const validationOverlay = document.getElementById('validation-overlay');
+    const validationOkBtn = document.getElementById('validation-ok-btn');
+    
+    console.log('Setting up login sliding modals with elements:', { validationModal, validationOverlay, validationOkBtn });
+    
+    // Function to show validation modal
+    window.showValidationModal = function(message) {
+        console.log('Showing validation modal with message:', message);
+        const validationMessage = document.getElementById('validation-message');
+        if (validationMessage && message) {
+            validationMessage.textContent = message;
+        }
+        
+        if (validationModal) {
+            validationModal.style.display = 'block';
+            // Use setTimeout to ensure display block is applied before adding the class
+            setTimeout(() => {
+                validationModal.classList.remove('translate-y-full');
+                validationModal.classList.add('translate-y-0');
+            }, 10);
+        } else {
+            console.error('Validation modal element not found');
+        }
+    };
+    
+    // Function to hide validation modal
+    window.hideValidationModal = function() {
+        console.log('Hiding validation modal');
+        if (validationModal) {
+            validationModal.classList.remove('translate-y-0');
+            validationModal.classList.add('translate-y-full');
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                validationModal.style.display = 'none';
+            }, 300);
+        } else {
+            console.error('Validation modal element not found when trying to hide');
+        }
+    };
+    
+    // Set up event listeners for modal interactions
+    if (validationOkBtn) {
+        validationOkBtn.addEventListener('click', window.hideValidationModal);
+        console.log('Added click listener to validation OK button');
+    } else {
+        console.error('Validation OK button not found');
+    }
+    
+    if (validationOverlay) {
+        validationOverlay.addEventListener('click', window.hideValidationModal);
+        console.log('Added click listener to validation overlay');
+    } else {
+        console.error('Validation overlay not found');
+    }
+}
+
+/**
+ * Set up password visibility toggle for login page
+ */
+function setupLoginPasswordToggle() {
+    const showPasswordCheckbox = document.getElementById('show-password');
+    const passwordField = document.getElementById('password');
+
+    if (showPasswordCheckbox && passwordField) {
+        showPasswordCheckbox.addEventListener('change', function() {
+            const type = this.checked ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        });
+    }
+}
+
+/**
+ * Set up login form submission
+ */
+function setupLoginForm() {
+    const loginForm = document.getElementById('login-form');
+    
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLoginSubmit);
+    }
+}
+
+/**
+ * Handle login form submission
+ * @param {Event} event - The form submission event
+ */
+async function handleLoginSubmit(event) {
+    event.preventDefault();
+    console.log('Handling login form submission');
+
+    // Get form inputs
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    if (!emailInput || !passwordInput) {
+        console.error('Form inputs not found');
+        return;
+    }
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    console.log('Login attempt with email:', email);
+
+    // Validate form inputs
+    if (!email || !password) {
+        console.log('Empty fields detected');
+        window.showValidationModal('Please fill in all fields.');
+        return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        console.log('Invalid email format');
+        window.showValidationModal('Please enter a valid email address.');
+        return;
+    }
+
+    try {
+        // Attempt to login
+        console.log('Calling loginUser function with:', { email, password });
+        const { data, error } = await loginUser(email, password);
+        console.log('Login response:', { data, error });
+
+        if (error) {
+            console.error('Error during login:', error.message);
+            window.showValidationModal(`Login failed: ${error.message}`);
+            return;
+        }
+
+        if (!data) {
+            window.showValidationModal('Invalid email or password. Please try again.');
+            return;
+        }
+
+        console.log('Login successful:', data);
+        
+        // Create authentication session
+        createAuthSession(data);
+        console.log('Auth session created, redirecting to dashboard');
+        
+        // Redirect to dashboard - use the correct path
+        window.location.href = 'dashboard.html';
+    } catch (err) {
+        console.error('An unexpected error occurred:', err);
+        window.showValidationModal('An unexpected error occurred. Please try again.');
+    }
+}
+
+// Expose login functions to global scope
+window.setupLoginPage = setupLoginPage;
+window.handleLoginSubmit = handleLoginSubmit;
+
+// ===== DASHBOARD FUNCTIONALITY =====
+
+/**
+ * Check if user is authenticated and can access the dashboard
+ * @returns {boolean} True if user is authenticated, false otherwise
+ */
+function isAuthenticated() {
+    // Check for session data in localStorage
+    const authSession = localStorage.getItem('authSession');
+    if (!authSession) {
+        return false;
+    }
+    
+    try {
+        const session = JSON.parse(authSession);
+        // Check if session contains required user data and hasn't expired
+        if (!session.user || !session.email || !session.timestamp) {
+            return false;
+        }
+        
+        // Check if session has expired (24 hour validity)
+        const now = new Date().getTime();
+        const sessionTime = session.timestamp;
+        const DAY_IN_MS = 24 * 60 * 60 * 1000;
+        
+        if (now - sessionTime > DAY_IN_MS) {
+            // Session expired, clear it
+            localStorage.removeItem('authSession');
+            return false;
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Error parsing auth session:', error);
+        return false;
+    }
+}
+
+/**
+ * Create auth session after successful login
+ * @param {Object} userData - User data to store in session
+ */
+function createAuthSession(userData) {
+    const session = {
+        user: userData,
+        email: userData.Email,
+        timestamp: new Date().getTime()
+    };
+    
+    localStorage.setItem('authSession', JSON.stringify(session));
+}
+
+/**
+ * Check authentication on dashboard page load
+ */
+function setupDashboardAuth() {
+    // Only run on dashboard page
+    if (!window.location.pathname.includes('/dashboard.html')) {
+        return;
+    }
+    
+    console.log('Setting up dashboard authentication check');
+    
+    // Check if user is authenticated
+    if (!isAuthenticated()) {
+        console.log('User not authenticated, redirecting to login');
+        // Redirect to login page
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    console.log('User authenticated, setting up dashboard');
+    // User is authenticated, set up dashboard
+    setupDashboardNavigation();
+}
+
+/**
+ * Set up dashboard navigation
+ */
+function setupDashboardNavigation() {
+    console.log('Setting up dashboard navigation');
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
+    
+    // Set up click handlers for navigation
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get the target section ID from the href
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Hide all sections and remove active class from nav links
+            sections.forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active-section');
+            });
+            
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('text-[#199B91]');
+                navLink.classList.add('text-gray-500', 'hover:text-[#199B91]');
+            });
+            
+            // Show the target section and set active class on the clicked link
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('active-section');
+            }
+            
+            // Update the active link styling
+            document.querySelectorAll(`nav a[href="#${targetId}"]`).forEach(activeLink => {
+                activeLink.classList.remove('text-gray-500', 'hover:text-[#199B91]');
+                activeLink.classList.add('text-[#199B91]');
+            });
+        });
+    });
+}
+
+/**
+ * Log out the user
+ */
+function logoutUser() {
+    // Clear auth session
+    localStorage.removeItem('authSession');
+    // Redirect to login page
+    window.location.href = '../index.html';
+}
+
+// This section is intentionally removed as it's a duplicate of the handleLoginSubmit function above
+
+// Initialize dashboard auth check on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on the dashboard page
+    if (window.location.pathname.includes('/dashboard.html')) {
+        setupDashboardAuth();
+    }
+});
+
+// Expose dashboard functions to global scope
+window.setupDashboardAuth = setupDashboardAuth;
+window.setupDashboardNavigation = setupDashboardNavigation;
+window.logoutUser = logoutUser;

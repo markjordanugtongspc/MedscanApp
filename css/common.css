@@ -6,6 +6,7 @@
     --shadow-color: rgba(0, 0, 0, 0.1);
     --color-medscan: #199b91;
     --color-dot: #199b91;
+    --color-teal: #0d9488;
     --animation-timing: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
@@ -90,4 +91,55 @@
   
   header nav ul li a:hover {
     opacity: 1;
+  }
+  
+  /* Tailwind-style utility classes for --color-teal (#0d9488) */
+  .bg-teal {
+    background-color: var(--color-teal);
+  }
+  
+  .text-teal {
+    color: var(--color-teal);
+  }
+  
+  .border-teal {
+    border-color: var(--color-teal);
+  }
+  
+  .hover\:bg-teal:hover {
+    background-color: var(--color-teal);
+  }
+  
+  .hover\:text-teal:hover {
+    color: var(--color-teal);
+  }
+  
+  /* Footer navigation styles */
+  .nav-active {
+    transform: scale(1.1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+  
+  footer button:active, footer .rounded-full:active {
+    transform: scale(0.95);
+  }
+  
+  footer button, footer .rounded-full {
+    transition: transform 0.2s ease;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark-mode #app-content {
+    background-color: #263238;
+  }
+  
+  /* Change welcome message text color in dark mode */
+  body.dark-mode #welcome-message {
+    color: white;
+  }
+  
+  /* Toggle Switch Animation */
+  #mode-toggle:checked + div .light-mode-circle {
+    transform: translateX(28px);
   }

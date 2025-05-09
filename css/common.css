@@ -18,6 +18,8 @@
   /* Button Font (Especially for Dark Mode) */
   button {
     font-family: "Montserrat", bold;
+    background-color: #199B91;
+    color: white;
   }
   
   html,

@@ -6,23 +6,32 @@
   <title>MedScan - Sign Up</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="icon" type="image/png" href="../../images/logo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
 
   <!-- Custom Font Imports -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
-  <!-- Added Flowbite CSS for Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <!-- Custom styles for sliding modal -->
+  <style>
+    .modal-slide-up {
+      transform: translateY(0);
+    }
+    .modal-slide-down {
+      transform: translateY(100%);
+    }
+  </style>
+  
   <!-- Added Tailwind CSS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script type="module" src="../../jscript/auth_event_listeners.js"></script>
 </head>
 <body class="bg-[#f1f7ed]">
     <div class="app-wrapper">
   <!-- Sign Up Page -->
   <div id="signup-page" class="relative container flex h-screen flex-col items-center justify-center bg-[#f1f7ed] px-6 py-10"> <!-- Mobile Screen View -->
     <!-- Back Button -->
-    <button class="absolute top-17 left-6 w-[40px] h-[40px] flex-shrink-0 cursor-pointer" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
+    <a class="absolute top-17 left-6 w-[40px] h-[40px] flex-shrink-0 cursor-pointer" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
         <g clip-path="url(#clip0_206_1776)">
           <path d="M5.47161 18.2333C5.00344 18.7021 4.74048 19.3375 4.74048 20C4.74048 20.6625 5.00344 21.2979 5.47161 21.7666L14.8983 31.1966C15.1305 31.4289 15.4062 31.6131 15.7096 31.7388C16.013 31.8644 16.3382 31.9291 16.6666 31.9291C16.995 31.9291 17.3202 31.8644 17.6236 31.7388C17.927 31.6131 18.2027 31.4289 18.4349 31.1966C18.6672 30.9644 18.8514 30.6887 18.977 30.3853C19.1027 30.0819 19.1674 29.7567 19.1674 29.4283C19.1674 29.0999 19.1027 28.7747 18.977 28.4713C18.8514 28.1679 18.6672 27.8922 18.4349 27.66L13.2749 22.5H32.4999C33.163 22.5 33.7989 22.2366 34.2677 21.7677C34.7366 21.2989 34.9999 20.663 34.9999 20C34.9999 19.3369 34.7366 18.7011 34.2677 18.2322C33.7989 17.7634 33.163 17.5 32.4999 17.5H13.2749L18.4349 12.34C18.9037 11.871 19.167 11.235 19.1668 10.5719C19.1667 9.90879 18.9031 9.27291 18.4341 8.80414C17.9651 8.33537 17.3291 8.07211 16.666 8.07227C16.0029 8.07242 15.367 8.33599 14.8983 8.80498L5.47161 18.2333Z" fill="#011023"/>
@@ -33,7 +42,7 @@
           </clipPath>
         </defs>
       </svg>
-    </button>
+    </a>
     <!-- Logo -->
     <div class="w-[120px] h-[120px] mb-4 mx-auto">
       <img src="../../images/logo.png" alt="MedScan Logo" class="h-full w-full object-contain" />
@@ -48,7 +57,7 @@
       </div>
 
       <!-- Form -->
-      <form id="signup-form" class="space-y-4">
+      <form id="signup-form" class="space-y-4" onsubmit="handleSignupSubmit(event)">
         <!-- Email Field -->
         <div>
           <div class="relative">
@@ -81,7 +90,7 @@
             <input
               type="password"
               id="signup-password"
-              class="block w-full p-3 pl-10 text-sm text-gray-900 border border-[#199B91] rounded-full focus:outline-none focus:ring-1 focus:ring-[#199B91]"
+              class="block w-full p-3 pl-10 text-sm text-gray-900 border border-[#199B91] rounded-full bg-[#FAFAFA] focus:border-[#199B91] focus:outline-none focus:ring-1 focus:ring-[#199B91]"
               placeholder="PASSWORD"
             />
           </div>
@@ -100,7 +109,7 @@
             <input
               type="password"
               id="signup-confirm-password"
-              class="block w-full p-3 pl-10 text-sm text-gray-900 border border-[#199B91] rounded-full focus:outline-none focus:ring-1 focus:ring-[#199B91]"
+              class="block w-full p-3 pl-10 text-sm text-gray-900 border border-[#199B91] rounded-full bg-[#FAFAFA] focus:border-[#199B91] focus:outline-none focus:ring-1 focus:ring-[#199B91]"
               placeholder="CONFIRM PASSWORD"
             />
           </div>
@@ -119,7 +128,7 @@
 <!-- Sign Up Button -->
 <button
     type="submit"
-    class="relative bg-[#199B91] text-black text-lg font-bold font-montserrat shadow-md w-[389px] h-[56px] rounded-full transition-all active:scale-95 flex items-center justify-center hover:bg-[#0d8b81]"
+    class="text-lg font-bold font-montserrat shadow-md w-[389px] h-[56px] rounded-full  flex items-center justify-center"
 >
     SIGN UP
 </button>
@@ -140,7 +149,7 @@
 
         <!-- Social Login Buttons (Placeholder) -->
         <div class="flex justify-center gap-4">
-          <button class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center" aria-label="Sign up with Facebook">
+          <a class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center cursor-pointer" aria-label="Sign up with Facebook">
             <!-- Facebook icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
               <g clip-path="url(#clip0_206_1766)">
@@ -153,28 +162,96 @@
                 </clipPath>
               </defs>
             </svg>
-          </button>
-          <button class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center" aria-label="Sign up with Google">
+          </a>
+          <a class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center cursor-pointer" aria-label="Sign up with Google">
             <!-- Google icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65" fill="none">
               <path d="M59.0566 27.1956H56.8751V27.0832H32.5001V37.9165H47.8062C45.5732 44.2229 39.5729 48.7498 32.5001 48.7498C23.526 48.7498 16.2501 41.4739 16.2501 32.4998C16.2501 23.5258 23.526 16.2498 32.5001 16.2498C36.6425 16.2498 40.4111 17.8125 43.2806 20.3652L50.9411 12.7046C46.104 8.19661 39.6338 5.4165 32.5001 5.4165C17.5433 5.4165 5.41675 17.5431 5.41675 32.4998C5.41675 47.4566 17.5433 59.5832 32.5001 59.5832C47.4569 59.5832 59.5834 47.4566 59.5834 32.4998C59.5834 30.6839 59.3965 28.9113 59.0566 27.1956Z" fill="#FFC107"/>
-              <path d="M8.53931 19.8939L17.4375 26.4196C19.8452 20.4586 25.6763 16.2498 32.4999 16.2498C36.6423 16.2498 40.411 17.8125 43.2805 20.3652L50.941 12.7046C46.1039 8.19661 39.6337 5.4165 32.4999 5.4165C22.0972 5.4165 13.0758 11.2895 8.53931 19.8939Z" fill="#FF3D00"/>
+              <path d="M8.53931 19.8939L17.4375 26.4196C19.8452 20.4586 25.6763 16.2498 32.4999 16.2498C36.6423 16.2498 40.411 17.8125 43.2805 20.3652L50.941 12.7046C46.1039 8.19661 39.6337 5.4165 32.5001 5.4165C22.0972 5.4165 13.0758 11.2895 8.53931 19.8939Z" fill="#FF3D00"/>
               <path d="M32.5001 59.5833C39.4957 59.5833 45.8522 56.9061 50.6581 52.5525L42.2758 45.4593C39.4658 47.5976 36.0312 48.7538 32.5001 48.75C25.4557 48.75 19.4744 44.2582 17.221 37.9897L8.38916 44.7944C12.8715 53.5654 21.9742 59.5833 32.5001 59.5833Z" fill="#4CAF50"/>
               <path d="M59.0566 27.1959H56.875V27.0835H32.5V37.9168H47.8061C46.738 40.9182 44.8139 43.5409 42.2717 45.4609L42.2757 45.4582L50.658 52.5513C50.0649 53.0903 59.5833 46.0418 59.5833 32.5002C59.5833 30.6842 59.3965 28.9116 59.0566 27.1959Z" fill="#1976D2"/>
             </svg>
-          </button>
-          <button class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center" aria-label="Sign up with TikTok">
+          </a>
+          <a class="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center cursor-pointer" aria-label="Sign up with TikTok">
             <!-- TikTok icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65" fill="none">
               <path d="M32.5001 5.4165C27.1435 5.4165 21.9072 7.00491 17.4534 9.98087C12.9996 12.9568 9.52823 17.1867 7.47836 22.1355C5.42848 27.0843 4.89214 32.5299 5.93716 37.7835C6.98218 43.0372 9.56161 47.863 13.3493 51.6507C17.137 55.4383 21.9627 58.0178 27.2164 59.0628C32.4701 60.1078 37.9156 59.5715 42.8644 57.5216C47.8133 55.4717 52.0431 52.0004 55.0191 47.5465C57.995 43.0927 59.5834 37.8564 59.5834 32.4998C59.5763 25.3191 56.7205 18.4345 51.643 13.3569C46.5654 8.27939 39.6808 5.42367 32.5001 5.4165ZM48.5849 26.3059V28.0555C48.5849 28.1894 48.5581 28.3219 48.5061 28.4453C48.4541 28.5687 48.3778 28.6804 48.2819 28.7738C48.1859 28.8672 48.0723 28.9404 47.9475 28.9892C47.8228 29.0379 47.6896 29.0612 47.5557 29.0575C44.6961 28.8555 41.9604 27.8114 39.6934 26.0567V38.8617C39.6928 40.2789 39.4099 41.6818 38.8612 42.9884C38.3125 44.2951 37.509 45.4794 36.4976 46.4721C35.4779 47.4908 34.2652 48.2958 32.9305 48.8399C31.5958 49.384 30.1659 49.6563 28.7247 49.6409C25.8264 49.6367 23.0446 48.4995 20.9734 46.4721C19.6555 45.1434 18.7063 43.4945 18.219 41.6876C17.7318 39.8807 17.7234 37.9781 18.1947 36.1669C18.6253 34.4282 19.4947 32.8303 20.7216 31.5275C21.6365 30.4092 22.7898 29.5096 24.0972 28.8943C25.4046 28.279 26.8329 27.9638 28.2778 27.9715H30.4986V32.5838C30.4996 32.7178 30.472 32.8504 30.4177 32.9728C30.3634 33.0953 30.2836 33.2047 30.1837 33.2939C30.0837 33.3831 29.9659 33.45 29.8381 33.49C29.7103 33.5301 29.5754 33.5425 29.4424 33.5263C28.1529 33.139 26.7634 33.2675 25.5669 33.8846C24.3703 34.5018 23.4601 35.5595 23.0281 36.8347C22.5961 38.1099 22.6761 39.503 23.2513 40.7203C23.8264 41.9377 24.8517 42.8842 26.1111 43.3603C26.8424 43.78 27.6603 44.0265 28.4999 44.0834C29.1499 44.1105 29.7999 44.0292 30.4174 43.8342C31.4482 43.4864 32.3449 42.8257 32.9823 41.944C33.6198 41.0624 33.9663 40.0038 33.9734 38.9159V15.5836C33.9734 15.3255 34.0758 15.0779 34.258 14.8951C34.4403 14.7123 34.6876 14.6093 34.9457 14.6086H38.778C39.027 14.6089 39.2665 14.7045 39.4473 14.8757C39.628 15.0469 39.7365 15.2808 39.7503 15.5294C39.89 16.7244 40.2695 17.8789 40.8662 18.9237C41.4628 19.9685 42.2642 20.882 43.2224 21.6096C44.5172 22.5816 46.0551 23.1776 47.6668 23.3321C47.9082 23.3528 48.1339 23.4602 48.3022 23.6345C48.4705 23.8087 48.57 24.0381 48.5822 24.28L48.5849 26.3059Z" fill="black"/>
             </svg>
-          </button>
+          </a>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="../../jscript/script.js"></script>
-  <script src="../../jscript/auth.js"></script>
+  <!-- Sliding Validation Modal -->
+  <div id="validation-modal" class="fixed inset-0 z-50 transform transition-transform duration-300 translate-y-full" style="display: none;">
+    <!-- Modal Overlay -->
+    <div id="validation-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Modal Content -->
+    <div class="absolute bottom-0 left-0 right-0 mx-auto max-w-md bg-white rounded-t-3xl p-6 shadow-xl transform transition-transform duration-300">
+      <!-- Drag handle -->
+      <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+      
+      <div class="text-center py-4">
+        <svg class="mx-auto mb-4 text-[#199B91] w-14 h-14" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        </svg>
+        <h3 id="validation-message" class="mb-5 text-lg font-semibold text-gray-700"></h3>
+        <button id="validation-ok-btn" type="button" class="w-full sm:max-w-xs mx-auto text-green bg-[#0d5c56] hover:bg-[#064641] focus:ring-4 focus:outline-none focus:ring-[#199B91]/30 font-bold rounded-full text-sm px-6 py-3 text-center border-2 border-[#199B91] shadow-lg">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sliding Success Modal (Terms and Conditions) -->
+  <div id="success-modal" class="fixed inset-0 z-50 transform transition-transform duration-300 translate-y-full" style="display: none;">
+    <!-- Modal Overlay -->
+    <div id="success-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Modal Content -->
+    <div class="absolute bottom-0 left-0 right-0 mx-auto max-w-md bg-white rounded-t-3xl p-6 shadow-xl transform transition-transform duration-300">
+      <!-- Drag handle -->
+      <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+      
+      <div class="text-center py-4">
+        <div class="flex justify-center mb-4">
+          <div class="relative">
+            <svg class="w-16 h-16 text-[#199B91]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        
+        <h3 class="text-xl font-semibold text-[#199B91] mb-4">
+          Welcome to MedScan!
+        </h3>
+        <div class="space-y-3 mb-6">
+          <p class="text-sm leading-relaxed text-gray-700">
+            Thank you for registering with MedScan! Before we proceed, please review and accept our terms of service.
+          </p>
+          <p class="text-sm leading-relaxed text-gray-700">
+            By accepting, you agree to our privacy policy and consent to the storage and processing of your personal information in accordance with our terms.
+          </p>
+        </div>
+        <div class="flex flex-col space-y-3 max-w-xs mx-auto">
+          <button id="accept-terms" type="button" class="w-full text-green bg-[#0d5c56] hover:bg-[#064641] focus:ring-4 focus:outline-none focus:ring-[#199B91]/30 font-bold rounded-full text-sm px-6 py-3 text-center border-2 border-[#199B91] shadow-lg">
+            I accept
+          </button>
+          <button id="decline-terms" type="button" class="w-full text-green bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm font-bold px-6 py-3 text-center border-2 border-red-700 shadow-lg">
+            Decline
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- No external modal library needed -->
+
+<!-- Your custom scripts -->
+<script type="module" src="../../jscript/auth_api.js"></script>
+<script type="module" src="../../jscript/auth_event_listeners.js"></script>
+<script type="module" src="../../jscript/script.js"></script>
 </body>
 </html>

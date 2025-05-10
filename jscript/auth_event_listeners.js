@@ -1,4 +1,5 @@
 import { signUpUser } from './auth_api.js';
+import { hashPassword } from './hash_util.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set up sliding modals
@@ -192,9 +193,11 @@ async function handleSignupSubmit(event) {
         return;
     }
 
-    // Show terms and conditions modal
-    window.showSuccessModal();
-    setupAcceptTermsHandler(email, password);
+    // Hash password before sending to backend
+    hashPassword(password).then(hashedPassword => {
+        window.showSuccessModal();
+        setupAcceptTermsHandler(email, hashedPassword);
+    });
 }
 
 /**
@@ -405,7 +408,7 @@ async function handleLoginSubmit(event) {
         console.log('Auth session created, redirecting to dashboard');
         
         // Redirect to dashboard - use the correct path
-        window.location.href = 'dashboard.html';
+        window.location.href = '../dashboard.html';
     } catch (err) {
         console.error('An unexpected error occurred:', err);
         window.showValidationModal('An unexpected error occurred. Please try again.');
@@ -473,7 +476,7 @@ function createAuthSession(userData) {
  */
 function setupDashboardAuth() {
     // Only run on dashboard page
-    if (!window.location.pathname.includes('/dashboard.html')) {
+    if (!window.location.pathname.includes('./dashboard.html')) {
         return;
     }
     
@@ -551,7 +554,7 @@ function logoutUser() {
 // Initialize dashboard auth check on page load
 document.addEventListener('DOMContentLoaded', () => {
     // Check if we're on the dashboard page
-    if (window.location.pathname.includes('/dashboard.html')) {
+    if (window.location.pathname.includes('./dashboard.html')) {
         setupDashboardAuth();
     }
 });

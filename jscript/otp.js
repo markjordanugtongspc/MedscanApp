@@ -126,12 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.addEventListener('click', hideModal);
     }
 
-    // Redirect to login page when clicking "GET STARTED" button
+    // Redirect to info page when clicking "GET STARTED" button
     const getStartedButton = document.getElementById('get-started-btn');
     if (getStartedButton) {
         getStartedButton.addEventListener('click', function() {
-            // Redirect to login page
-            window.location.href = 'login.html';
+            // Redirect to info page
+            window.location.href = 'info.html';
         });
     }
 

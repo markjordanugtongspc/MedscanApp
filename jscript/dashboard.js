@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initToggleSwitch();
   displayUserWelcome();
   initScrollableDashboard();
+  // Removed initHealthCardToggle as we now use direct dragging
 });
 
 /**
@@ -80,21 +81,58 @@ function displayUserWelcome() {
  * Initialize toggle switch functionality
  */
 function initToggleSwitch() {
-  const toggleSwitch = document.getElementById('mode-toggle');
-  const lightModeIcon = document.getElementById('light-mode-icon');
-  const darkModeIcon = document.getElementById('dark-mode-icon');
+  // Start of Theme Toggle Function
+  const themeToggle = document.getElementById("input");
   
-  if (toggleSwitch) {
-    // Check if mode preference exists in localStorage
-    const currentMode = localStorage.getItem('appMode') || 'light';
+  if (themeToggle) {
+    console.log("Theme toggle found, initializing dark/light mode");
     
-    // Set initial state
-    toggleSwitch.checked = currentMode === 'dark';
-    updateToggleIcons(currentMode);
+    // Function to apply theme based on preference
+    function applyTheme(isDark) {
+      if (isDark) {
+        // Add dark theme class to body but preserve footer
+        document.body.classList.add("dark-theme");
+        console.log("Dark theme applied (footer remains static)");
+      } else {
+        // Remove dark theme class
+        document.body.classList.remove("dark-theme");
+        console.log("Light theme applied (footer remains static)");
+      }
+    }
     
-    // Add event listener for toggle changes
-    toggleSwitch.addEventListener('change', handleToggleChange);
+    // Load theme from localStorage on init
+    const savedTheme = localStorage.getItem("darkTheme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    // Use saved preference or fallback to system preference
+    const isDarkTheme = savedTheme !== null ? savedTheme === "true" : prefersDark;
+    
+    // Set initial state of the toggle
+    themeToggle.checked = isDarkTheme;
+    applyTheme(isDarkTheme);
+    
+    // Handle toggle changes
+    themeToggle.addEventListener("change", function() {
+      const isDark = this.checked;
+      applyTheme(isDark);
+      localStorage.setItem("darkTheme", isDark);
+      console.log("Theme toggled:", isDark ? "dark" : "light");
+    });
+    
+    // Add keyboard accessibility
+    themeToggle.addEventListener("keydown", function(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        this.checked = !this.checked;
+        const isDark = this.checked;
+        applyTheme(isDark);
+        localStorage.setItem("darkTheme", isDark);
+      }
+    });
+  } else {
+    console.error("Theme toggle element with id='input' not found");
   }
+  // End of Theme Toggle Function
 }
 
 /**
@@ -105,10 +143,7 @@ function handleToggleChange(event) {
   const mode = event.target.checked ? 'dark' : 'light';
   
   // Save preference to localStorage
-  localStorage.setItem('appMode', mode);
-  
-  // Update the toggle icon visibility
-  updateToggleIcons(mode);
+  localStorage.setItem('darkTheme', mode === 'dark' ? 'true' : 'false');
   
   // Apply theme changes to the application
   applyTheme(mode);
@@ -121,19 +156,9 @@ function handleToggleChange(event) {
  * @param {string} mode - The current mode ('light' or 'dark')
  */
 function updateToggleIcons(mode) {
-  const lightModeIcon = document.getElementById('light-mode-icon');
-  const darkModeIcon = document.getElementById('dark-mode-icon');
-  
-  if (lightModeIcon && darkModeIcon) {
-    // Set visibility based on mode
-    if (mode === 'dark') {
-      lightModeIcon.style.opacity = '0.3';
-      darkModeIcon.style.opacity = '1';
-    } else {
-      lightModeIcon.style.opacity = '1';
-      darkModeIcon.style.opacity = '0.3';
-    }
-  }
+  // This function is kept for backwards compatibility
+  // The new implementation uses CSS transitions and animations
+  console.log(`Toggle icon update for ${mode} mode handled by CSS`);
 }
 
 /**
@@ -144,13 +169,13 @@ function applyTheme(mode) {
   const body = document.body;
   
   if (mode === 'dark') {
-    // Apply dark mode class to body for CSS targeting
-    body.classList.add('dark-mode');
-    console.log('Dark mode applied - changing app-content background to #263238');
+    // Apply dark theme class to body for CSS targeting
+    body.classList.add('dark-theme');
+    console.log('Dark theme applied - changing background and text colors');
   } else {
-    // Remove dark mode class
-    body.classList.remove('dark-mode');
-    console.log('Light mode applied - resetting app-content background');
+    // Remove dark theme class
+    body.classList.remove('dark-theme');
+    console.log('Light theme applied - resetting to default colors');
   }
 }
 
@@ -162,17 +187,28 @@ function initScrollableDashboard() {
   const scrollableDashboard = document.getElementById('scrollable-dashboard');
   
   if (scrollableDashboard) {
-    console.log('Initializing scrollable dashboard with enhanced functionality');
-    
-    // Add smooth scrolling behavior
-    scrollableDashboard.style.scrollBehavior = 'smooth';
-    
-    // Variables for drag scrolling
-    let isDown = false;
-    let startY;
-    let startX; // Also track X coordinate for mobile touch scrolling
-    let scrollTop;
-    let isDragging = false;
+  console.log('Initializing mobile-friendly draggable dashboard');
+  
+  // Add smooth scrolling behavior
+  scrollableDashboard.style.scrollBehavior = 'smooth';
+  
+  // Set initial scroll position to show only first four cards
+  scrollableDashboard.scrollTop = 0;
+  
+  // Variables for drag scrolling
+  let isDown = false;
+  let startY;
+  let startX;
+  let scrollTop;
+  let isDragging = false;
+
+  // Add a subtle visual indicator for draggability
+  const dragIndicator = document.createElement('div');
+  dragIndicator.className = 'drag-indicator flex justify-center items-center my-1';
+  dragIndicator.innerHTML = `
+    <div class="w-10 h-1 bg-white/50 rounded-full mb-1"></div>
+  `;
+  scrollableDashboard.parentNode.insertBefore(dragIndicator, scrollableDashboard);
 
     // Add hover effect to card items
     const dashboardCards = scrollableDashboard.querySelectorAll('.health-card');
@@ -195,79 +231,140 @@ function initScrollableDashboard() {
       // Add keyboard accessibility
       card.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
-          this.classList.add('scale-105');
-          setTimeout(() => {
-            this.classList.remove('scale-105');
-          }, 200);
+          e.preventDefault();
+          console.log(`Card activated via keyboard: ${this.querySelector('p').textContent}`);
+          // Add card activation functionality here
         }
       });
 
-      // Add click handler (later can link to specific functionality)
+      // Add click handler
       card.addEventListener('click', function(e) {
         // Only consider it a click if we weren't dragging
         if (!isDragging) {
           console.log(`Card clicked: ${this.querySelector('p').textContent}`);
-          // Future card click functionality would go here
+          // Add card click functionality here
         }
       });
     });
 
-    // Custom cursor style for draggable area
-    scrollableDashboard.classList.add('cursor-grab');
-
-    // Mouse wheel events - enhanced sensitivity
-    scrollableDashboard.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      scrollableDashboard.scrollTop += e.deltaY * 0.5; // Adjust sensitivity 
-    }, { passive: false });
-
-    // Mouse events for drag scrolling anywhere on the dashboard
+    // Mouse events for drag scrolling
     scrollableDashboard.addEventListener('mousedown', (e) => {
       isDown = true;
       isDragging = false; // Reset drag state
-      scrollableDashboard.classList.remove('cursor-grab');
       scrollableDashboard.classList.add('cursor-grabbing');
-      startY = e.pageY - scrollableDashboard.offsetTop;
+      scrollableDashboard.classList.remove('cursor-grab');
+      startY = e.pageY;
+      startX = e.pageX;
       scrollTop = scrollableDashboard.scrollTop;
-      
-      // Prevent text selection during drag
       e.preventDefault();
     });
 
-    document.addEventListener('mouseup', () => {
-      if (isDown) {
-        isDown = false;
-        setTimeout(() => { isDragging = false; }, 100); // Short delay to prevent immediate click after drag
-        scrollableDashboard.classList.remove('cursor-grabbing');
-        scrollableDashboard.classList.add('cursor-grab');
-      }
+    scrollableDashboard.addEventListener('mouseleave', () => {
+      isDown = false;
+      scrollableDashboard.classList.add('cursor-grab');
+      scrollableDashboard.classList.remove('cursor-grabbing');
     });
 
-    document.addEventListener('mousemove', (e) => {
+    scrollableDashboard.addEventListener('mouseup', () => {
+      isDown = false;
+      setTimeout(() => { isDragging = false; }, 100); // Short delay to prevent immediate click after drag
+      scrollableDashboard.classList.add('cursor-grab');
+      scrollableDashboard.classList.remove('cursor-grabbing');
+    });
+
+    scrollableDashboard.addEventListener('mousemove', (e) => {
       if (!isDown) return;
-      const y = e.pageY - scrollableDashboard.offsetTop;
-      const walk = (y - startY) * 2; // Increased scroll speed multiplier
+      e.preventDefault();
+      const y = e.pageY;
+      const walk = (y - startY) * 2; // Faster scrolling
       
       if (Math.abs(walk) > 5) {
         isDragging = true; // If moved more than 5px, consider it a drag
       }
       
       scrollableDashboard.scrollTop = scrollTop - walk;
-      e.preventDefault();
     });
+    
+    // Wheel events for smoother scrolling
+    scrollableDashboard.addEventListener('wheel', (e) => {
+      // Determine scroll direction and amount
+      const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail || -e.deltaY)));
+      const scrollSpeed = 30; // Adjust for faster/slower scrolling
+      
+      // If it's a horizontal mouse wheel, don't interfere
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        return;
+      }
+      
+      scrollableDashboard.scrollTop = scrollableDashboard.scrollTop - (delta * scrollSpeed);
+      e.preventDefault();
+    }, { passive: false });
 
-    // Touch events for mobile drag scrolling
+    // Mobile touch events with momentum scrolling and snap effect
     let touchStartY;
     let initialTouchY;
+    let lastTouchY;
+    let momentumID;
+    let velocity = 0;
+    let lastMoveTime = 0;
+    let cardHeight = 0;
     
+    // Get the card height for snap-to-grid effect
+    const firstCard = scrollableDashboard.querySelector('.health-card');
+    if (firstCard) {
+      cardHeight = firstCard.offsetHeight + 8; // Card height + gap
+    }
+    
+    // Function to apply momentum effect after touch end with snap-to-grid
+    function applyMomentum() {
+      if (Math.abs(velocity) < 0.5) {
+        // When momentum ends, snap to nearest row of cards
+        cancelAnimationFrame(momentumID);
+        if (cardHeight > 0) {
+          const rowPosition = Math.round(scrollableDashboard.scrollTop / cardHeight) * cardHeight;
+          scrollableDashboard.scrollTo({
+            top: rowPosition,
+            behavior: 'smooth'
+          });
+        }
+        return;
+      }
+      
+      scrollableDashboard.scrollTop += velocity;
+      velocity *= 0.95; // Decay factor
+      momentumID = requestAnimationFrame(applyMomentum);
+    }
+    
+    // Function to snap scroll position to grid rows
+    function snapToGrid() {
+      if (cardHeight > 0) {
+        const rowPosition = Math.round(scrollableDashboard.scrollTop / cardHeight) * cardHeight;
+        scrollableDashboard.scrollTo({
+          top: rowPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    // Touch start event
     scrollableDashboard.addEventListener('touchstart', (e) => {
+      // Cancel any ongoing momentum scrolling
+      cancelAnimationFrame(momentumID);
+      velocity = 0;
+      
       isDragging = false;
       initialTouchY = e.touches[0].clientY;
       touchStartY = initialTouchY;
+      lastTouchY = initialTouchY;
       startX = e.touches[0].clientX;
       scrollTop = scrollableDashboard.scrollTop;
+      lastMoveTime = Date.now();
+      
+      // Add active dragging visual feedback
+      scrollableDashboard.classList.add('active-drag');
     }, { passive: false });
 
+    // Touch move event
     scrollableDashboard.addEventListener('touchmove', (e) => {
       if (!touchStartY) return;
       
@@ -275,13 +372,20 @@ function initScrollableDashboard() {
       const touchX = e.touches[0].clientX;
       const yDiff = touchStartY - touchY;
       const xDiff = startX - touchX;
+      const now = Date.now();
+      const elapsed = now - lastMoveTime;
+      
+      // Calculate velocity for momentum scrolling
+      if (elapsed > 0) {
+        velocity = (lastTouchY - touchY) / elapsed * 15; // Scale factor for smooth momentum
+      }
       
       // If vertical scrolling is more significant than horizontal, handle it
       if (Math.abs(yDiff) > Math.abs(xDiff)) {
         const touchWalk = yDiff * 1.5; // Increased sensitivity
         
         // Determine if we're dragging (needed to prevent click after drag)
-        if (Math.abs(initialTouchY - touchY) > 10) {
+        if (Math.abs(initialTouchY - touchY) > 5) {
           isDragging = true;
         }
 
@@ -289,26 +393,58 @@ function initScrollableDashboard() {
         e.preventDefault(); // Prevent page scrolling while dragging dashboard
       }
 
-      // Update touchStartY for next move event (for smoother scrolling)
+      // Update values for next move event (for smoother scrolling)
       touchStartY = touchY;
+      lastTouchY = touchY;
+      lastMoveTime = now;
     }, { passive: false });
 
+    // Touch end event
     scrollableDashboard.addEventListener('touchend', () => {
+      scrollableDashboard.classList.remove('active-drag');
       touchStartY = null;
+      
+      // Apply momentum scrolling if velocity is significant
+      if (Math.abs(velocity) > 0.5) {
+        momentumID = requestAnimationFrame(applyMomentum);
+      } else {
+        // If no significant momentum, just snap to grid
+        snapToGrid();
+      }
+      
       // Keep isDragging true for a short time to prevent immediate clicks
       setTimeout(() => { isDragging = false; }, 100);
     });
     
-    // Add custom CSS for cursors
-    const style = document.createElement('style');
-    style.textContent = `
+    // Apply snap-to-grid when scrolling stops
+    scrollableDashboard.addEventListener('scroll', () => {
+      clearTimeout(scrollableDashboard.scrollEndTimer);
+      scrollableDashboard.scrollEndTimer = setTimeout(() => {
+        // Only apply snap if we're not still momentum scrolling
+        if (!momentumID) {
+          snapToGrid();
+        }
+      }, 150);
+});
+  
+// Add custom CSS for cursors and dragging effects
+const style = document.createElement('style');
+style.textContent = `
       .cursor-grab { cursor: grab; }
       .cursor-grabbing { cursor: grabbing; }
-    `;
-    document.head.appendChild(style);
-    
-    console.log('Enhanced scrollable dashboard initialized successfully');
-  }
+      .active-drag { 
+    cursor: grabbing;
+        transition: transform 0.1s ease;
+      }
+      .drag-indicator { pointer-events: none; }
+`;
+document.head.appendChild(style);
+
+// Add cursor-grab class by default
+scrollableDashboard.classList.add('cursor-grab');
+
+console.log('Enhanced draggable dashboard initialized successfully');
+}
 }
 /* End of Scrollable Dashboard Function */
 
@@ -384,3 +520,5 @@ function provideVisualFeedback(navItem) {
   }
 }
 /* End of Navigation Handler Functions */
+
+// We don't need the initHealthCardToggle function anymore since we've removed the Show More button

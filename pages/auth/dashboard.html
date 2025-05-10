@@ -6,6 +6,7 @@
   <title>MedScan - Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/dashboard.css">
   <link rel="icon" type="image/png" href="../../images/logo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
@@ -24,10 +25,12 @@
           </div>
           <div class="flex items-center space-x-4">
             <!-- Bell Icon (Notification) -->
-            <a class="cursor-pointer">
+            <a class="cursor-pointer relative">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.0001 2.5C12.6795 2.5 10.4539 3.42187 8.81291 5.06282C7.17197 6.70376 6.2501 8.92936 6.2501 11.25V15.66C6.25028 15.8539 6.20534 16.0452 6.11885 16.2188L3.9726 20.51C3.86775 20.7197 3.81825 20.9526 3.82878 21.1868C3.83931 21.421 3.90954 21.6485 4.03278 21.8479C4.15602 22.0473 4.32819 22.2119 4.53293 22.326C4.73767 22.4401 4.96819 22.5 5.2026 22.5H24.7976C25.032 22.5 25.2625 22.4401 25.4673 22.326C25.672 22.2119 25.8442 22.0473 25.9674 21.8479C26.0907 21.6485 26.1609 21.421 26.1714 21.1868C26.1819 20.9526 26.1324 20.7197 26.0276 20.51L23.8826 16.2188C23.7957 16.0453 23.7503 15.854 23.7501 15.66V11.25C23.7501 8.92936 22.8282 6.70376 21.1873 5.06282C19.5463 3.42187 17.3207 2.5 15.0001 2.5ZM15.0001 26.25C14.2243 26.2504 13.4674 26.0102 12.8339 25.5624C12.2003 25.1147 11.7212 24.4814 11.4626 23.75H18.5376C18.279 24.4814 17.7999 25.1147 17.1663 25.5624C16.5328 26.0102 15.7759 26.2504 15.0001 26.25Z" fill="#199B91"/>
               </svg>
+              <span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-red-500"></span>
+              <span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-red-500 animate-ping"></span>
             </a>
             
             <!-- Toggle Switch -->
@@ -35,27 +38,75 @@
               <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" id="mode-toggle" class="sr-only peer">
                 <div class="relative">
-                  <!-- Toggle Background -->
-                  <svg width="54" height="26" viewBox="0 0 54 26" fill="none" xmlns="http://www.w3.org/2000/svg" class="peer-checked:opacity-100 opacity-100">
-                    <rect width="54" height="26" rx="13" fill="#199B91"/>
-                  </svg>
-                  
-                  <!-- Light Mode Icon (Left) -->
-                  <div id="light-mode-icon" class="absolute left-3 top-1/2 -translate-y-1/2 transition-opacity duration-300" :class="{ 'opacity-100': !isDarkMode, 'opacity-0': isDarkMode }">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="9" cy="9" r="9" fill="#263238"/>
-                      <path d="M9.02786 11.3336C7.72571 11.3336 6.66675 10.2746 6.66675 8.97244C6.66675 7.67029 7.72571 6.61133 9.02786 6.61133C10.33 6.61133 11.389 7.67029 11.389 8.97244C11.389 10.2746 10.33 11.3336 9.02786 11.3336Z" stroke="white"/>
-                      <path d="M9.0277 3.77783V5.00005M14.2221 8.97228H12.9999M5.05547 8.97228H3.83325M9.0277 12.9445V14.1667M11.7777 6.22228L12.6944 5.30561M5.36103 12.6389L6.2777 11.7223M5.36103 5.30561L6.2777 6.22228M11.7777 11.7223L12.6944 12.6389" stroke="white" stroke-linecap="round"/>
-                    </svg>
+                <!-- Start of Dark Mode/Light Mode Switch -->
+                <label class="switch">
+                    <input id="input" type="checkbox" />
+                  <div class="slider round">
+                      <div class="sun-moon">
+                        <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                      
+                        <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                        <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="50"></circle>
+                        </svg>
+                      </div>
+                      <div class="stars">
+                        <svg id="star-1" class="star" viewBox="0 0 20 20">
+                          <path
+                            d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+                          ></path>
+                        </svg>
+                        <svg id="star-2" class="star" viewBox="0 0 20 20">
+                          <path
+                            d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+                          ></path>
+                        </svg>
+                        <svg id="star-3" class="star" viewBox="0 0 20 20">
+                          <path
+                            d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+                          ></path>
+                        </svg>
+                        <svg id="star-4" class="star" viewBox="0 0 20 20">
+                          <path
+                            d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+                          ></path>
+                        </svg>
+                      </div>
+                  </label>
+                  <!-- End of Dark Mode/Light Mode Switch -->
                   </div>
-                  
-                  <!-- Dark Mode Icon (Right) -->
-                  <div id="dark-mode-icon" class="absolute right-3 top-1/2 -translate-y-1/2 transition-opacity duration-300" :class="{ 'opacity-100': isDarkMode, 'opacity-0': !isDarkMode }">
-                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.19661 2.0386C1.74474 2.49191 1.38844 3.0313 1.14881 3.6248C0.909176 4.21831 0.79109 4.85387 0.801542 5.49385C0.811995 6.13382 0.950774 6.76518 1.20966 7.35055C1.46854 7.93592 1.84227 8.46338 2.3087 8.90168C2.77513 9.33999 3.32478 9.68024 3.9251 9.90227C4.52541 10.1243 5.16418 10.2236 5.80356 10.1943C6.44295 10.165 7.06995 10.0077 7.64743 9.73162C8.22491 9.4556 8.74112 9.06648 9.16549 8.58733C8.23311 8.81664 7.25733 8.80152 6.3325 8.54342C5.40767 8.28532 4.56508 7.79298 3.88618 7.114C3.20727 6.43502 2.71503 5.59236 2.45704 4.6675C2.19905 3.74264 2.18404 2.76686 2.41346 1.8345C2.33911 1.90031 2.2668 1.96838 2.19661 2.0386ZM4.45207 6.54873C5.3127 7.4094 6.46906 7.90964 7.68561 7.94756C8.90217 7.98548 10.0874 7.55823 11 6.75283C10.7636 7.7135 10.276 8.59406 9.58728 9.3043C8.89855 10.0145 8.03339 10.5289 7.08043 10.7948C6.12748 11.0606 5.12098 11.0683 4.16405 10.8172C3.20712 10.566 2.33416 10.065 1.63459 9.36541C0.935024 8.66584 0.433996 7.79288 0.182834 6.83595C-0.068327 5.87902 -0.0605931 4.87252 0.205244 3.91957C0.471081 2.96661 0.985465 2.10145 1.6957 1.41272C2.40594 0.723981 3.2865 0.236427 4.24717 0C3.44164 0.912713 3.01439 2.0982 3.05246 3.31495C3.09053 4.5317 3.59106 5.68816 4.45207 6.54873Z" fill="white"/>
-                    </svg>
-                  </div>
-                </div>
+                </div>                
               </label>
             </div>
           </div>
@@ -208,90 +259,143 @@
           </div>
         </section>
 
-        <!-- Start of Section 2 -->
-        <section class="bg-teal rounded-3xl shadow-md p-6 mb-6 relative overflow-hidden h-[300px] w-[300px]">
-          <h2 class="text-xl font-bold text-white mb-3 font-poppins text-start ml-2 mt-4">Health Dashboard</h2>
-          
-          <div id="scrollable-dashboard" class="rounded-2xl p-1 mb-3 max-h-[320px] overflow-y-auto touch-auto bg-white/20">
-            <!-- Start of Grid Layout -->
-            <div class="grid grid-cols-2 gap-2 mb-3">
-              <!-- Card 1 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="../../images/assessment.png" alt="Assessment" class="w-16 h-16">
+        <!-- Health Dashboard Section -->
+        <section class="flex justify-center items-center my-4">
+          <div class="bg-teal rounded-3xl shadow-md p-6 relative overflow-hidden">
+            <h2 class="text-xl font-bold text-white mb-3 font-poppins text-start ml-2 mt-1">Health Dashboard</h2>
+            
+            <!-- Scrollable Health Cards Container -->
+            <div id="scrollable-dashboard" class="rounded-2xl p-1 mb-3 max-h-[200px] overflow-y-auto touch-auto bg-white/20 cursor-grab">
+              <div class="grid grid-cols-2 gap-2">
+                <!-- Card 1 - Assessment -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="../../images/assessment.png" alt="Assessment" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Assessment</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Assessment</p>
-              </div>
-              
-              <!-- Card 2 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="../../images/emergency.png" alt="Emergency Contact" class="w-16 h-16">
+                
+                <!-- Card 2 - Emergency Contact -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="../../images/emergency.png" alt="Emergency Contact" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Emergency Contact</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Emergency Contact</p>
-              </div>
-              
-              <!-- Card 3 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="../../images/healthalert.png" alt="Health Alert" class="w-16 h-16">
+                
+                <!-- Card 3 - Health Alert -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="../../images/healthalert.png" alt="Health Alert" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Health Alert</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Health Alert</p>
-              </div>
-              
-              <!-- Card 4 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="../../images/bmi.png" alt="Body Mass Index" class="w-16 h-16">
+                
+                <!-- Card 4 - Body Mass Index -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="../../images/bmi.png" alt="Body Mass Index" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Body Mass Index</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Body Mass Index</p>
-              </div>
-              
-              <!-- Card 5 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="https://placehold.co/80x80/F3E5F5/AB47BC?text=Meds" alt="Medications" class="w-16 h-16">
+                
+                <!-- Card 5 - Medications -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="https://placehold.co/80x80/F3E5F5/AB47BC?text=Meds" alt="Medications" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Medications</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Medications</p>
-              </div>
-              
-              <!-- Card 6 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="https://placehold.co/80x80/FFF3E0/FF9800?text=Schedule" alt="Schedule" class="w-16 h-16">
+                
+                <!-- Card 6 - Schedule -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="https://placehold.co/80x80/FFF3E0/FF9800?text=Schedule" alt="Schedule" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Schedule</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Schedule</p>
-              </div>
-              
-              <!-- Card 7 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="https://placehold.co/80x80/E8EAF6/3F51B5?text=Doctor" alt="Doctor" class="w-16 h-16">
+                
+                <!-- Card 7 - Doctor -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="https://placehold.co/80x80/E8EAF6/3F51B5?text=Doctor" alt="Doctor" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">Doctor</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">Doctor</p>
-              </div>
-              
-              <!-- Card 8 -->
-              <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
-                <div class="card-icon flex justify-center mb-2">
-                  <img src="https://placehold.co/80x80/EFEBE9/795548?text=History" alt="History" class="w-16 h-16">
+                
+                <!-- Card 8 - History -->
+                <div class="health-card bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer">
+                  <div class="card-icon flex justify-center mb-2">
+                    <img src="https://placehold.co/80x80/EFEBE9/795548?text=History" alt="History" class="w-16 h-16">
+                  </div>
+                  <p class="text-sm font-medium text-[#243e36]">History</p>
                 </div>
-                <p class="text-sm font-medium text-[#243e36]">History</p>
               </div>
             </div>
-            <!-- End of Grid Layout -->
           </div>
         </section>
-        <!-- End of Section 2 -->
+        <!-- End of Health Dashboard Section -->
 
       </main>
 
-      <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-lg">
-        <nav class="flex justify-around py-3">
-          <svg width="440" height="110" viewBox="0 0 440 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="440" height="111" fill="#199B91"/>
-          </svg>            
-        </nav>
+      <footer class="fixed bottom-0 left-0 right-0 w-full shadow-lg z-10">
+        <!-- Bottom Navigation Bar -->
+        <div class="relative">
+          <!-- Navigation Bar with all buttons in a row -->
+          <nav class="flex justify-between items-center bg-teal py-8 px-6 mx-auto max-w-md">
+            <!-- Home Button -->
+            <button 
+              aria-label="Home" 
+              tabindex="0" 
+              onclick="handleNavClick('home')"
+              onkeydown="handleNavKeyDown(event, 'home')"
+              class="text-white p-3 rounded-full hover:bg-[#0a8174] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </button>
+            
+            <!-- Kiosk Machine Button -->
+            <button 
+              aria-label="Kiosk" 
+              tabindex="0" 
+              onclick="handleNavClick('computer')"
+              onkeydown="handleNavKeyDown(event, 'computer')"
+              class="text-white p-3 rounded-full hover:bg-[#0a8174] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </button>
+            
+            <!-- Chat Support Button -->
+            <button 
+              aria-label="Chat" 
+              tabindex="0" 
+              onclick="handleNavClick('menu')"
+              onkeydown="handleNavKeyDown(event, 'menu')"
+              class="text-white p-3 rounded-full hover:bg-[#0a8174] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </button>
+            
+            <!-- Profile Button -->
+            <button 
+              aria-label="Profile" 
+              tabindex="0" 
+              onclick="handleNavClick('profile')"
+              onkeydown="handleNavKeyDown(event, 'profile')"
+              class="text-white p-3 rounded-full hover:bg-[#0a8174] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </button>
+          </nav>
+        </div>
       </footer>
     </div>
   </div>

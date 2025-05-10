@@ -23,6 +23,11 @@
     color: white;
   }
   
+  /* Icon buttons without background */
+  .icon-button {
+    background-color: transparent;
+  }
+  
   html,
   body {
     height: 100%;

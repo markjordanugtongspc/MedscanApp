@@ -26,7 +26,7 @@
   <div class="app-wrapper">
     <div id="otp-page" class="relative container flex h-screen flex-col items-center justify-center bg-[#f1f7ed] px-6 py-10"> <!-- Mobile Screen View -->
     <!-- Start of Back Button -->
-    <button class="absolute top-17 left-6 w-[40px] h-[40px] flex-shrink-0 cursor-pointer" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
+    <button class="icon-button absolute top-17 left-6 w-[40px] h-[40px] flex-shrink-0 cursor-pointer" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
         <g clip-path="url(#clip0_206_1776)">
           <path d="M5.47161 18.2333C5.00344 18.7021 4.74048 19.3375 4.74048 20C4.74048 20.6625 5.00344 21.2979 5.47161 21.7666L14.8983 31.1966C15.1305 31.4289 15.4062 31.6131 15.7096 31.7388C16.013 31.8644 16.3382 31.9291 16.6666 31.9291C16.995 31.9291 17.3202 31.8644 17.6236 31.7388C17.927 31.6131 18.2027 31.4289 18.4349 31.1966C18.6672 30.9644 18.8514 30.6887 18.977 30.3853C19.1027 30.0819 19.1674 29.7567 19.1674 29.4283C19.1674 29.0999 19.1027 28.7747 18.977 28.4713C18.8514 28.1679 18.6672 27.8922 18.4349 27.66L13.2749 22.5H32.4999C33.163 22.5 33.7989 22.2366 34.2677 21.7677C34.7366 21.2989 34.9999 20.663 34.9999 20C34.9999 19.3369 34.7366 18.7011 34.2677 18.2322C33.7989 17.7634 33.163 17.5 32.4999 17.5H13.2749L18.4349 12.34C18.9037 11.871 19.167 11.235 19.1668 10.5719C19.1667 9.90879 18.9031 9.27291 18.4341 8.80414C17.9651 8.33537 17.3291 8.07211 16.666 8.07227C16.0029 8.07242 15.367 8.33599 14.8983 8.80498L5.47161 18.2333Z" fill="#011023"/>
@@ -285,14 +285,9 @@
           <button
               id="get-started-btn"
               type="button"
-              class="w-full flex items-center justify-center gap-3 bg-[#199B91] hover:bg-[#14786e] transition-colors duration-200 text-white font-bold text-lg rounded-full py-3 mt-2 focus:outline-none focus:ring-4 focus:ring-[#199B91]/30 cursor-pointer"
-              style="display: block;">
-            <svg width="389" height="56" viewBox="0 0 389 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="389" height="56" rx="28" fill="#199B91"/>
-            </svg>
-            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-lg">
-                LET'S GET STARTED
-            </div>
+              class="w-full sm:max-w-xs mx-auto text-green bg-[#0d5c56] hover:bg-[#064641] focus:ring-4 focus:outline-none focus:ring-[#199B91]/30 font-bold rounded-full text-sm px-1 py-6 text-center border-2 border-[#199B91] shadow-lg text-white flex items-center justify-center">
+            LET'S GET STARTED
+          </button>
           </div>
         </div>
       </div>

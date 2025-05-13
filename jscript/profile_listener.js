@@ -111,20 +111,45 @@ async function debugSupabaseInsertion(testData) {
  */
 async function saveUserProfile(userId, profileData) {
   try {
-    // Make sure we have a timestamp for when this profile was created
-    profileData.updated_at = new Date().toISOString();
+    console.log('Saving profile for user:', userId);
     
-    // Check if the user already has a profile
+    // Check if the user exists in the database
     const { data: existingProfile, error: checkError } = await profile
       .from('MedScan Authentication')
       .select('Email')
       .eq('Email', userId)
       .single();
     
-    if (checkError && checkError.code !== 'PGRST116') { // PGRST116 is the error code for 'no rows found'
-      console.error('Error checking for existing profile:', checkError);
-      return { data: null, error: checkError };
+    if (checkError) {
+      // If user doesn't exist, we need to handle this case
+      if (checkError.code === 'PGRST116') { // 'no rows found'
+        console.warn('User not found in database. This may be a new registration without completed auth flow.');
+        
+        // We can try to create a new record instead
+        const { data: insertData, error: insertError } = await profile
+          .from('MedScan Authentication')
+          .insert([{
+            Email: userId,
+            ...profileData,
+            created_at: new Date().toISOString()
+          }]);
+        
+        if (insertError) {
+          console.error('Error creating new user profile:', insertError);
+          return { data: null, error: insertError };
+        }
+        
+        console.log('Created new user profile:', insertData);
+        return { data: insertData, error: null };
+      } else {
+        // Some other error occurred
+        console.error('Error checking for existing profile:', checkError);
+        return { data: null, error: checkError };
+      }
     }
+    
+    // User exists, proceed with update
+    console.log('User found, updating profile for:', existingProfile.Email);
     
     // Create the update object with all the profile fields
     const updateData = {
@@ -134,7 +159,7 @@ async function saveUserProfile(userId, profileData) {
       sex: profileData.sex,
       height: profileData.height,
       weight: profileData.weight,
-      updated_at: profileData.updated_at
+      updated_at: profileData.updated_at || new Date().toISOString()
     };
     
     // Update the user record with profile information
@@ -168,20 +193,52 @@ function handleProfileFormSubmit(event) {
   // Perform Supabase connection debug before submission
   debugSupabaseConnection();
   
-  // Get the user email from localStorage or sessionStorage (or from registration flow)
-  let userEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('userEmail');
-  // If not found, try to get from a temporary registration storage (set after signup)
+  // Check for user identification in multiple places
+  // 1. First try session storage (most immediate)
+  let userEmail = sessionStorage.getItem('userEmail');
+  
+  // 2. If not found, check for temporary registration session in localStorage
+  if (!userEmail) {
+    try {
+      const tempSession = JSON.parse(localStorage.getItem('tempRegistrationSession'));
+      if (tempSession && tempSession.email) {
+        userEmail = tempSession.email;
+        console.log('Found user from temporary registration session:', userEmail);
+      }
+    } catch (e) {
+      console.error('Error parsing temporary session:', e);
+    }
+  }
+  
+  // 3. Check global variable (set during signup flow)
   if (!userEmail && window.tempRegisteredEmail) {
     userEmail = window.tempRegisteredEmail;
+    console.log('Found user from global variable:', userEmail);
   }
+  
+  // 4. Check regular auth session (for users who logged in)
+  if (!userEmail) {
+    try {
+      const authSession = JSON.parse(localStorage.getItem('authSession'));
+      if (authSession && authSession.email) {
+        userEmail = authSession.email;
+        console.log('Found user from auth session:', userEmail);
+      }
+    } catch (e) {
+      console.error('Error parsing auth session:', e);
+    }
+  }
+  
   // If still not found, show error and redirect
   if (!userEmail) {
     console.error('No user email found. User must be logged in or coming from registration.');
+    alert('Session expired or not found. Please log in again.');
     window.location.href = 'login.html';
     return;
   }
   
   const userId = userEmail; // Using email as the identifier
+  console.log('Proceeding with user ID (email):', userId);
   
   // Get form data
   const fullName = document.getElementById('fullName').value;
@@ -205,21 +262,24 @@ function handleProfileFormSubmit(event) {
   const profileData = {
     full_name: fullName,
     full_address: fullAddress,
-    age: parseInt(age),
-    sex,
-    height: parseInt(height),
-    weight: parseInt(weight)
+    age: parseInt(age) || 0,
+    sex: sex || 'not specified',
+    height: parseInt(height) || 0,
+    weight: parseInt(weight) || 0,
+    updated_at: new Date().toISOString()
   };
+  
+  console.log('Saving profile data for user:', userId, profileData);
   
   // Debug insertion before saving
   debugSupabaseInsertion({
     email: userId,
     full_name: fullName,
     full_address: fullAddress,
-    age: parseInt(age),
-    sex,
-    height: parseInt(height),
-    weight: parseInt(weight)
+    age: parseInt(age) || 0,
+    sex: sex || 'not specified',
+    height: parseInt(height) || 0,
+    weight: parseInt(weight) || 0
   });
   
   // Save profile data
@@ -229,8 +289,75 @@ function handleProfileFormSubmit(event) {
         alert('Error saving profile information. Please try again.');
         console.error('Profile save error:', error);
       } else {
-        // Redirect to login page after profile save
-        window.location.href = 'login.html';
+        // Create a proper auth session now that profile is complete
+        const fullUserData = {
+          Email: userId,
+          ...profileData
+        };
+        
+        // Store in auth session for future use
+        const authSession = {
+          user: fullUserData,
+          email: userId,
+          timestamp: new Date().getTime(),
+          isTemporary: false
+        };
+        
+        localStorage.setItem('authSession', JSON.stringify(authSession));
+        
+        // Clean up temporary session data
+        localStorage.removeItem('tempRegistrationSession');
+        sessionStorage.removeItem('userEmail');
+        if (window.tempRegisteredEmail) {
+          delete window.tempRegisteredEmail;
+        }
+        
+        // Show the success modal instead of alert
+        const successModal = document.getElementById('profile-success-modal');
+        if (successModal) {
+          // Display the modal
+          successModal.style.display = 'block';
+          // Trigger the slide-up animation after a small delay
+          setTimeout(() => {
+            successModal.classList.remove('translate-y-full');
+          }, 10);
+          
+          // Get progress bar elements
+          const progressBar = document.getElementById('progress-bar');
+          const progressPercentage = document.getElementById('progress-percentage');
+          
+          if (progressBar && progressPercentage) {
+            // Set up automatic progress bar animation and redirection
+            let progress = 0;
+            const totalDuration = 3000; // 3 seconds
+            const interval = 30; // Update every 30ms
+            const increment = (interval / totalDuration) * 100;
+            
+            const progressInterval = setInterval(() => {
+              progress += increment;
+              const roundedProgress = Math.min(Math.round(progress), 100);
+              
+              // Update progress bar width and text
+              progressBar.style.width = `${roundedProgress}%`;
+              progressPercentage.textContent = `${roundedProgress}%`;
+              
+              // When progress reaches 100%, redirect to login page
+              if (roundedProgress >= 100) {
+                clearInterval(progressInterval);
+                
+                // Slide down animation before redirecting
+                successModal.classList.add('translate-y-full');
+                setTimeout(() => {
+                  window.location.href = 'login.html';
+                }, 300); // Wait for animation to complete
+              }
+            }, interval);
+          }
+        } else {
+          // Fallback to alert if modal not found
+          alert('Profile information saved successfully!');
+          window.location.href = 'login.html';
+        }
       }
     });
 }

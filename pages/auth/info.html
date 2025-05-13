@@ -25,7 +25,7 @@
         <div id="info-page" class="relative container flex h-screen flex-col items-center justify-center bg-[#f1f7ed] px-6 py-10">
             <!-- Start of Back Button and Title -->
             <div class="flex items-center absolute top-6 left-6">
-                <button class="icon-button w-[40px] h-[40px] flex-shrink-0 cursor-pointer mr-4" onclick="handleBackToLogin()" tabindex="0" aria-label="Back to login page">
+                <button class="icon-button w-[40px] h-[40px] flex-shrink-0 cursor-pointer mr-4" onclick="handleBackToSignup()" tabindex="0" aria-label="Back to signup page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <g clip-path="url(#clip0_206_1776)">
                             <path d="M5.47161 18.2333C5.00344 18.7021 4.74048 19.3375 4.74048 20C4.74048 20.6625 5.00344 21.2979 5.47161 21.7666L14.8983 31.1966C15.1305 31.4289 15.4062 31.6131 15.7096 31.7388C16.013 31.8644 16.3382 31.9291 16.6666 31.9291C16.995 31.9291 17.3202 31.8644 17.6236 31.7388C17.927 31.6131 18.2027 31.4289 18.4349 31.1966C18.6672 30.9644 18.8514 30.6887 18.977 30.3853C19.1027 30.0819 19.1674 29.7567 19.1674 29.4283C19.1674 29.0999 19.1027 28.7747 18.977 28.4713C18.8514 28.1679 18.6672 27.8922 18.4349 27.66L13.2749 22.5H32.4999C33.163 22.5 33.7989 22.2366 34.2677 21.7677C34.7366 21.2989 34.9999 20.663 34.9999 20C34.9999 19.3369 34.7366 18.7011 34.2677 18.2322C33.7989 17.7634 33.163 17.5 32.4999 17.5H13.2749L18.4349 12.34C18.9037 11.871 19.167 11.235 19.1668 10.5719C19.1667 9.90879 18.9031 9.27291 18.4341 8.80414C17.9651 8.33537 17.3291 8.07211 16.666 8.07227C16.0029 8.07242 15.367 8.33599 14.8983 8.80498L5.47161 18.2333Z" fill="#011023"/>
@@ -312,5 +312,131 @@
 
         </div>
     </div>
+    
+    <!-- Sliding Success Modal -->  
+    <div id="profile-success-modal" class="fixed inset-0 z-50 transform transition-transform duration-300 translate-y-full" style="display: none;">
+        <!-- Modal Overlay -->
+        <div id="profile-success-overlay" class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <!-- Modal Content -->
+        <div class="absolute bottom-0 left-0 right-0 mx-auto max-w-md bg-white rounded-t-3xl p-4 sm:p-6 shadow-lg transform transition-transform duration-300">
+            <!-- Drag handle -->
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+            
+            <div class="text-center py-4">
+                <div class="flex justify-center mb-4">
+                    <div class="relative">
+                        <svg class="w-16 h-16 text-[#199B91]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-[#199B91] mb-4">
+                    Profile Saved Successfully!
+                </h3>
+                <div class="space-y-3 mb-6">
+                    <p class="text-sm leading-relaxed text-gray-700">
+                        Thank you for completing your profile information. Your details have been saved successfully.
+                    </p>
+                    <p class="text-sm leading-relaxed text-gray-700">
+                        You will now be redirected to the login page to continue your MedScan experience.
+                    </p>
+                </div>
+                <div class="flex flex-col space-y-3 max-w-xs mx-auto">
+                    <div class="relative pt-1">
+                        <div class="flex mb-2 items-center justify-between">
+                            <div>
+                                <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-[#199B91] bg-[#e6f7f5]">
+                                    Redirecting...
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span id="progress-percentage" class="text-xs font-semibold inline-block text-[#199B91]">
+                                    0%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-[#e6f7f5]">
+                            <div id="progress-bar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#199B91]" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Session check and navigation scripts -->
+    <script>
+        // Function to handle back to signup button
+        function handleBackToSignup() {
+            window.location.href = 'signup.html';
+        }
+        
+        // Check if user has a temporary session or is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize success modal functionality
+            const successModal = document.getElementById('profile-success-modal');
+            const continueButton = document.getElementById('profile-success-continue');
+            
+            if (continueButton) {
+                continueButton.addEventListener('click', function() {
+                    // Slide down animation before redirecting
+                    if (successModal) {
+                        successModal.classList.add('translate-y-full');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 300); // Wait for animation to complete
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                });
+            }
+            
+            // Check for user identification in multiple places
+            let userIdentified = false;
+            
+            // 1. Check session storage
+            if (sessionStorage.getItem('userEmail')) {
+                userIdentified = true;
+                console.log('User identified from sessionStorage');
+            }
+            
+            // 2. Check temporary registration session
+            try {
+                const tempSession = JSON.parse(localStorage.getItem('tempRegistrationSession'));
+                if (tempSession && tempSession.email) {
+                    userIdentified = true;
+                    console.log('User identified from temporary registration session');
+                }
+            } catch (e) {
+                console.error('Error parsing temporary session:', e);
+            }
+            
+            // 3. Check global variable
+            if (window.tempRegisteredEmail) {
+                userIdentified = true;
+                console.log('User identified from global variable');
+            }
+            
+            // 4. Check auth session
+            try {
+                const authSession = JSON.parse(localStorage.getItem('authSession'));
+                if (authSession && authSession.email) {
+                    userIdentified = true;
+                    console.log('User identified from auth session');
+                }
+            } catch (e) {
+                console.error('Error parsing auth session:', e);
+            }
+            
+            // If user is not identified, redirect to login
+            if (!userIdentified) {
+                console.warn('No user session found. Redirecting to login.');
+                alert('Please log in or sign up first.');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 </html>

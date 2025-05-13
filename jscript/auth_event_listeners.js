@@ -223,7 +223,23 @@ function setupAcceptTermsHandler(email, password) {
                     showValidationError(`Signup failed: ${error.message}`);
                 } else {
                     console.log('Signup successful:', data);
-                    window.location.href = 'verification.html';
+                    
+                    // Create a temporary session for the user to maintain identity through the registration flow
+                    const tempSession = {
+                        email: email,
+                        registrationTimestamp: new Date().getTime(),
+                        isTemporary: true
+                    };
+                    
+                    // Store in both sessionStorage and localStorage for redundancy
+                    sessionStorage.setItem('userEmail', email);
+                    localStorage.setItem('tempRegistrationSession', JSON.stringify(tempSession));
+                    
+                    // Also set a global variable for immediate access
+                    window.tempRegisteredEmail = email;
+                    
+                    // Redirect to info page instead of verification
+                    window.location.href = 'info.html';
                 }
             } catch (err) {
                 console.error('An unexpected error occurred:', err);

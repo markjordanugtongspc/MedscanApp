@@ -20,6 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
             welcomePage.style.opacity = '0';
             welcomePage.style.transition = 'opacity 0.5s ease-in';
         }
+        
+        // Check URL parameters to see if we should show a specific slide
+        const urlParams = new URLSearchParams(window.location.search);
+        const slideToShow = urlParams.get('showSlide');
+        
+        if (slideToShow) {
+            // Hide loader immediately
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+            
+            // Show the specified slide
+            showOnboarding(parseInt(slideToShow) - 1); // Convert to 0-based index
+            
+            // Clean up the URL
+            history.replaceState({}, document.title, window.location.pathname);
+        }    
     }
 
     // Main animation sequence
@@ -98,14 +116,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Show onboarding screen
-    function showOnboarding() {
+    function showOnboarding(slideIndex = 0) {
         onboarding.style.display = 'flex';
         setTimeout(() => {
             onboarding.style.opacity = '1';
-            // Make sure the first slide is active
-            const firstSlide = document.querySelector('.onboarding-slide');
-            if (firstSlide) {
-                firstSlide.classList.add('active');
+            
+            // Get all slides
+            const slides = document.querySelectorAll('.onboarding-slide');
+            
+            // Remove active class from all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.classList.add('invisible');
+            });
+            
+            // Make the specified slide active
+            if (slides.length > slideIndex) {
+                slides[slideIndex].classList.add('active');
+                slides[slideIndex].classList.remove('invisible');
+            } else if (slides.length > 0) {
+                // Fallback to first slide if specified index doesn't exist
+                slides[0].classList.add('active');
+                slides[0].classList.remove('invisible');
             }
         }, 50);
     }
@@ -235,10 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // ===== NEW FUNCTIONALITY CAN GO HERE =====
 
-// Function to handle back button click - returns to welcome page
+// Function to handle back button click - returns to onboarding slide 3
 function handleBackToWelcome() {
-    // Redirect to the welcome page (index.html)
-    window.location.href = '../../index.html';
+    // Redirect to the index page with a parameter to show slide 3
+    // This will be handled by the initApp function
+    window.location.href = '../../../index.html?showSlide=3';
 }
 
 // Function to show login page and hide welcome page

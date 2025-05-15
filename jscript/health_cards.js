@@ -107,10 +107,26 @@ function applyTheme(isDark) {
     if (isDark) {
         // Add dark theme class to body but preserve footer
         document.body.classList.add("dark-theme");
+        
+        // Apply dark theme styles to input fields with border-black
+        const inputFields = document.querySelectorAll('input.border-black');
+        inputFields.forEach(input => {
+            input.classList.remove('border-black');
+            input.classList.add('border-white');
+        });
+        
         console.log("Dark theme applied to assessment page");
     } else {
         // Remove dark theme class
         document.body.classList.remove("dark-theme");
+        
+        // Restore light theme styles to input fields with border-white
+        const inputFields = document.querySelectorAll('input.border-white');
+        inputFields.forEach(input => {
+            input.classList.remove('border-white');
+            input.classList.add('border-black');
+        });
+        
         console.log("Light theme applied to assessment page");
     }
 }

@@ -204,6 +204,16 @@ function initAssessment() {
     } else {
         console.log('Continue button not found');
     }
+    
+    // Add event listener to the proceed button if it exists (for medicine recommendation)
+    const proceedButton = document.querySelector('#proceed-button');
+    if (proceedButton) {
+        console.log('Proceed button found, adding event listener');
+        proceedButton.addEventListener('click', function() {
+            // Navigate back to dashboard
+            window.location.href = '../dashboard.html';
+        });
+    }
 }
 
 /**
@@ -225,6 +235,78 @@ function handleContinueClick() {
     } else {
         // This is the final question, show loading animation
         showLoadingAnimation();
+        
+        // After loading animation completes, show medicine recommendation
+        setTimeout(() => {
+            showMedicineRecommendation();
+        }, 2500); // Assuming loading animation takes about 2.5 seconds
+    }
+}
+
+/**
+ * Display medicine recommendation based on user's symptoms and duration
+ * @param {string} medicineName - Optional medicine name to display (defaults to Paracetamol Syrup)
+ * @param {string} notificationText - Optional notification text (defaults to standard message)
+ */
+function showMedicineRecommendation(medicineName = 'Paracetamol Syrup', notificationText = 'This will show in notification') {
+    console.log('Showing medicine recommendation');
+    
+    // Get the app content container
+    const appContent = document.getElementById('app-content');
+    const appWrapper = document.querySelector('.app-wrapper');
+    
+    if (appWrapper && appContent) {
+        // Clear the app content and recreate the structure
+        appContent.innerHTML = '';
+        
+        // Recreate the header and assessment section
+        const assessmentSection = document.createElement('section');
+        assessmentSection.className = 'app-wrapper';
+        
+        assessmentSection.innerHTML = `
+            <section class="flex items-center justify-center px-5 sm:px-10 md:px-21 mt-5">
+                <div class="text-center">
+                    <!-- Start of Header -->
+                    <h1 class="text-black text-3xl font-bold leading-tight">
+                        Recommend 
+                        <br class="hidden sm:block">
+                        Medicine
+                    </h1>
+                    <!-- End of Header -->
+                    
+                    <!-- Start of Medicine Recommendation Section -->
+                    <section class="mt-8">
+                        <div class="border-2 border-[#243e36] bg-transparent p-6 rounded-lg mb-6">
+                            <h2 class="text-xl font-semibold mb-2">${medicineName}</h2>
+                        </div>
+                        <p class="text-gray-700 mb-6">${notificationText}</p>
+                        <button id="proceed-button" class="bg-[#243e36] text-white py-3 px-8 rounded-lg hover:bg-opacity-90 transition-all">
+                            Proceed
+                        </button>
+                    </section>
+                    <!-- End of Medicine Recommendation Section -->
+                </div>
+            </section>
+        `;
+        
+        // Append the assessment section to app-content
+        appContent.appendChild(assessmentSection);
+        
+        // Add event listener to the proceed button
+        const proceedButton = document.getElementById('proceed-button');
+        if (proceedButton) {
+            proceedButton.addEventListener('click', function() {
+                // Navigate back to dashboard
+                window.location.href = '../dashboard.html';
+            });
+        }
+        
+        // Apply theme
+        const savedTheme = localStorage.getItem("darkTheme");
+        const isDarkTheme = savedTheme === "true";
+        if (isDarkTheme) {
+            document.body.classList.add("dark-theme");
+        }
     }
 }
 
@@ -473,11 +555,8 @@ function showLoadingAnimation() {
         // Append the loading animation to app-content
         appContent.appendChild(loadingElement);
         
-        // After 3 seconds, redirect to dashboard
-        setTimeout(() => {
-            console.log('Assessment completed, redirecting to dashboard...');
-            window.location.href = '../dashboard.html';
-        }, 3000);
+        // Loading animation will show for a few seconds before medicine recommendation appears
+        console.log('Assessment completed, preparing to show medicine recommendation...');
     }
 }
 /* End of Assessment Functions */

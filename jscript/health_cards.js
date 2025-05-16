@@ -279,7 +279,7 @@ function showMedicineRecommendation(medicineName = 'Paracetamol Syrup', notifica
                         <div class="border-2 border-[#243e36] bg-transparent p-6 rounded-lg mb-6">
                             <h2 class="text-xl font-semibold mb-2">${medicineName}</h2>
                         </div>
-                        <p class="text-gray-700 mb-6">${notificationText}</p>
+                        <p class="notification-text mb-6">${notificationText}</p>
                         <button id="proceed-button" class="bg-[#243e36] text-white py-3 px-8 rounded-lg hover:bg-opacity-90 transition-all">
                             Proceed
                         </button>
@@ -301,11 +301,20 @@ function showMedicineRecommendation(medicineName = 'Paracetamol Syrup', notifica
             });
         }
         
-        // Apply theme
+        // Apply theme and update notification text color
         const savedTheme = localStorage.getItem("darkTheme");
         const isDarkTheme = savedTheme === "true";
+        const notificationTextElement = document.querySelector('.notification-text');
+        
         if (isDarkTheme) {
             document.body.classList.add("dark-theme");
+            if (notificationTextElement) {
+                notificationTextElement.style.color = '#ffffff'; // White text for dark mode
+            }
+        } else {
+            if (notificationTextElement) {
+                notificationTextElement.style.color = '#000000'; // Black text for light mode
+            }
         }
     }
 }

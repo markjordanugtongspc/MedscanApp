@@ -50,7 +50,7 @@
 
                     <!-- Start of Paragraph -->
                     <div class="w-full max-w-md text-center px-6">
-                        <p class="text-white leading-relaxed mx-auto max-w-sm" style="line-height: 1.6; transform: rotate(-1deg);">
+                        <p class="text-black dark:text-white leading-relaxed mx-auto max-w-sm" style="line-height: 1.6; transform: rotate(-1deg);">
                             Adding an emergency contact for mental health ensures someone you trust can be alerted if you're in crisis or need urgent support.
                         </p>
                     </div>
@@ -72,7 +72,68 @@
             </div>
         </section>
         <!-- End of Section 2 -->
-
+        
+        <!-- Section 3 - Modal Popup -->
+        <section id="emergency-modal" class="hidden fixed inset-0 z-10">
+            <div class="bg-black bg-opacity-50 flex items-center justify-center h-full">
+                <div class="bg-black shadow-lg w-96" style="height: 42rem;"> <!-- Change width and height-->
+                    <!-- Modal Header -->
+                    <div class="bg-teal text-white p-4 flex items-center">
+                        <a href="#" class="mr-3" id="close-modal">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <h2 class="text-xl font-semibold">Emergency Contacts</h2>
+                        <div class="ml-auto cursor-pointer">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal Content -->
+                    <div class="p-4">
+                        <!-- Search Bar -->
+                        <div class="mb-4">
+                            <div class="relative rounded-full bg-gray-100 flex items-center px-3 py-2">
+                                <i class="fas fa-search text-gray-400 mr-2"></i>
+                                <input type="text" placeholder="Search here..." class="bg-transparent border-none w-full focus:outline-none">
+                            </div>
+                        </div>
+                        
+                        <!-- Contact List -->
+                        <div class="space-y-4">
+                            <!-- Contact 1 -->
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-3">
+                                    <img src="../../images/emergency/contacts/papa.jpg" alt="Papa" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold">Papa</h3>
+                                    <p class="text-gray-500 text-sm">9123257921</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact 2 -->
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-3 flex-shrink-0">
+                                    <img src="../../images/emergency/contacts/mama.jpg" alt="Mama" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold">Mama</h3>
+                                    <p class="text-gray-500 text-sm">09363615429</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating Add Button -->
+                        <div class="absolute right-14" style="top: 733px;">
+                            <button class="bg-teal-500 hover:bg-teal-600 text-white p-3 rounded-full shadow-lg transition duration-300 focus:outline-none">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                          <!-- End of Floating Add Button -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of Section 3 -->
       </div>
     </div>
 

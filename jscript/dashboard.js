@@ -243,6 +243,7 @@ function initScrollableDashboard() {
         if (!isDragging) {
           console.log(`Card clicked: ${this.querySelector('p').textContent}`);
           // Add card click functionality here
+        window.location.href = '/pages/box/assessment.html';
         }
       });
     });

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScan - Emergency Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="icon" type="image/png" href="../../images/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+
+    <!-- Custom Font Imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-[#f1f7ed]">
+    <div class="app-wrapper">
+      <!-- App Content -->
+      <div id="app-content" class="container mx-auto -px-1 -py-1 max-w-screen-lg">
+        <!-- Section 1 - Header -->
+        <section>
+            <header class="bg-transparent" style="background-color: transparent !important;">
+                <a href="/pages/dashboard.html" class="flex items-center text-white md:text-lg ml-6 mt-7">
+                  <i class="fas fa-arrow-left"></i>
+                </a>
+              </header>
+        </section>
+        <!-- End of Section 1 -->
+        
+        <!-- Section 2 - Box -->
+        <section>
+            <div>
+                <!-- Start of SVG -->
+                <div class="flex flex-col items-center justify-center p-6">
+                    <div class="w-full max-w-md">
+                        <object type="image/svg+xml" data="../../images/svg/emergency_contact.svg" class="w-250 ml-12 py-10">
+                            Emergency Contact SVG
+                        </object>
+                    </div>
+                </div>
+                <!-- End of SVG -->
+                 <div class="flex flex-col items-center justify-center p-6">
+                    <!-- Start of Title -->
+                    <div class="w-full max-w-md">
+                        <h1 class="text-3xl -px-2 font-bold whitespace-nowrap">Add Emergency Contact</h1>
+                    </div>
+                    <!-- End of Title -->
+
+                    <!-- Start of Paragraph -->
+                    <div class="w-full max-w-md text-center px-6">
+                        <p class="text-white leading-relaxed mx-auto max-w-sm" style="line-height: 1.6; transform: rotate(-1deg);">
+                            Adding an emergency contact for mental health ensures someone you trust can be alerted if you're in crisis or need urgent support.
+                        </p>
+                    </div>
+                    <!-- End of Paragraph -->
+
+                    <!-- Start of Button -->
+                    <div class="relative cursor-pointer -bottom-5" id="continue-button">
+                        <div class="mb-4"> <!-- Added space below the paragraph -->
+                            <svg class="flex py-1 mt-4" width="400" height="50" viewBox="0 0 389 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="389" height="56" rx="28" fill="#199B91" class="transition duration-200 border-2 border-teal-500 hover:fill-transparent" />
+                                <span class="absolute inset-0 flex items-center justify-center font-semibold text-lg text-white hover:text-black">
+                                    ADD CONTACT
+                                  </span>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- End of Button -->   
+                 </div>
+            </div>
+        </section>
+        <!-- End of Section 2 -->
+
+      </div>
+    </div>
+
+    <script type="module" src="../../jscript/emergency.js"></script>
+</body>
+</html>

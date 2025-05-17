@@ -236,16 +236,6 @@ function initScrollableDashboard() {
           // Add card activation functionality here
         }
       });
-
-      // Add click handler
-      card.addEventListener('click', function(e) {
-        // Only consider it a click if we weren't dragging
-        if (!isDragging) {
-          console.log(`Card clicked: ${this.querySelector('p').textContent}`);
-          // Add card click functionality here
-        window.location.href = '/pages/box/assessment.html';
-        }
-      });
     });
 
     // Mouse events for drag scrolling

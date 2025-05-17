@@ -133,45 +133,6 @@ function applyTheme(isDark) {
     }
 }
 
-/**
- * Handle click events on health cards
- * @param {string} cardTitle - The title of the clicked card
- */
-function handleCardClick(cardTitle) {
-    console.log(`${cardTitle} card clicked`);
-    
-    // Navigate to appropriate page based on card title
-    switch(cardTitle) {
-        case 'Assessment':
-            window.location.href = './box/assessment.html';
-            break;
-        case 'Emergency Contact':
-            window.location.href = './box/emergency.html';
-            break;
-        case 'Health Alert':
-            window.location.href = './box/health-alert.html';
-            break;
-        case 'Body Mass Index':
-            window.location.href = './box/bmi.html';
-            break;
-        case 'Medications':
-            window.location.href = './box/medications.html';
-            break;
-        case 'Schedule':
-            window.location.href = './box/schedule.html';
-            break;
-        case 'Doctor':
-            window.location.href = './box/doctor.html';
-            break;
-        case 'History':
-            window.location.href = './box/history.html';
-            break;
-        default:
-            console.log('No navigation defined for this card');
-    }
-}
-/* End of Health Card Navigation Function */
-
 /* Start of Assessment Functions */
 // Global variables for assessment
 let currentQuestionNumber = 1; // Track current question (1: symptoms, 2: duration)

@@ -1,0 +1,20 @@
+.toggle-bg {
+  background: linear-gradient(to right, #d1d5db, #0f50de);
+}
+
+.toggle-checked {
+  background: linear-gradient(to right, #f472b6, #9ca3af); 
+}
+
+.toggle-circle {
+  transition: all 0.3s ease;
+  left: 0.25rem;
+}
+
+.circle-right {
+  left: 2.25rem !important; 
+}
+
+.circle-left {
+  left: 0.25rem !important; 
+}

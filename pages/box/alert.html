@@ -22,18 +22,20 @@
         <!-- Section 1 - Header -->
         <section>
             <header class="bg-transparent" style="background-color: transparent !important;">
-                <a href="/pages/dashboard.html" class="flex items-center text-white md:text-lg ml-5 mt-7">
-                  <i class="fas fa-arrow-left"></i>
-                  <h1 class="text-2xl mx-24 text-center font-bold">Heart Alert</h1> <!--- pwede rapud ni eh ubos if ever -->
-                </a>
-              </header>
+              <a href="/pages/dashboard.html" class="flex items-center md:text-lg ml-5 mt-7" style="color: #243e36;">
+              <i class="fas fa-arrow-left" style="color: #243e36; font-size: 2rem;"></i>
+              <span class="flex items-center justify-center w-full">
+                <h1 class="text-4xl font-bold whitespace-nowrap" style="color: #243e36;">Heart Alert</h1>
+              </span>
+              </a>
+            </header>
         </section>
         <!-- End of Section 1 -->
 
         <!-- Section 2 - Alert -->
         <section>
           <div class="flex flex-col items-center gap-4">
-            <div id="alertContainer" class="bg-gray-800 p-16 alertBoxx text-center">
+            <div id="alertContainer" class="bg-gray-800 p-16 alertBoxx text-center mx-4">
               <!-- Content goes here -->
               <img src="../../images/alert/highfever.png" class="mx-auto" />
               <h1 class="text-white text-2xl font-bold">High Fever <br> Detected!</h1>
@@ -54,20 +56,21 @@
 
         <!-- Section 3 - Buttons -->
         <section>
-          <div class="flex flex-col items-center gap-4">
-            <div class="flex grid-cols-2 gap-4">
-              <button id="alertButton1" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
-                <img src="../../images/alert/doctorVector.svg" class="mr-2 w-4 h-4" />
-                  Call Doctor
+            <div class="flex flex-col items-center gap-4 mx-4">
+            <div class="flex justify-between gap-4 w-full max-w-md">
+              <button id="alertButton1" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center w-full">
+              <img src="../../images/alert/doctorVector.svg" class="mr-2 w-4 h-4" />
+              Call Doctor
               </button>
-            <button id="alertButton2" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
+              <button id="alertButton2" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center w-full">
               Self-Care Tips
-            </button>
-              <br>
-            <button id="alertButton3" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
+              </button>
+              <button id="alertButton3" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center w-full">
               <img src="../../images/alert/graph.png" class="mr-2 w-4 h-4" />
-                Track Results
-            </button>
+              Track Results
+              </button>
+            </div>
+            </div>
             </div>
           </div>
         </section>

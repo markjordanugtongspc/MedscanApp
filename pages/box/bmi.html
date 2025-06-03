@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/bmi.css">
     <link rel="icon" type="image/png" href="../../images/logo.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
@@ -22,19 +23,19 @@
         <!-- Section 1 - Header -->
         <section>
             <header class="bg-transparent flex items-center justify-between px-3 py-4">
-                <a href="/pages/dashboard.html" class="text-white md:text-lg">
-                  <i class="fas fa-arrow-left"></i>
-                </a>
-                <h1 class="text-4xl mx-8 text-center font-bold">BMI Calculator</h1> 
-                <img src="../../images/bmi/bmi.png" class="w-32 h-32" />
-              </header>
+              <a href="/pages/dashboard.html" class="md:text-lg text-[#28303B]">
+                <i class="fas fa-arrow-left text-3xl" style="color: #28303B;"></i>
+              </a>
+              <h1 class="text-4xl mx-8 text-center font-bold text-black">BMI Calculator</h1>
+              <img src="../../images/bmi/bmi.png" class="w-32 h-32" />
+            </header>
 
               <div class="px-6 py-8 space-y-6">
                 <!-- Age and Weight Grid -->
                 <div class="grid grid-cols-2 gap-4">
                   <!-- Age Card -->
                   <div class="bg-teal rounded-xl p-6 text-white text-center">
-                    <label class="block text-sm font-medium mb-4">Age</label>
+                    <label class="block text-lg font-bold mb-4">Age</label>
                     <div id="ageDisplay" class="text-4xl font-bold mb-4">25</div>
                     <div class="flex justify-center items-center space-x-6">
                       <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
@@ -48,7 +49,7 @@
 
                   <!-- Weight Card -->
                   <div class="bg-teal rounded-xl p-6 text-white text-center">
-                    <label class="block text-sm font-medium mb-4">Weight(KG)</label>
+                    <label class="block text-lg font-bold mb-4">Weight(KG)</label>
                     <div class="text-4xl font-bold mb-4">71</div>
                     <div class="flex justify-center items-center space-x-6">
                       <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
@@ -63,29 +64,28 @@
 
                 <!-- Height Card -->
                 <div class="bg-teal rounded-xl p-6 text-white">
-                  <label class="block text-sm font-medium mb-4 text-center">Height (CM)</label>
+                  <label class="block text-lg font-bold mb-4 text-center">Height (CM)</label>
                   <div class="text-4xl font-bold mb-6 text-center">150</div>
                   <div class="relative">
                     <input type="range" min="50" max="300" value="150" class="w-full h-2 bg-teal-600 rounded-lg appearance-none cursor-pointer slider">
-                    <div class="flex justify-between text-sm mt-2">
-                      <span>50 cm</span>
-                      <span>300 cm</span>
+                    <div class="flex justify-between text-sm mt-4">
+                      <span class="mt-4 block">50 cm</span>
+                      <span class="mt-4 block">300 cm</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Gender Card -->
                 <div class="bg-teal rounded-xl p-6 text-white">
-                  <label class="block text-sm font-medium mb-4 text-center">Gender</label>
+                  <label class="block text-lg font-bold mb-4 text-center">Gender</label>
                   <div class="flex items-center justify-center space-x-4">
                     <span class="text-lg">Male</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" class="peer hidden">
-                        <div class="w-16 h-8 bg-gradient-to-r from-gray-300 to-gray-900 rounded-full peer-checked:from-gray-900 peer-checked:to-gray-300 transition-all duration-500 relative">
-                          <div class="w-6 h-6 bg-white rounded-full absolute left-1 top-1 
-                               peer-checked:left-9 transition-all duration-500"></div>
-                        </div>
-                      </label>                                            
+                    <label for="gender-toggle" class="relative inline-flex items-center cursor-pointer">
+                      <input id="gender-toggle" type="checkbox" class="peer sr-only" />
+                      <div class="toggle-bg w-16 h-8 bg-gray-300 rounded-full transition-all duration-500 relative">
+                        <div class="toggle-circle w-6 h-6 bg-white rounded-full absolute top-1 left-1 transition-all duration-500"></div>
+                      </div>
+                    </label>
                     <span class="text-lg">Female</span>
                   </div>
                 </div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScan - Heart Alert</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="icon" type="image/png" href="../../images/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+
+    <!-- Custom Font Imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-[#f1f7ed]">
+    <div class="app-wrapper">
+      <!-- App Content -->
+      <div id="app-content" class="container mx-auto -px-1 -py-1 max-w-screen-lg">
+        <!-- Section 1 - Header -->
+        <section>
+            <header class="bg-transparent" style="background-color: transparent !important;">
+                <a href="/pages/dashboard.html" class="flex items-center text-white md:text-lg ml-5 mt-7">
+                  <i class="fas fa-arrow-left"></i>
+                  <h1 class="text-2xl mx-24 text-center font-bold">Heart Alert</h1> <!--- pwede rapud ni eh ubos if ever -->
+                </a>
+              </header>
+        </section>
+        <!-- End of Section 1 -->
+
+        <!-- Section 2 - Alert -->
+        <section>
+          <div class="flex flex-col items-center gap-4">
+            <div id="alertContainer" class="bg-gray-800 p-16 alertBoxx text-center">
+              <!-- Content goes here -->
+              <img src="../../images/alert/highfever.png" class="mx-auto" />
+              <h1 class="text-white text-2xl font-bold">High Fever <br> Detected!</h1>
+              <h2 class="text-white text-sm">🔥 38.5°C</h2>
+              <p class="text-white font-bold">
+                Risk Level: <span class="text-yellow-500 font-thin">Moderate</span>
+              </p>
+              <p class="text-white font-bold">
+                Recommended Action: <span class="font-thin">Rest + Hydration</span>
+              </p>
+            </div>
+            <div id="diagnosisList" class="grid grid-cols-2 gap-4 items-center">
+              <!-- Dynamic content will be generated here -->
+            </div>
+          </div>
+        </section>
+        <!-- End of Section 2 -->
+
+        <!-- Section 3 - Buttons -->
+        <section>
+          <div class="flex flex-col items-center gap-4">
+            <div class="flex grid-cols-2 gap-4">
+              <button id="alertButton1" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
+                <img src="../../images/alert/doctorVector.svg" class="mr-2 w-4 h-4" />
+                  Call Doctor
+              </button>
+            <button id="alertButton2" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
+              Self-Care Tips
+            </button>
+              <br>
+            <button id="alertButton3" class="bg-gray-800 text-white px-4 py-2 rounded-md flex items-center">
+              <img src="../../images/alert/graph.png" class="mr-2 w-4 h-4" />
+                Track Results
+            </button>
+            </div>
+          </div>
+        </section>
+        <!-- End of Section 3 -->
+      </div>
+    </div>
+
+    <script type="module" src="../../jscript/alert.js"></script>
+</body>
+</html>

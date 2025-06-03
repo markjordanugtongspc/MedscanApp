@@ -324,9 +324,45 @@ body.dark-theme .health-card {
   transition: opacity 0.3s ease;
 }
 
+/* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+#scrollable-dashboard::-webkit-scrollbar {
+  width: 10px;
+}
+
+#scrollable-dashboard::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2); 
+  border-radius: 10px; 
+}
+
+#scrollable-dashboard::-webkit-scrollbar-thumb {
+  background-color: #199B91; 
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0.2); 
+}
+
+/* For Firefox */
 #scrollable-dashboard {
-  scroll-behavior: smooth;
-  cursor: grab;
+  scrollbar-width: thin; 
+  scrollbar-color: #199B91 rgba(255, 255, 255, 0.2);
+}
+
+/* Health Dashboard Container */
+.health-dashboard-container {
+  width: 90%; 
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 20px; 
+  background-color: rgba(255, 255, 255, 0.9); 
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+}
+
+/* Adjust the height of the scrollable area */
+#scrollable-dashboard {
+  max-height: 380px; 
+  overflow-y: auto;   
+  overflow-x: hidden; 
+  cursor: grab;       
 }
 
 #scrollable-dashboard.active-drag {

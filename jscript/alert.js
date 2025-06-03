@@ -325,3 +325,262 @@ window.AlertFunctions = {
     showAIAnalysis,
     saveResults
 };
+
+/* ---------------------------------------------------- */
+/* BMI Calculator Functions - Dynamic Interface */
+/* ---------------------------------------------------- */
+
+/**
+ * Initialize BMI Calculator display
+ */
+function initializeBMICalculator() {
+    const diagnosisList = document.getElementById('diagnosisList');
+    if (!diagnosisList) {
+        console.error('Diagnosis list container not found');
+        return;
+    }
+
+    // Clear existing content
+    diagnosisList.innerHTML = '';
+    
+    // Create BMI calculator interface
+    createBMIInterface();
+}
+
+/**
+ * Create the complete BMI calculator interface
+ */
+function createBMIInterface() {
+    const diagnosisList = document.getElementById('diagnosisList');
+    
+    // BMI State - Updated default values
+    const bmiState = {
+        age: 25,
+        weight: 65,
+        height: 170,
+        isMale: false
+    };
+
+    // Create Age and Weight Grid
+    const ageWeightGrid = createAgeWeightGrid(bmiState);
+    diagnosisList.appendChild(ageWeightGrid);
+
+    // Create Height Card
+    const heightCard = createHeightCard(bmiState);
+    diagnosisList.appendChild(heightCard);
+
+    // Create Gender Card
+    const genderCard = createGenderCard(bmiState);
+    diagnosisList.appendChild(genderCard);
+
+    // Create Calculate Button
+    const calculateButton = createCalculateButton(bmiState);
+    diagnosisList.appendChild(calculateButton);
+}
+
+/**
+ * Create Age and Weight grid cards
+ */
+function createAgeWeightGrid(bmiState) {
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'col-span-2 grid grid-cols-2 gap-4 mb-4';
+
+    // Age Card - Added black border
+    const ageCard = document.createElement('div');
+    ageCard.className = 'bg-teal-500 border-2 border-black rounded-xl p-6 text-white text-center';
+    ageCard.innerHTML = `
+        <label class="block text-sm font-medium mb-4">Age</label>
+        <div id="ageValue" class="text-4xl font-bold mb-4">${bmiState.age}</div>
+        <div class="flex justify-center items-center space-x-6">
+            <button id="ageDecrement" class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                <i class="fas fa-minus text-lg"></i>
+            </button>
+            <button id="ageIncrement" class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                <i class="fas fa-plus text-lg"></i>
+            </button>
+        </div>
+    `;
+
+    // Weight Card - Added black border
+    const weightCard = document.createElement('div');
+    weightCard.className = 'bg-teal-500 border-2 border-black rounded-xl p-6 text-white text-center';
+    weightCard.innerHTML = `
+        <label class="block text-sm font-medium mb-4">Weight(KG)</label>
+        <div id="weightValue" class="text-4xl font-bold mb-4">${bmiState.weight}</div>
+        <div class="flex justify-center items-center space-x-6">
+            <button id="weightDecrement" class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                <i class="fas fa-minus text-lg"></i>
+            </button>
+            <button id="weightIncrement" class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                <i class="fas fa-plus text-lg"></i>
+            </button>
+        </div>
+    `;
+
+    gridContainer.appendChild(ageCard);
+    gridContainer.appendChild(weightCard);
+
+    // Add event listeners for age
+    setTimeout(() => {
+        document.getElementById('ageDecrement').addEventListener('click', () => {
+            if (bmiState.age > 1) {
+                bmiState.age--;
+                document.getElementById('ageValue').textContent = bmiState.age;
+            }
+        });
+        document.getElementById('ageIncrement').addEventListener('click', () => {
+            if (bmiState.age < 120) {
+                bmiState.age++;
+                document.getElementById('ageValue').textContent = bmiState.age;
+            }
+        });
+
+        // Add event listeners for weight
+        document.getElementById('weightDecrement').addEventListener('click', () => {
+            if (bmiState.weight > 1) {
+                bmiState.weight--;
+                document.getElementById('weightValue').textContent = bmiState.weight;
+            }
+        });
+        document.getElementById('weightIncrement').addEventListener('click', () => {
+            if (bmiState.weight < 300) {
+                bmiState.weight++;
+                document.getElementById('weightValue').textContent = bmiState.weight;
+            }
+        });
+    }, 10);
+
+    return gridContainer;
+}
+
+/**
+ * Create Height card with slider
+ */
+function createHeightCard(bmiState) {
+    const heightCard = document.createElement('div');
+    heightCard.className = 'col-span-2 bg-teal-500 border-2 border-black rounded-xl p-6 text-white mb-4';
+    heightCard.innerHTML = `
+        <label class="block text-sm font-medium mb-4 text-center">Height (CM)</label>
+        <div id="heightValue" class="text-4xl font-bold mb-6 text-center">${bmiState.height}</div>
+        <div class="relative">
+            <input type="range" id="heightSlider" min="50" max="300" value="${bmiState.height}" class="w-full h-2 bg-teal-600 rounded-lg appearance-none cursor-pointer">
+            <div class="flex justify-between text-sm mt-2">
+                <span>50 cm</span>
+                <span>300 cm</span>
+            </div>
+        </div>
+    `;
+
+    // Add event listener for height slider
+    setTimeout(() => {
+        document.getElementById('heightSlider').addEventListener('input', (e) => {
+            bmiState.height = parseInt(e.target.value);
+            document.getElementById('heightValue').textContent = bmiState.height;
+        });
+    }, 10);
+
+    return heightCard;
+}
+
+/**
+ * Create Gender card with switch
+ */
+function createGenderCard(bmiState) {
+    const genderCard = document.createElement('div');
+    genderCard.className = 'col-span-2 bg-teal-500 border-2 border-black rounded-xl p-6 text-white mb-4';
+    genderCard.innerHTML = `
+        <label class="block text-sm font-medium mb-4 text-center">Gender</label>
+        <div class="flex items-center justify-center space-x-4">
+            <span class="text-lg">Male</span>
+            <div class="relative">
+                <div id="genderSwitch" class="w-16 h-8 bg-teal-600 rounded-full cursor-pointer transition-all duration-300">
+                    <div id="genderToggle" class="w-6 h-6 ${bmiState.isMale ? 'bg-blue-500' : 'bg-pink-500'} rounded-full mt-1 ml-1 transition-transform duration-300 ease-in-out ${bmiState.isMale ? '' : 'transform translate-x-8'}"></div>
+                </div>
+            </div>
+            <span class="text-lg">Female</span>
+        </div>
+    `;
+
+    // Add event listener for gender switch
+    setTimeout(() => {
+        document.getElementById('genderSwitch').addEventListener('click', () => {
+            bmiState.isMale = !bmiState.isMale;
+            const toggle = document.getElementById('genderToggle');
+            if (bmiState.isMale) {
+                toggle.className = 'w-6 h-6 bg-blue-500 rounded-full mt-1 ml-1 transition-transform duration-300 ease-in-out';
+            } else {
+                toggle.className = 'w-6 h-6 bg-pink-500 rounded-full mt-1 ml-1 transition-transform duration-300 ease-in-out transform translate-x-8';
+            }
+        });
+    }, 10);
+
+    return genderCard;
+}
+
+/**
+ * Create Calculate BMI button
+ */
+function createCalculateButton(bmiState) {
+    const button = document.createElement('button');
+    button.className = 'col-span-2 w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 text-lg';
+    button.textContent = 'Calculate BMI';
+
+    button.addEventListener('click', () => {
+        calculateBMI(bmiState);
+    });
+
+    return button;
+}
+
+/**
+ * Calculate and display BMI result
+ */
+function calculateBMI(bmiState) {
+    const heightInMeters = bmiState.height / 100;
+    const bmi = (bmiState.weight / (heightInMeters * heightInMeters)).toFixed(1);
+    
+    let category = '';
+    let color = '';
+    
+    if (bmi < 18.5) {
+        category = 'Underweight';
+        color = 'text-blue-400';
+    } else if (bmi < 25) {
+        category = 'Normal';
+        color = 'text-teal-400';
+    } else if (bmi < 30) {
+        category = 'Overweight';
+        color = 'text-yellow-400';
+    } else {
+        category = 'Obese';
+        color = 'text-red-400';
+    }
+
+    // Display result
+    const diagnosisList = document.getElementById('diagnosisList');
+    diagnosisList.innerHTML = `
+        <div class="col-span-2 text-center text-white">
+            <h2 class="text-2xl font-bold mb-4">BMI Result</h2>
+            <div class="bg-teal-500 rounded-xl p-6 mb-4">
+                <div class="text-4xl font-bold mb-2">${bmi}</div>
+                <div class="text-lg ${color} font-semibold">${category}</div>
+                <div class="text-sm mt-2">Age: ${bmiState.age} | Weight: ${bmiState.weight}kg | Height: ${bmiState.height}cm</div>
+                <div class="text-sm">Gender: ${bmiState.isMale ? 'Male' : 'Female'}</div>
+            </div>
+            <button onclick="initializeBMICalculator()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                Recalculate
+            </button>
+        </div>
+    `;
+}
+
+// Export BMI functions for external use
+window.BMIFunctions = {
+    initializeBMICalculator,
+    calculateBMI
+};
+
+/* ---------------------------------------------------- */
+/* Above: BMI Calculator Functions - Dynamic Interface */
+/* Below: Future Functions can be added here */
+/* ---------------------------------------------------- */

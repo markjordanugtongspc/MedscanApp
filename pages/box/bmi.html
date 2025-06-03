@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScan - Heart Alert</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="icon" type="image/png" href="../../images/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+
+    <!-- Custom Font Imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-[#f1f7ed]">
+    <div class="app-wrapper">
+      <!-- App Content -->
+      <div id="app-content" class="container mx-auto -px-10 -py-10 max-w-screen-lg">
+        <!-- Section 1 - Header -->
+        <section>
+            <header class="bg-transparent flex items-center justify-between px-3 py-4">
+                <a href="/pages/dashboard.html" class="text-white md:text-lg">
+                  <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1 class="text-4xl mx-8 text-center font-bold">BMI Calculator</h1> 
+                <img src="../../images/bmi/bmi.png" class="w-32 h-32" />
+              </header>
+
+              <div class="px-6 py-8 space-y-6">
+                <!-- Age and Weight Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                  <!-- Age Card -->
+                  <div class="bg-teal rounded-xl p-6 text-white text-center">
+                    <label class="block text-sm font-medium mb-4">Age</label>
+                    <div class="text-4xl font-bold mb-4">21</div>
+                    <div class="flex justify-center items-center space-x-6">
+                      <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                        <i class="fas fa-minus text-lg"></i>
+                      </button>
+                      <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                        <i class="fas fa-plus text-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Weight Card -->
+                  <div class="bg-teal rounded-xl p-6 text-white text-center">
+                    <label class="block text-sm font-medium mb-4">Weight(KG)</label>
+                    <div class="text-4xl font-bold mb-4">71</div>
+                    <div class="flex justify-center items-center space-x-6">
+                      <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                        <i class="fas fa-minus text-lg"></i>
+                      </button>
+                      <button class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center hover:bg-teal-700 transition">
+                        <i class="fas fa-plus text-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Height Card -->
+                <div class="bg-teal rounded-xl p-6 text-white">
+                  <label class="block text-sm font-medium mb-4 text-center">Height (CM)</label>
+                  <div class="text-4xl font-bold mb-6 text-center">150</div>
+                  <div class="relative">
+                    <input type="range" min="50" max="300" value="150" class="w-full h-2 bg-teal-600 rounded-lg appearance-none cursor-pointer slider">
+                    <div class="flex justify-between text-sm mt-2">
+                      <span>50 cm</span>
+                      <span>300 cm</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Gender Card -->
+                <div class="bg-teal rounded-xl p-6 text-white">
+                  <label class="block text-sm font-medium mb-4 text-center">Gender</label>
+                  <div class="flex items-center justify-center space-x-4">
+                    <span class="text-lg">Male</span>
+                    <div class="relative">
+                      <div class="w-16 h-8 bg-teal-600 rounded-full cursor-pointer">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full mt-1 ml-1 transition-transform duration-300 ease-in-out"></div>
+                      </div>
+                    </div>
+                    <span class="text-lg">Female</span>
+                  </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 text-lg">
+                  Calculate BMI
+                </button>
+              </div>
+        </section>
+        <!-- End of Section 1 -->
+      </div>
+    </div>
+
+    <script type="module" src="../../jscript/alert.js"></script>
+</body>
+</html>

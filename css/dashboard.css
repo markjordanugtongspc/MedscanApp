@@ -379,3 +379,277 @@ box-shadow: 0 4px 6px rgba(255, 255, 255, 0.15); /* Slightly more pronounced on 
 
 /* Footer is intentionally excluded from dark theme styles to keep it static */
 /* End of Dark Theme Styles */
+
+/* ====================
+ * START: Avatar Selection Modal Styles
+ * Modal functionality for profile avatar selection
+ * ==================== */
+
+/* Modal Styles - Based on W3Schools Modal Examples */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal Content - Mobile Optimized */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Reduced margin for mobile */
+    padding: 15px; /* Reduced padding for mobile */
+    border: none;
+    border-radius: 12px;
+    width: 90%; /* Mobile-friendly width */
+    max-width: 400px; /* Smaller max-width for mobile */
+    max-height: 70vh; /* Reduced height for mobile screens */
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px; /* Slightly smaller for mobile */
+    font-weight: bold;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Modal Header - Mobile Optimized */
+.modal-header {
+    margin-bottom: 15px;
+    padding-right: 30px; /* Space for close button */
+}
+
+.modal-header h2 {
+    font-size: 1.5rem; /* Smaller heading for mobile */
+    margin-bottom: 8px;
+}
+
+.modal-header p {
+    font-size: 0.875rem; /* Smaller text for mobile */
+    margin-bottom: 15px;
+}
+
+/* Avatar Grid - Mobile Optimized */
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for mobile */
+    gap: 10px; /* Reduced gap for mobile */
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.avatar-option {
+    width: 70px; /* Smaller avatars for mobile */
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Smaller emoji size */
+    margin: 0 auto; /* Center avatars in grid */
+}
+
+.avatar-option:hover {
+    border-color: #10b981;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.avatar-option.selected {
+    border-color: #059669;
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+}
+
+/* Upload Section - Mobile Optimized */
+.upload-section {
+    margin-top: 15px;
+}
+
+.upload-section .border-dashed {
+    padding: 15px; /* Reduced padding for mobile */
+}
+
+.upload-section i {
+    font-size: 2.5rem; /* Smaller upload icon */
+    display: block;
+    margin-bottom: 8px;
+}
+
+.upload-section p {
+    font-size: 0.875rem;
+    margin-bottom: 4px;
+}
+
+.upload-section span {
+    font-size: 0.75rem;
+}
+
+/* Dark Theme Support for Modal */
+body.dark-theme .modal-content {
+    background-color: #1f2937;
+    color: #f9fafb;
+}
+
+body.dark-theme .modal-header h2 {
+    color: #f9fafb;
+}
+
+body.dark-theme .modal-header p {
+    color: #d1d5db;
+}
+
+body.dark-theme .close {
+    color: #d1d5db;
+}
+
+body.dark-theme .close:hover,
+body.dark-theme .close:focus {
+    color: #f9fafb;
+}
+
+body.dark-theme .avatar-option {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+body.dark-theme .avatar-option:hover {
+    border-color: #10b981;
+}
+
+body.dark-theme .upload-section .border-dashed {
+    border-color: #4b5563;
+}
+
+body.dark-theme .upload-section p {
+    color: #d1d5db;
+}
+
+body.dark-theme .upload-section span {
+    color: #9ca3af;
+}
+
+body.dark-theme .upload-section i {
+    color: #6b7280;
+}
+
+/* Extra Small Mobile Devices (smaller than 375px) */
+@media (max-width: 374px) {
+    .modal-content {
+        width: 95%;
+        margin: 15% auto;
+        padding: 12px;
+        max-height: 65vh;
+    }
+    
+    .avatar-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for very small screens */
+        gap: 8px;
+    }
+    
+    .avatar-option {
+        width: 60px;
+        height: 60px;
+        font-size: 1.25rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .close {
+        font-size: 20px;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 640px) {
+    .modal-content {
+        margin: 8% auto;
+        padding: 15px;
+        max-height: 75vh;
+    }
+    
+    .avatar-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    
+    .avatar-option {
+        width: 65px;
+        height: 65px;
+        font-size: 1.4rem;
+    }
+}
+
+/* Medium Devices and up */
+@media (min-width: 641px) {
+    .modal-content {
+        max-width: 500px;
+        padding: 20px;
+        margin: 5% auto;
+    }
+    
+    .avatar-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+    }
+    
+    .avatar-option {
+        width: 80px;
+        height: 80px;
+        font-size: 1.75rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.75rem;
+    }
+    
+    .close {
+        font-size: 28px;
+        right: 15px;
+        top: 15px;
+    }
+}
+
+/* ====================
+ * END: Avatar Selection Modal Styles
+ * ==================== */

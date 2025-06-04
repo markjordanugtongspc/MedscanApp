@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScan - Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="icon" type="image/png" href="../../images/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+
+    <!-- Custom Font Imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-[#f1f7ed]">
+    <div class="app-wrapper">
+      <!-- App Content -->
+      <div id="app-content" class="container mx-auto -px-10 -py-10 max-w-screen-lg">
+        <!-- Section 1 - Header -->
+        <section>
+            <header class="bg-transparent flex items-center justify-between px-8 py-12">
+              <a href="/pages/dashboard.html" class="md:text-lg text-[#28303B]">
+                <i class="fas fa-arrow-left text-3xl" style="color: #28303B;"></i>
+              </a>
+              <a class="cursor-pointer">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.9 8.70017V11.9439C13.9085 12.339 13.7976 12.7274 13.5817 13.0584C13.3658 13.3894 13.055 13.6475 12.69 13.7989C12.4476 13.8999 12.1876 13.9521 11.925 13.9527H8.675C8.15069 13.9527 7.64761 13.7455 7.27534 13.3763C6.90308 13.0071 6.69179 12.5057 6.6875 11.9814V8.73767C6.68717 8.47675 6.73838 8.21833 6.83819 7.97726C6.938 7.73619 7.08445 7.5172 7.26912 7.33288C7.45379 7.14856 7.67305 7.00252 7.91431 6.90317C8.15557 6.80381 8.41408 6.75309 8.675 6.75392H11.925C12.4429 6.75706 12.9391 6.96223 13.308 7.32574C13.6768 7.68925 13.8893 8.18239 13.9 8.70017ZM13.9 18.0689V21.3127C13.9007 21.8375 13.6931 22.3411 13.3228 22.713C12.9525 23.0849 12.4498 23.2948 11.925 23.2964H8.675C8.14853 23.2964 7.64357 23.0875 7.27095 22.7156C6.89833 22.3437 6.68849 21.8391 6.6875 21.3127V18.0689C6.69015 17.5441 6.90091 17.0418 7.27353 16.6722C7.64616 16.3026 8.15019 16.096 8.675 16.0977H11.925C12.4482 16.0977 12.9499 16.3052 13.3202 16.6748C13.6905 17.0444 13.899 17.5458 13.9 18.0689ZM23.325 8.70017V11.9439C23.3324 12.4645 23.1346 12.9671 22.7744 13.343C22.4142 13.7189 21.9204 13.9379 21.4 13.9527H18.1625C17.6382 13.9527 17.1351 13.7455 16.7628 13.3763C16.3906 13.0071 16.1793 12.5057 16.175 11.9814V8.73767C16.1747 8.47675 16.2259 8.21833 16.3257 7.97726C16.4255 7.73619 16.5719 7.5172 16.7566 7.33288C16.9413 7.14856 17.1606 7.00252 17.4018 6.90317C17.6431 6.80381 17.9016 6.75309 18.1625 6.75392H21.4C21.9092 6.76983 22.3928 6.98063 22.751 7.34281C23.1092 7.70498 23.3147 8.19087 23.325 8.70017ZM23.325 18.0939V21.3377C23.3259 21.854 23.1252 22.3502 22.7656 22.7207C22.4061 23.0912 21.9161 23.3068 21.4 23.3214H18.1625C17.636 23.3214 17.1311 23.1125 16.7585 22.7406C16.3858 22.3687 16.176 21.8641 16.175 21.3377V18.0939C16.178 17.5692 16.3888 17.0671 16.7614 16.6976C17.1339 16.3281 17.6378 16.1213 18.1625 16.1227H21.4C21.9134 16.1388 22.4006 16.3531 22.7595 16.7206C23.1184 17.0881 23.3211 17.5803 23.325 18.0939Z" fill="#263238"/>
+                <path d="M26.5625 12.1187C26.3151 12.1155 26.0787 12.0159 25.9036 11.841C25.7286 11.6662 25.6286 11.4299 25.625 11.1825V7.3275C25.634 6.93689 25.5632 6.54855 25.4171 6.1862C25.271 5.82385 25.0525 5.49509 24.775 5.22C24.2259 4.67694 23.4849 4.37202 22.7125 4.37125H18.9C18.6518 4.37125 18.4138 4.27282 18.238 4.09755C18.0623 3.92227 17.9632 3.68446 17.9625 3.43625C17.9629 3.18783 18.0618 2.94969 18.2376 2.77415C18.4134 2.5986 18.6516 2.5 18.9 2.5H22.75C24.0167 2.53192 25.22 3.06083 26.1 3.9725C26.5452 4.41538 26.8982 4.94214 27.1385 5.52231C27.3788 6.10248 27.5017 6.72454 27.5 7.3525V11.2075C27.4932 11.4516 27.3914 11.6833 27.2163 11.8535C27.0413 12.0237 26.8067 12.1188 26.5625 12.1187ZM22.7125 27.5H18.9C18.6518 27.5 18.4138 27.4016 18.238 27.2263C18.0623 27.051 17.9632 26.8132 17.9625 26.565C17.9629 26.3166 18.0618 26.0784 18.2376 25.9029C18.4134 25.7274 18.6516 25.6287 18.9 25.6287H22.75C23.3265 25.6241 23.8885 25.4478 24.3643 25.1223C24.8401 24.7968 25.2081 24.3369 25.4213 23.8013C25.5627 23.4464 25.632 23.0669 25.625 22.685V18.8675C25.6254 18.6191 25.7243 18.3809 25.9001 18.2054C26.0759 18.0299 26.3141 17.9313 26.5625 17.9313C26.811 17.9313 27.0492 18.0299 27.225 18.2054C27.4008 18.3809 27.4997 18.6191 27.5 18.8675V22.685C27.5024 23.6315 27.2227 24.5572 26.6966 25.344C26.1705 26.1308 25.4219 26.743 24.5463 27.1025C23.965 27.3412 23.3413 27.465 22.7125 27.4625V27.5ZM11.15 27.5H7.30005C6.66793 27.4996 6.04209 27.3746 5.45828 27.1322C4.87447 26.8899 4.34413 26.5349 3.89754 26.0875C3.45193 25.6407 3.09906 25.1101 2.85922 24.5264C2.61939 23.9427 2.49732 23.3173 2.50004 22.6863V18.8687C2.50038 18.6203 2.59929 18.3822 2.77507 18.2066C2.95085 18.0311 3.18912 17.9325 3.43754 17.9325C3.68597 17.9325 3.92424 18.0311 4.10002 18.2066C4.2758 18.3822 4.37471 18.6203 4.37504 18.8687V22.6863C4.37802 23.4594 4.68775 24.1997 5.23618 24.7446C5.78462 25.2895 6.52692 25.5945 7.30005 25.5925H11.15C11.3985 25.5925 11.6367 25.6911 11.8125 25.8666C11.9883 26.0422 12.0872 26.2803 12.0875 26.5287C12.0877 26.6518 12.0636 26.7737 12.0165 26.8873C11.9694 27.001 11.9003 27.1043 11.8132 27.1912C11.7261 27.278 11.6226 27.3469 11.5088 27.3936C11.395 27.4404 11.2731 27.4642 11.15 27.4638V27.5ZM3.43754 12.1187C3.19012 12.1155 2.95373 12.0159 2.77864 11.841C2.60356 11.6662 2.5036 11.4299 2.50004 11.1825V7.3275C2.50336 6.06777 3.00695 4.86094 3.90004 3.9725C4.8015 3.07932 6.01854 2.57724 7.28754 2.575H11.1375C11.386 2.575 11.6242 2.6736 11.8 2.84915C11.9758 3.02469 12.0747 3.26283 12.075 3.51125C12.0744 3.75946 11.9753 3.99727 11.7996 4.17255C11.6238 4.34782 11.3858 4.44625 11.1375 4.44625H7.28754C6.51432 4.44393 5.77183 4.74877 5.22332 5.29377C4.67481 5.83876 4.36519 6.57928 4.36254 7.3525V11.2075C4.35579 11.4494 4.25574 11.6793 4.08334 11.8492C3.91094 12.019 3.67953 12.1156 3.43754 12.1187Z" fill="#263238"/>
+              </svg>
+              </a>              
+            </header>
+
+            <div class="flex items-center justify-between">
+                <div class="flex mx-12 -my-12 items-center">
+                    <div class="relative">
+                        <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 rounded-full">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M37 0.333496C41.8151 0.333474 46.5831 1.28187 51.0317 3.12453C55.4804 4.96719 59.5225 7.66803 62.9273 11.0728C66.3321 14.4776 69.033 18.5198 70.8757 22.9684C72.7184 27.417 73.6668 32.185 73.6668 37.0001C73.6668 57.2506 57.2505 73.6669 37 73.6669C16.7497 73.6669 0.333374 57.2506 0.333374 37.0001C0.333374 16.7498 16.7497 0.333496 37 0.333496ZM40.6668 40.6669H33.3334C24.2558 40.6669 16.4625 46.1647 13.1011 54.0126C18.4196 61.4705 27.1419 66.3335 37 66.3335C46.858 66.3335 55.5804 61.4705 60.899 54.0121C57.5377 46.1647 49.7443 40.6669 40.6668 40.6669ZM37 11.3335C30.9249 11.3335 26 16.2584 26 22.3335C26 28.4086 30.9249 33.3335 37 33.3335C43.0751 33.3335 48 28.4086 48 22.3335C48 16.2584 43.0752 11.3335 37 11.3335Z" fill="#263238"/>
+                        </svg>
+                        <div class="absolute bottom-0 right-0 bg-teal-600 rounded-full p-1 z-10">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2H3.5L4.5 1H7.5L8.5 2H10C10.2652 2 10.5196 2.10536 10.7071 2.29289C10.8946 2.48043 11 2.73478 11 3V9C11 9.26522 10.8946 9.51957 10.7071 9.70711C10.5196 9.89464 10.2652 10 10 10H2C1.73478 10 1.48043 9.89464 1.29289 9.70711C1.10536 9.51957 1 9.26522 1 9V3C1 2.73478 1.10536 2.48043 1.29289 2.29289C1.48043 2.10536 1.73478 2 2 2ZM6 3.5C5.33696 3.5 4.70107 3.76339 4.23223 4.23223C3.76339 4.70107 3.5 5.33696 3.5 6C3.5 6.66304 3.76339 7.29893 4.23223 7.76777C4.70107 8.23661 5.33696 8.5 6 8.5C6.66304 8.5 7.29893 8.23661 7.76777 7.76777C8.23661 7.29893 8.5 6.66304 8.5 6C8.5 5.33696 8.23661 4.70107 7.76777 4.23223C7.29893 3.76339 6.66304 3.5 6 3.5ZM6 4.5C6.39782 4.5 6.77936 4.65804 7.06066 4.93934C7.34196 5.22064 7.5 5.60218 7.5 6C7.5 6.39782 7.34196 6.77936 7.06066 7.06066C6.77936 7.34196 6.39782 7.5 6 7.5C5.60218 7.5 5.22064 7.34196 4.93934 7.06066C4.65804 6.77936 4.5 6.39782 4.5 6C4.5 5.60218 4.65804 5.22064 4.93934 4.93934C5.22064 4.65804 5.60218 4.5 6 4.5Z" fill="black"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4 -mt-2">
+                            <h1 id="user-name" class="text-2xl font-bold"></h1>
+                            <p id="user-email" class="text-sm text-gray-500 -mt-4"></p>
+                        <button class="bg-gray-800 text-white my-2 px-4 py-1 rounded-md cursor-pointer hover:bg-gray-700 hover:shadow-md transition-all duration-200">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of Section 1 -->
+
+        <!-- Section 2 - Profile Information -->
+        <section>
+        <div class="px-12 py-32 flex justify-center">
+            <div class="flex flex-col space-y-6 w-full max-w-md">
+                <!-- Languages Selector -->
+                <div class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-globe text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Languages</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+                
+                <!-- Location Selector -->
+                <div class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Location</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+                
+                <!-- Horizontal Line -->
+                <hr class="border-gray-300 my-2">
+                
+                <!-- Clear Cache Selector -->
+                <div class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-trash-alt text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Clear Cache</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+                
+                <!-- Clear History Selector -->
+                <div class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-history text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Clear History</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+                
+                <!-- Horizontal Line -->
+                <hr class="border-gray-300 my-2">
+                
+                <!-- Settings Selector -->
+                <div class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-cog text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Settings</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+                
+                <!-- Logout Selector -->
+                <div data-action="logout" class="flex items-center justify-between cursor-pointer p-3 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                    <div class="flex items-center">
+                        <i class="fas fa-sign-out-alt text-gray-700 text-2xl mr-4"></i>
+                        <span class="text-gray-800 text-lg font-medium">Logout</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-500 text-lg"></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <!-- End of Section 2 -->
+      </div>
+    </div>
+
+    <!-- Avatar Selection Modal -->
+    <div id="avatarModal" class="modal">
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <!-- Close Button -->
+            <span class="close" id="closeAvatarModal">&times;</span>
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Choose Your Avatar</h2>
+                <p class="text-gray-600 mb-6">Select an avatar from the options below</p>
+            </div>
+            
+            <!-- Avatar Grid -->
+            <div class="avatar-grid" id="avatarGrid">
+                <!-- Avatar options will be dynamically loaded here -->
+            </div>
+            
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                    <input type="file" id="customAvatarUpload" accept="image/*" class="hidden">
+                    <label for="customAvatarUpload" class="cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                        <p class="text-gray-600">Upload Custom Avatar</p>
+                        <span class="text-sm text-gray-500">PNG, JPG up to 5MB</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear Cache Modal -->
+    <div id="clearCacheModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-sm mx-4 transform transition-all duration-300 scale-95 opacity-0" id="clearCacheModalContent">
+            <!-- Modal Header -->
+            <div class="p-6 text-center">
+                <h3 class="text-lg font-semibold text-gray-800 mb-6">Are you sure you want to Clear Cache?</h3>
+                
+                <!-- Cache Info -->
+                <div class="mb-8">
+                    <p class="text-2xl font-bold text-gray-800 mb-1">Cache</p>
+                    <p class="text-lg font-light text-gray-600">10.7 MB</p>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button id="clearCacheYes" class="flex-1 py-3 px-4 border border-black bg-transparent text-black rounded-lg hover:bg-black hover:text-white transition-all duration-200 font-medium">
+                        Yes
+                    </button>
+                    <button id="clearCacheNo" class="flex-1 py-3 px-4 border border-black bg-transparent text-black rounded-lg hover:bg-black hover:text-white transition-all duration-200 font-medium">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear History Modal -->
+    <div id="clearHistoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-sm mx-4 transform transition-all duration-300 scale-95 opacity-0" id="clearHistoryModalContent">
+            <!-- Modal Header -->
+            <div class="p-6 text-center">
+                <h3 class="text-lg font-semibold text-gray-800 mb-8">Are you sure you want to Clear History?</h3>
+                
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button id="clearHistoryYes" class="flex-1 py-3 px-4 border border-black bg-transparent text-black rounded-lg hover:bg-black hover:text-white transition-all duration-200 font-medium">
+                        Yes
+                    </button>
+                    <button id="clearHistoryNo" class="flex-1 py-3 px-4 border border-black bg-transparent text-black rounded-lg hover:bg-black hover:text-white transition-all duration-200 font-medium">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../jscript/profile.js"></script>
+</body>
+</html>

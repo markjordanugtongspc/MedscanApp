@@ -113,7 +113,7 @@ function createActionButton(text, type) {
     const button = document.createElement('button');
 
     if (type === 'save') {
-        button.className = 'bg-teal-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-600 transition-colors duration-200 w-32 mb-2 block mx-auto';
+        button.className = 'bg-teal-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-600 transition-colors duration-200 w-32 mb-2 mx-auto col-span-2';
     } else {
         button.className = 'bg-teal-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-600 transition-colors duration-200 col-span-2 mb-2 w-full';
     }
